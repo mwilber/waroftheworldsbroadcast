@@ -1,0 +1,35 @@
+{
+  "name": "webpack-boilerplate",
+  "version": "3.0.0",
+  "description": "Plain webpack 3 Boilerplate with Babel and SASS.",
+  "author": "Matthew Wilber",
+  "license": "MIT",
+  "homepage": "https://github.com/mwilber/webpack-boilerplate.git",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=dev webpack-dev-server --port 8699 --progress --open --config webpack.config.dev.js",
+    "build": "webpack -p --progress --config webpack.config.build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mwilber/webpack-boilerplate.git"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "clean-webpack-plugin": "^0.1.18",
+    "cross-env": "^5.1.3",
+    "css-loader": "^0.28.10",
+    "ejs-loader": "^0.3.0",
+    "file-loader": "^1.1.9",
+    "html-webpack-plugin": "^2.30.1",
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.20.2",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.11.0",
+    "webpack-dev-server": "^2.11.1",
+    "webpack-merge": "^4.1.2"
+  }
+}
