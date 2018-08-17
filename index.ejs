@@ -2,8 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title><%= htmlWebpackPlugin.options.data.title %></title>
+	<meta name="description" content="<%= htmlWebpackPlugin.options.data.description %>">
+	<meta name="author" content="<%= htmlWebpackPlugin.options.data.author %>">
+	<meta property="og:title" content="<%= htmlWebpackPlugin.options.data.title %>" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="<%= htmlWebpackPlugin.options.data.link %>" />
+	<meta property="og:image" content="<%= htmlWebpackPlugin.options.data.image %>" />
+	<meta property="og:site_name" content="<%= htmlWebpackPlugin.options.data.title %>" />
+	<meta property="fb:admins" content="631337813" />
+	<meta property="fb:app_id" content="<%= htmlWebpackPlugin.options.data.fbappid %>" />
+	<meta property="og:description" content="<%= htmlWebpackPlugin.options.data.description %>" />
+	
+	
+	<!-- Google Plus Metadata -->
+	<meta itemprop="name" content="<%= htmlWebpackPlugin.options.data.title %>">
+	<meta itemprop="description" content="<%= htmlWebpackPlugin.options.data.description %>">
+	<meta itemprop="image" content="<%= htmlWebpackPlugin.options.data.image %>">
+	
+	<!-- Twitter Summary Card -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="@greenzeta">
+	<meta name="twitter:title" content="<%= htmlWebpackPlugin.options.data.title %>">
+	<meta name="twitter:description" content="<%= htmlWebpackPlugin.options.data.description %>">
+	<meta name="twitter:creator" content="@greenzeta">
+	<meta name="twitter:image:src" content="<%= htmlWebpackPlugin.options.data.image %>">
+	<meta name="twitter:domain" content="waroftheworldsbroadcast.com">
+	
+	
+    <!-- Optimized mobile viewport -->
     <meta name="viewport" content="width=device-width">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+  	<meta name="apple-mobile-web-app-capable" content="yes" />
+
+	<meta name="theme-color" content="<%= htmlWebpackPlugin.options.data.themecolor %>">
+
+	<!-- Add to home screen -->
+	<meta name="mobile-web-app-capable" content="yes">
+
+  
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
 </head>
 <body>
     <div class="content">

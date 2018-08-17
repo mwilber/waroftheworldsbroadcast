@@ -10,6 +10,15 @@ const dirApp = path.join(__dirname, 'app');
 const dirAssets = path.join(__dirname, 'assets');
 
 const appHtmlTitle = 'Webpack Boilerplate';
+const appHtmlData = {
+    'author': 'Matthew Wilber',
+    'title': 'War of the Worlds Broadcast',
+    'description': 'For forty minutes Martians were real. Relive the night of October 30th, 1938.',
+    'image': 'http://www.waroftheworldsbroadcast.com/images/share.png',
+    'link': 'http://www.waroftheworldsbroadcast.com/',
+    'themecolor': '#1E0A00',
+    'fbappid': '162325253971329',
+};
 
 /**
  * Webpack Configuration
@@ -38,7 +47,8 @@ module.exports = {
 
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'index.ejs'),
-            title: appHtmlTitle
+            title: appHtmlTitle,
+            data: appHtmlData
         })
     ],
     module: {
