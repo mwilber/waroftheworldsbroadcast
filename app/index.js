@@ -1,7 +1,3 @@
-/**
- * Application entry point
- */
-
 // Load application styles
 import 'styles/index.scss';
 
@@ -9,8 +5,9 @@ import {Preloader} from './preloader';
 
 let preloader = new Preloader();
 
-preloader.PreloadAssets(document.querySelectorAll('[data-cache]')).then(()=>{
-    console.log('promise complete', preloader.loadedAssets);
+preloader.PreloadAssets().then(()=>{
+    // TODO: add some sort of check for number of images loaded successfully
+    preloader.RenderAssets();
 
 }).catch((error)=>{
     console.error('error loading assets', error);
