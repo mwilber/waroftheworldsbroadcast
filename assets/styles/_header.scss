@@ -1,0 +1,66 @@
+.header{
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    height:40px;
+    float: left;
+    background: -moz-linear-gradient(top,  rgba(30,10,0,0.8) 0%, rgba(30,10,0,0.95) 100%);
+    background: -webkit-linear-gradient(top,  rgba(30,10,0,0.8) 0%,rgba(30,10,0,0.95) 100%);
+    background: linear-gradient(to bottom,  rgba(30,10,0,0.8) 0%,rgba(30,10,0,0.95) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80e3343f', endColorstr='#cce3343f',GradientType=0 );
+
+
+    .controllinks{
+        float:left;
+        margin:5px 10px;
+
+        a{
+            font-size:28px;
+        }
+        
+        a.volume{
+            text-align:left;
+            margin-left:10px;
+        }
+    }
+      
+    .sociallinks{
+        float:right;
+        margin:10px;
+    }
+}
+
+.header .sociallinks a,
+.header .controllinks a{
+  color:#fff;
+  text-decoration:none;
+  text-align:center;
+  width: 50px;
+  font-size: 22px;
+}
+
+
+#logo{
+    position:absolute;
+    top:0px;
+    left:50%;
+    width:80px;
+    height:35px;
+    margin:0px 0px 0px -40px;
+    text-align:center;
+    background-color:transparent;
+
+    img{
+        vertical-align: baseline;
+        margin:auto;
+        height: 95%;
+        margin: 5% 0%;
+    }
+    
+    span{
+      font-size: 3.5em;
+      /*font-family: 'Life Savers', cursive;*/
+      font-weight: bold;
+      display:none;
+    }
+}

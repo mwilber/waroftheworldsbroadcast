@@ -1,0 +1,126 @@
+#infobox, #gzbox{
+	display:none;
+	position:absolute;
+	height:60%;
+	width:80%;
+	max-width:700px;
+	top:10%;
+	left:50%;
+	z-index: 6000;
+	padding: 30px 30px 30px 40px;
+	-webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+	background:rgba(0,0,0,0.8);
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	-moz-transform: translateX(-50%);
+	
+}
+
+#infobox{
+
+    @media screen and (max-width: 800px) {
+        padding: 5%;
+    }
+
+    .plate{
+        overflow:hidden;
+        width:100%;
+        height:100%;
+    }
+    
+    .close{
+        float: right;
+        width: auto;
+        padding: 0px;
+        font-size: 44px;
+        line-height: 31px;
+        margin: -20px -10px;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    #about{
+        margin-top:20px;
+        height: 100%;
+        clear: both;
+
+        p a{
+            float:none;
+            border: none;
+            display: inline;
+            margin: 0px;
+            padding: 0px;
+            font-size: inherit;
+            line-height: inherit;
+            color: #eef;
+            text-decoration: underline;
+        }
+
+    }
+
+    h1{
+        color: #fff;
+        margin-bottom: 20px;
+        font-size: 30px;
+        text-align: center;
+    }
+
+    p{
+        color: #eef;
+        font-size: 18px;
+        line-height: 28px;
+        margin-bottom:15px;
+        text-align:justify;
+        text-justify:inter-word;
+    }
+    
+    @media screen and (max-width: 800px) {
+        p {
+            font-size: 12px;
+            line-height: 16px;
+        }
+    }
+
+    @media screen and (max-height: 400px) {
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+    }
+
+}
+
+#infobox, #appalert{
+
+    .jspVerticalBar
+    {
+        background: transparent;
+    }
+
+    .jspDrag
+    {
+        background-color: #5B6664;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    .jspTrack
+    {
+        background-color: transparent;
+        background-color: rgba(91, 102, 100, 0.5);
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    .jspCap
+    {
+        display: block;
+        background: transparent;
+    }
+
+}

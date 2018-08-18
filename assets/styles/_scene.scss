@@ -1,0 +1,138 @@
+#wall{
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+	background:#fed url('../images/wall_tile.png') center center repeat;
+}
+
+#stageframe{
+	position:absolute;
+	top:-15%;
+	left:0%;
+
+	transform-origin: 0% 0%;
+	-ms-transform-origin: 0% 0%;
+	-moz-transform-origin: 0% 0%;
+	-webkit-transform-origin: 0% 0%;
+}
+
+#stage{
+	width: 602px;
+	height:759px;
+	position: absolute;
+	top: 150px;
+    left: 110px;
+    overflow:hidden;
+    
+    #backdrop{
+        position:absolute;
+    }
+    
+    #comet1{
+        position:absolute;
+    }
+    
+    #comet2{
+        position:absolute;
+        top:100px;
+    }
+    
+    #comet3{
+        position:absolute;
+        top:170px;
+    }
+    
+    .car{
+        position:absolute;
+        left:-600px;
+        top:545px;
+        width:296px;
+        height:208px;
+    }
+    
+    .tripod{
+        position:absolute;
+        left:0px;
+        top:325px;
+        width:500px;
+        height:313px;
+    }
+    
+    #trees{
+        position:absolute;
+    
+    }
+}
+
+
+
+#plants{
+	position:absolute;
+	width:100%;
+	height: 100%;
+	overflow:hidden;
+    /*background-color:rgba(255,0,0,0.5);*/
+    
+    img{
+        position:absolute;
+        bottom:0px;
+        left:0px;
+        height:227px;
+        width:260px;
+    }
+}
+
+
+
+#window{
+	width: 790px;
+	height:1050px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	/*background:transparent url('../images/window.png');*/
+    background:none;
+    
+    img{
+        // display:none;
+    }
+}
+
+
+
+#tabletop{
+    position: absolute;
+    bottom: -15%;
+    left: 0px;
+    width: 150%;
+    height: 40%;
+	margin-left:-25%;
+	background:transparent url('../images/wood_surface.jpg') center center repeat-x;
+	-webkit-transform: rotate(359deg);
+	-moz-transform: rotate(359deg);
+	-o-transform: rotate(359deg);
+	
+    .texture{
+        width: 100%;
+        height: 100%;
+        background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0) 63%, rgba(0,0,0,1) 100%);
+        background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 63%,rgba(0,0,0,1) 100%);
+        background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 63%,rgba(0,0,0,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 );
+    }
+}
+
+#radio, #radiom{
+	width: 450px;
+	height: 500px;
+    position: absolute;
+    bottom: 10%;
+    left: auto;
+    right: 5%;
+	transform-origin: 100% 100%;
+	-ms-transform-origin: 100% 100%;
+	-moz-transform-origin: 100% 100%;
+	-webkit-transform-origin: 100% 100%;
+}
