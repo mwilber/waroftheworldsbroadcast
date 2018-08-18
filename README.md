@@ -10,10 +10,12 @@ For updates, follow [@greenzeta](https://twitter.com/greenzeta) on twitter.
 ![alt text](http://www.waroftheworldsbroadcast.com/images/share.png "Logo Title Text 1")
 
 ## Goals
-* Progressive Web App
+* Refactor JavaScript to ES6 syntax
+* Refactor CSS to SASS
+* Replace jQuery animation with css3 and \<canvas>
+* Progressive Web App Support
     * Home Screen Install
     * Offline Access
-* Replace jQuery animation with \<canvas>
 
 ##
 > Visit the current live site at [waroftheworldsbroadcast.com](http://waroftheworldsbroadcast.com/)
