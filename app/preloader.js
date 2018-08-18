@@ -15,7 +15,7 @@ export class Preloader{
                     for( let asset of self.assets ){
                         // TODO: Add support for other asset types (audio)
                         if(asset.tagName.toLowerCase() === 'img'){
-                            assetPromises.push(self._loadImage(asset.dataset.cache, self.loadedAssets));
+                            assetPromises.push(self._loadImage(asset.dataset.cache, self.loadedAssets).then(()=>{self.PercentComplete()}));
                         }
                     }
                 }catch(error){
@@ -39,6 +39,10 @@ export class Preloader{
                 
             }
         }
+    }
+
+    PercentComplete(){
+        console.log(Math.floor((this.loadedAssets.length/this.assets.length)*100)+'%');
     }
 
     _loadImage(src, loadedref) {
