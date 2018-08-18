@@ -5,39 +5,30 @@ export class Preloader{
         this.assets = document.querySelectorAll('[data-cache]');
         // List of urls of assets loaded
         this.loadedAssets = [];
-
-        //for( let asset of this.assets ){
-        //    console.log(asset.dataset.cache);
-        //}
-
-        // Preload Images
-        //this.PreloadAssets();
     }
 
     PreloadAssets(){
-        return this._preloadAssets(this.assets, this.loadedAssets, this._loadImage);
-    }
-
-    _preloadAssets(assets, loadedAssets, _loadImage){
-        return new Promise(function(resolve, reject){
-            let assetPromises = [];
-            try{
-                for( let asset of assets ){
-                    // TODO: Add support for other asset types (audio)
-                    if(asset.tagName.toLowerCase() === 'img'){
-                        assetPromises.push(_loadImage(asset.dataset.cache, loadedAssets));
+        return function(self){
+            return new Promise(function(resolve, reject){
+                let assetPromises = [];
+                try{
+                    for( let asset of self.assets ){
+                        // TODO: Add support for other asset types (audio)
+                        if(asset.tagName.toLowerCase() === 'img'){
+                            assetPromises.push(self._loadImage(asset.dataset.cache, self.loadedAssets));
+                        }
                     }
+                }catch(error){
+                    reject(error);
                 }
-            }catch(error){
-                reject(error);
-            }
-
-            Promise.all(assetPromises).then(()=>{
-                //console.log('all promises resolved. resolve here.',this.loadedAssets);
-                resolve(true);
+    
+                Promise.all(assetPromises).then(()=>{
+                    //console.log('all promises resolved. resolve here.',this.loadedAssets);
+                    resolve(true);
+                });
+    
             });
-
-        });
+        }(this);
     }
 
     RenderAssets(){
