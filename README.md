@@ -1,37 +1,17 @@
-Webpack 3 Boilerplate
+War of the Worlds Broadcast
 ===========
 
-[![Dependency Status](https://david-dm.org/cvgellhorn/webpack-boilerplate.svg)](https://david-dm.org/cvgellhorn/webpack-boilerplate)
-[![devDependency Status](https://david-dm.org/cvgellhorn/webpack-boilerplate/dev-status.svg)](https://david-dm.org/cvgellhorn/webpack-boilerplate)
+A modern update of waroftheworldsbroadcast.com. 
 
-> Plain webpack 3 boilerplate with Babel and SASS on board
+The current site was built in 2012 with the goal of working in all browsers. This project is a modern rewrite in ES6 & SASS.
 
-## Requirements
-You only need <b>node.js</b> pre-installed and you’re good to go.
+## Goals
+* Progressive Web App
+    * Home Screen Install
+    * Offline Access
+* Replace jQuery animation with \<canvas>
 
-## Download
-Download in current directory
-```sh
-$ curl -L -o master.zip https://github.com/mwilber/webpack-boilerplate/archive/master.zip && unzip master.zip && rm master.zip && mv ./webpack-boilerplate-master/{.,}* ./ && rm -r ./webpack-boilerplate-master
-```
+## About
+Designed and developed by Matthew Wilber. For updates, follow [@greenzeta](https://https://twitter.com/greenzeta) on twitter.
 
-## Setup
-Install dependencies
-```sh
-$ npm install
-```
-
-## Development
-Run the local webpack-dev-server with livereload and autocompile on [http://localhost:8699/](http://localhost:8699/)
-```sh
-$ npm run dev
-```
-## Deployment
-Build the current application
-```sh
-$ npm run build
-```
-
-## [webpack](https://webpack.js.org/)
-If you're not familiar with webpack, the [webpack-dev-server](https://webpack.js.org/configuration/dev-server/) will serve the static files in your build folder and watch your source files for changes.
-When changes are made the bundle will be recompiled. This modified bundle is served from memory at the relative path specified in publicPath.
+> Visit the current live site at [waroftheworldsbroadcast.com](http://waroftheworldsbroadcast.com/)
