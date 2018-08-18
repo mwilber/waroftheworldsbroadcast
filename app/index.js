@@ -5,6 +5,6 @@
 // Load application styles
 import 'styles/index.scss';
 
-// ================================
-// START YOUR APP HERE
-// ================================
+import {Preloader} from './preloader';
+
+let preloader = new Preloader();
