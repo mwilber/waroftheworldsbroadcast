@@ -6,26 +6,37 @@ export class Preloader{
         // List of urls of assets loaded
         this.loadedAssets = [];
 
-        for( let asset of this.assets ){
-            //console.log(asset.dataset.cache);
-        }
+        //for( let asset of this.assets ){
+        //    console.log(asset.dataset.cache);
+        //}
+
         // Preload Images
-        this.PreloadAssets();
+        //this.PreloadAssets();
     }
 
     PreloadAssets(){
+        return this._preloadAssets(this.assets, this.loadedAssets, this._loadImage);
+    }
 
-        let assetPromises = [];
-        for( let asset of this.assets ){
-            // TODO: Add support for other asset types (audio)
-            if(asset.tagName.toLowerCase() === 'img'){
-                assetPromises.push(this._LoadImage(asset.dataset.cache, this.loadedAssets));
+    _preloadAssets(assets, loadedAssets, _loadImage){
+        return new Promise(function(resolve, reject){
+            let assetPromises = [];
+            try{
+                for( let asset of assets ){
+                    // TODO: Add support for other asset types (audio)
+                    if(asset.tagName.toLowerCase() === 'img'){
+                        assetPromises.push(_loadImage(asset.dataset.cache, loadedAssets));
+                    }
+                }
+            }catch(error){
+                reject(error);
             }
-        }
 
-        Promise.all(assetPromises).then(()=>{
-            console.log('all promises resolved. resolve here.',this.loadedAssets);
-            this.RenderAssets();
+            Promise.all(assetPromises).then(()=>{
+                //console.log('all promises resolved. resolve here.',this.loadedAssets);
+                resolve(true);
+            });
+
         });
     }
 
@@ -36,12 +47,11 @@ export class Preloader{
                 asset.src = asset.dataset.cache;
                 
             }
-
         }
     }
 
-    _LoadImage(src, loadedref) {
-        return new Promise(function (resolve) {
+    _loadImage(src, loadedref) {
+        return new Promise(function (resolve, reject) {
             var img = new Image();
             img.onload = function () {
                 console.log('[preloader] loaded: '+src);
