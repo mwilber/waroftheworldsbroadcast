@@ -1,3 +1,7 @@
+require ('./fetch');
+require ('./promise');
+
+
 // Load application styles
 import 'styles/index.scss';
 
@@ -57,3 +61,4 @@ preloader.PreloadAssets().then(()=>{
 }).catch((error)=>{
     console.error('error loading assets', error);
 });
+
