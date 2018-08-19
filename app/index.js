@@ -1,7 +1,6 @@
 require ('./fetch');
 require ('./promise');
 
-
 // Load application styles
 import 'styles/index.scss';
 
