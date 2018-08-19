@@ -1,10 +1,24 @@
 export class Preloader{
 
-    constructor(){
+    constructor(addlassets){
         // List of nodes with data-cache property
-        this.assets = document.querySelectorAll('[data-cache]');
+        this.assets = Array.prototype.slice.call(document.querySelectorAll('[data-cache]'));
+
+        // Add in the additional assets
+        if( typeof addEventListener !== 'undefined' ){
+            for( let addlasset of addlassets ){
+                let tmp = document.createElement('img');
+                tmp.dataset['cache'] = addlasset;
+                tmp.dataset['render'] = 'false';
+                this.assets.push(tmp);
+            }
+        }
+
         // List of urls of assets loaded
         this.loadedAssets = [];
+
+        // Percent complete for display
+        this.percentComplete = 0;
     }
 
     PreloadAssets(){
@@ -12,10 +26,12 @@ export class Preloader{
             return new Promise(function(resolve, reject){
                 let assetPromises = [];
                 try{
+                    console.log(self.assets);
                     for( let asset of self.assets ){
                         // TODO: Add support for other asset types (audio)
-                        if(asset.tagName.toLowerCase() === 'img'){
-                            assetPromises.push(self._loadImage(asset.dataset.cache, self.loadedAssets).then(()=>{self.PercentComplete()}));
+                        if(asset.dataset.cache.indexOf('png') > -1 ||
+                            asset.dataset.cache.indexOf('jpg') > -1){
+                            assetPromises.push(self._loadImage(asset.dataset.cache, self.loadedAssets).then(()=>{self._updatePercentComplete()}));
                         }
                     }
                 }catch(error){
@@ -33,16 +49,26 @@ export class Preloader{
 
     RenderAssets(){
         for( let asset of this.assets ){
-            //TODO: Add support for other element types
-            if(asset.tagName.toLowerCase() === 'img'){
-                asset.src = asset.dataset.cache;
-                
+            this._renderAsset(asset);
+        }
+    }
+
+    _renderAsset(node){
+        if(typeof node.dataset.render !== 'undefined'){
+            if( node.dataset.render === 'false'){
+                return;
             }
+        }
+
+        //TODO: Add support for other element types
+        if(node.tagName.toLowerCase() === 'img'){
+            node.src = node.dataset.cache;
+            
         }
     }
 
     PercentComplete(){
-        console.log(Math.floor((this.loadedAssets.length/this.assets.length)*100)+'%');
+        return Math.floor(this.percentComplete*100);
     }
 
     _loadImage(src, loadedref) {
@@ -59,5 +85,9 @@ export class Preloader{
             };
             img.src = src;
         });
+    }
+
+    _updatePercentComplete(){
+        this.percentComplete = (this.loadedAssets.length/this.assets.length);
     }
 }
