@@ -5,7 +5,7 @@ export class Preloader{
         this.assets = Array.prototype.slice.call(document.querySelectorAll('[data-cache]'));
 
         // Add in the additional assets
-        if( typeof addEventListener !== 'undefined' ){
+        if( typeof addlassets !== 'undefined' ){
             for( let addlasset of addlassets ){
                 let tmp = document.createElement('img');
                 tmp.dataset['cache'] = addlasset;
