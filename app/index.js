@@ -8,10 +8,13 @@ import 'audio/381030.ogg';
 import 'styles/index.scss';
 
 import {Preloader} from './preloader';
+import { SoundBlaster } from './soundblaster';
 
 let preloader = new Preloader([
     "assets/images/leaves.png",
 ]);
+
+let soundBlaster = new SoundBlaster();
 
 var preloaderPointer = window.setInterval(function(){
     //console.log('tick', preloader.PercentComplete());
@@ -25,4 +28,5 @@ preloader.PreloadAssets().then(()=>{
 }).catch((error)=>{
     console.error('error loading assets', error);
 });
+
 
