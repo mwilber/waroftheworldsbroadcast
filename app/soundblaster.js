@@ -51,13 +51,18 @@ export class SoundBlaster{
         this.streamContext.currentTime = newTime;
     }
 
-    LoadStream(alias, loadHandler, playHandler, endHandler){
+    GetStreamPosition(){
+        return this.streamContext.currentTime;
+    }
+
+    LoadStream(alias, loadHandler, timeHandler, playHandler, endHandler){
         this.fetchStream(alias)
             .then(function(self){
                 return function (result){
                     if(result){
                         self.streamContext = result;
                         self.streamContext.addEventListener("loadeddata", loadHandler);
+                        self.streamContext.addEventListener("timeupdate", timeHandler);
                         self.streamContext.addEventListener("play", playHandler);
                         self.streamContext.addEventListener("ended", endHandler);
                     }
