@@ -1,9 +1,6 @@
 require ('./fetch');
 require ('./promise');
 
-import 'audio/381030.mp3';
-import 'audio/381030.ogg';
-
 // Load application styles
 import 'styles/index.scss';
 
@@ -15,6 +12,24 @@ let preloader = new Preloader([
 ]);
 
 let soundBlaster = new SoundBlaster();
+
+soundBlaster.LoadStream('broadcast',
+    function(event){
+        console.log('load handler called'); 
+        soundBlaster.SetStreamVolume(0.1); 
+        soundBlaster.PlayStream();
+        soundBlaster.SetStreamPosition(100);
+    },
+    function(event){
+        console.log('play handler called');
+    },
+    function(event){
+        console.log('ended handler called');
+        // Loop the broadcast
+        soundBlaster.SetStreamPosition(0);
+        soundBlaster.PlayStream();
+    }
+);
 
 var preloaderPointer = window.setInterval(function(){
     //console.log('tick', preloader.PercentComplete());

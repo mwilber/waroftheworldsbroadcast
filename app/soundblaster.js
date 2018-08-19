@@ -7,8 +7,10 @@ export class SoundBlaster{
         this.audioSources = {
             'broadcast': {
                 src: 'assets/audio/381030.mp3',
-                stream: true,
-              }
+                playOnLoad: true,
+                loopOnLoad: true,
+                preLoad: false
+            }
         }
 
         // Observable from my original Angular service
@@ -18,58 +20,7 @@ export class SoundBlaster{
 
         for (const alias of Object.keys(this.audioSources)) {
 
-            if( this.audioSources[alias].stream ){
-                    
-                this.fetchStream(alias)
-                .then(function(self){
-                    return function (result){
-                        if(result){
-                            self.streamContext = result;
-                            //Play audio element here
-                            self.streamContext.play();
-                        }
-                    }
-                }(this))
-                .catch(function(error){
-                    console.log('[SoundBlaster]', 'fetchStream', error);
-                });
-        
-                // broadcast.addEventListener("play", function(){
-                //     isPlaying = true;
-                // });
-                
-                // broadcast.addEventListener("loadeddata", function(){
-                //     tmrTripod = setInterval(handleTimeEvents, tripodInterval);
-                //     DebugOut("can play: "+broadcast.duration);
-                //     DebugOut('loaded data');
-                //     startCk = 2;
-                //     if( isWidget ) this.volume = 0.1;
-                //     this.play();
-                //     setTimeout(function(){
-                //         if(!isPlaying){
-                //             $('#introbox').show();
-                //         }
-                //     },1000);
-                    
-                // });
-                
-                // broadcast.addEventListener("loadedmetadata", function(){
-                //     DebugOut('loaded meta');
-                //     if( isNumber(hash) ){
-                //         this.currentTime = hash;
-                //     }else if(isWidget){
-                //         broadcast.currentTime = acts[1]+Math.floor(Math.random()*100)+100;
-                //     }else{
-                //            this.currentTime = Math.floor(Math.random()*300)+300;
-                //        }
-                // });
-                
-                // broadcast.addEventListener("ended", function(e){
-                //     this.currentTime = 0;
-                //     this.play();
-                // }, false);
-                
-            }else{
+            if( this.audioSources[alias].preLoad ){
                 this.fetchSample(alias)
                 .then((audioBuffer) => {
                     
@@ -85,6 +36,36 @@ export class SoundBlaster{
             }
         }
 
+    }
+
+    PlayStream(){
+        // Play audio element here
+        this.streamContext.play();
+    }
+
+    SetStreamVolume(newVol){
+        this.streamContext.volume = newVol;
+    }
+
+    SetStreamPosition(newTime){
+        this.streamContext.currentTime = newTime;
+    }
+
+    LoadStream(alias, loadHandler, playHandler, endHandler){
+        this.fetchStream(alias)
+            .then(function(self){
+                return function (result){
+                    if(result){
+                        self.streamContext = result;
+                        self.streamContext.addEventListener("loadeddata", loadHandler);
+                        self.streamContext.addEventListener("play", playHandler);
+                        self.streamContext.addEventListener("ended", endHandler);
+                    }
+                }
+            }(this))
+            .catch(function(error){
+                console.log('[SoundBlaster]', 'fetchStream', error);
+            });
     }
 
     fetchStream(alias) {
