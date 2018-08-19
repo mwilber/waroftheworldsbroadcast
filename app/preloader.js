@@ -53,20 +53,6 @@ export class Preloader{
         }
     }
 
-    _renderAsset(node){
-        if(typeof node.dataset.render !== 'undefined'){
-            if( node.dataset.render === 'false'){
-                return;
-            }
-        }
-
-        //TODO: Add support for other element types
-        if(node.tagName.toLowerCase() === 'img'){
-            node.src = node.dataset.cache;
-            
-        }
-    }
-
     PercentComplete(){
         return Math.floor(this.percentComplete*100);
     }
@@ -85,6 +71,20 @@ export class Preloader{
             };
             img.src = src;
         });
+    }
+
+    _renderAsset(node){
+        if(typeof node.dataset.render !== 'undefined'){
+            if( node.dataset.render === 'false'){
+                return;
+            }
+        }
+
+        //TODO: Add support for other element types
+        if(node.tagName.toLowerCase() === 'img'){
+            node.src = node.dataset.cache;
+            
+        }
     }
 
     _updatePercentComplete(){

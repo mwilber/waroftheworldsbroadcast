@@ -47,8 +47,13 @@ let preloader = new Preloader([
     "assets/leaves.png",
 ]);
 
+var preloaderPointer = window.setInterval(function(){
+    //console.log('tick', preloader.PercentComplete());
+},100);
+
 preloader.PreloadAssets().then(()=>{
     // TODO: add some sort of check for number of images loaded successfully
+    window.clearInterval(preloaderPointer);
     preloader.RenderAssets();
 
 }).catch((error)=>{
