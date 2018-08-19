@@ -111,6 +111,15 @@ module.exports = {
                 options: {
                     name: '[path][name].[ext]'
                 }
+            },
+
+            // MEDIA
+            {
+                test: /\.(mp3|ogg|wav)$/,
+                loader: 'file-loader',
+                options: {
+                    name: '[path][name].[ext]'
+                }
             }
         ]
     }
