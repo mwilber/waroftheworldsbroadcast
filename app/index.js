@@ -72,6 +72,9 @@ window.fetch('assets/data/script.json').then(function(response){
     }
     if( data.script ){
         stageHand = new StageHand(data.script);
+        // Timer goes here that will trigger the stagehand and pass the broadcast time
+        stageHand._placeActor('car left');
+        stageHand._placeActor('car right');
     }else{
         throw('script data not found in json');
     }
@@ -79,26 +82,3 @@ window.fetch('assets/data/script.json').then(function(response){
 .catch(function(error){
     console.error('fetch failed:', error);
 });
-
-
-SetCar(1);
-SetCar(2);
-
-
-function SetCar(carPtr)
-{   
-    let stage = document.querySelector('#stage');
-    let actor = document.createElement('img');
-
-    if( carPtr == 1 ){
-        actor.src = 'assets/images/car1.png';
-        actor.className = 'car left';
-    }else if( carPtr == 2 ){
-        actor.src = 'assets/images/car2.png';
-        actor.className = 'car right';
-    }
-    
-    stage.appendChild(actor);
-
-
-}

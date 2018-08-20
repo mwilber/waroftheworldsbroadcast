@@ -50,6 +50,7 @@
         top:545px;
         width:296px;
         height:208px;
+        background: transparent url('../images/car1.png') center no-repeat;
         z-index: 500;
 
         animation-duration: 10s;
@@ -62,6 +63,7 @@
 
         &.right{
             animation-name: carright;
+            background: transparent url('../images/car2.png') center no-repeat;
         }
     }
     
