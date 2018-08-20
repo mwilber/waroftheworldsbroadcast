@@ -8,7 +8,9 @@ import {Preloader} from './preloader';
 import { SoundBlaster } from './soundblaster';
 
 let preloader = new Preloader([
-    "assets/images/leaves.png",
+    'assets/images/car1.png',
+    'assets/images/car2.png',
+    'assets/images/leaves.png',
 ]);
 
 let soundBlaster = new SoundBlaster();
@@ -21,7 +23,7 @@ soundBlaster.LoadStream('broadcast',
         soundBlaster.SetStreamPosition(100);
     },
     function(event){
-        console.log('time handler called', soundBlaster.GetStreamPosition());
+        //console.log('time handler called', soundBlaster.GetStreamPosition());
     },
     function(event){
         console.log('play handler called');
