@@ -14,8 +14,10 @@ export class StageHand {
 
     Manage(currTime){
 
-        while(this._cleanQueue(currTime)){console.log('ck1');}
+        // Remove expired script points from the queue
+        while(this._cleanQueue(currTime)){}
 
+        // Check for new script points to add
         for( let sidx = this.scriptPointer; sidx < this.script.length; sidx++ ){
             //console.log('[StageHand]', 'checking script', scriptpoint);
             if( currTime > this.script[sidx].start ){
@@ -24,6 +26,15 @@ export class StageHand {
                 this.scriptPointer++;
                 break;
             }
+        }
+
+        // Process the Queue
+        this._processQueue();
+    }
+
+    _processQueue(){
+        for( let qPtr of this.queue ){
+            this._placeActor(qPtr.actor);
         }
     }
 
