@@ -6,22 +6,22 @@
     ],
     "script": [
         {
-            "start":0,
-            "end":50,
+            "start":100,
+            "end":150,
             "actor": "car left",
             "repeat":"random",
             "maxct":1
         },
         {
-            "start":20,
-            "end":100,
+            "start":120,
+            "end":200,
             "actor": "car right",
             "repeat":"random",
             "maxct":1
         },
         {
-            "start":30,
-            "end":50,
+            "start":130,
+            "end":150,
             "actor": "car left",
             "repeat":"random",
             "maxct":1

@@ -13,6 +13,9 @@ export class StageHand {
     }
 
     Manage(currTime){
+
+        while(this._cleanQueue(currTime)){console.log('ck1');}
+
         for( let sidx = this.scriptPointer; sidx < this.script.length; sidx++ ){
             //console.log('[StageHand]', 'checking script', scriptpoint);
             if( currTime > this.script[sidx].start ){
@@ -24,6 +27,17 @@ export class StageHand {
         }
     }
 
+    _cleanQueue(currTime){
+        for( let sidx = 0; sidx < this.queue.length; sidx++ ){
+            //console.log('[StageHand]', 'queue ck', currTime, this.queue[sidx].end );
+            if( currTime > this.queue[sidx].end ){
+                this.queue.splice(sidx, 1);
+                console.log('[StageHand]', 'queue cleaned', this.queue);
+                return true;
+            }
+        }
+        return false;
+    }
 
     _loadQueue(newItem){
         this.queue.push(newItem);
