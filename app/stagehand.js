@@ -20,7 +20,7 @@ export class StageHand {
         // Check for new script points to add
         for( let sidx = this.scriptPointer; sidx < this.script.length; sidx++ ){
             //console.log('[StageHand]', 'checking script', scriptpoint);
-            if( currTime > this.script[sidx].start ){
+            if( currTime > this.script[sidx].start && currTime < this.script[sidx].end ){
                 //console.log('[StageHand]', 'position found');
                 this._loadQueue(this.script[sidx]);
                 this.scriptPointer++;
@@ -41,10 +41,7 @@ export class StageHand {
 
     _cleanAllActors(){
         for( let actor of this.stage.querySelectorAll('.actor') ){
-            if( actor ){
-                console.log('[StageHand]', 'removing actor', actor);
-                this.stage.removeChild(actor);
-            }
+            this.stage.removeChild(actor);
         }
     }
 
