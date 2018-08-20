@@ -9,6 +9,10 @@ import 'styles/index.scss';
 
 import {Preloader} from './preloader';
 import { SoundBlaster } from './soundblaster';
+import { StageHand } from './stagehand';
+
+let stageHand = null;
+let actIdx = [];
 
 let preloader = new Preloader([
     'assets/images/car1.png',
@@ -53,6 +57,27 @@ preloader.PreloadAssets().then(()=>{
 
 }).catch((error)=>{
     console.error('error loading assets', error);
+});
+
+window.fetch('assets/data/script.json').then(function(response){
+    //console.log('fetch', response);
+    return response.json();
+})
+.then(function(data){
+    console.log('fetch data', data);
+    if( data.acts ){
+        actIdx = data.acts;
+    }else{
+        console.warn('act data not found in json')
+    }
+    if( data.script ){
+        stageHand = new StageHand(data.script);
+    }else{
+        throw('script data not found in json');
+    }
+})
+.catch(function(error){
+    console.error('fetch failed:', error);
 });
 
 

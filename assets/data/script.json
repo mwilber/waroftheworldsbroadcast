@@ -4,7 +4,16 @@
         1256,
         2470
     ],
-    "script": {
+    "script": [
+        {
+            "start":0,
+            "end":900,
+            "actor": "car left",
+            "repeat":"random",
+            "maxct":1
+        }
+    ],
+    "scriptold": {
 
         "0":{
             "ra":100,
