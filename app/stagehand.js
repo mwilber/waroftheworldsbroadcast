@@ -29,12 +29,23 @@ export class StageHand {
         }
 
         // Process the Queue
-        this._processQueue();
+        this._processQueue(Math.floor(currTime));
     }
 
-    _processQueue(){
+    _cleanStage(currTime){
+        for( let actor of this.stage.querySelectorAll('.actor') ){
+            if( currTime > actor.dataset.expiration ){
+                this.stage.removeChild(actor);
+            }
+        }
+    }
+
+    _processQueue(currTime){
+
+        this._cleanStage(currTime);
+
         for( let qPtr of this.queue ){
-            this._placeActor(qPtr.actor);
+            this._placeActor(qPtr.actor, currTime+qPtr.duration);
         }
     }
 
@@ -55,10 +66,11 @@ export class StageHand {
         console.log('[StageHand]', 'queue added', this.queue);
     }
 
-    _placeActor(labels)
+    _placeActor(classes, expiration)
     {   
         let actor = document.createElement('div');
-        actor.className = labels;
+        actor.className = 'actor '+classes;
+        actor.dataset['expiration'] = expiration;
         
         stage.appendChild(actor);
 

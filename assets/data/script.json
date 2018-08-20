@@ -9,6 +9,7 @@
             "start":100,
             "end":150,
             "actor": "car left",
+            "duration": 10,
             "repeat":"random",
             "maxct":1
         },
@@ -16,6 +17,7 @@
             "start":120,
             "end":200,
             "actor": "car right",
+            "duration": 10,
             "repeat":"random",
             "maxct":1
         },
@@ -23,6 +25,7 @@
             "start":130,
             "end":150,
             "actor": "car left",
+            "duration": 10,
             "repeat":"random",
             "maxct":1
         }
