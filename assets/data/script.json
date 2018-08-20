@@ -7,7 +7,21 @@
     "script": [
         {
             "start":0,
-            "end":900,
+            "end":50,
+            "actor": "car left",
+            "repeat":"random",
+            "maxct":1
+        },
+        {
+            "start":20,
+            "end":100,
+            "actor": "car right",
+            "repeat":"random",
+            "maxct":1
+        },
+        {
+            "start":30,
+            "end":50,
             "actor": "car left",
             "repeat":"random",
             "maxct":1

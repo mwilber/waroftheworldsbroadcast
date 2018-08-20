@@ -73,8 +73,11 @@ window.fetch('assets/data/script.json').then(function(response){
     if( data.script ){
         stageHand = new StageHand(data.script);
         // Timer goes here that will trigger the stagehand and pass the broadcast time
-        stageHand._placeActor('car left');
-        stageHand._placeActor('car right');
+        //stageHand._placeActor('car left');
+        //stageHand._placeActor('car right');
+        window.setInterval(function(){
+            stageHand.Manage(soundBlaster.GetStreamPosition());
+        },5000);
     }else{
         throw('script data not found in json');
     }
