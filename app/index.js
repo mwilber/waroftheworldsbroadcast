@@ -27,7 +27,7 @@ soundBlaster.LoadStream('broadcast',
         console.log('load handler called'); 
         soundBlaster.SetStreamVolume(0.1); 
         soundBlaster.PlayStream();
-        soundBlaster.SetStreamPosition(100);
+        soundBlaster.SetStreamPosition(3553);
     },
     function(event){
         //console.log('time handler called', soundBlaster.GetStreamPosition());
@@ -43,6 +43,8 @@ soundBlaster.LoadStream('broadcast',
         // Loop the broadcast
         soundBlaster.SetStreamPosition(0);
         soundBlaster.PlayStream();
+        // Reset the stage hand
+        stageHand.Reset();
     }
 );
 
@@ -72,9 +74,6 @@ window.fetch('assets/data/script.json').then(function(response){
     }
     if( data.script ){
         stageHand = new StageHand(data.script);
-        // Timer goes here that will trigger the stagehand and pass the broadcast time
-        //stageHand._placeActor('car left');
-        //stageHand._placeActor('car right');
         window.setInterval(function(){
             stageHand.Manage(soundBlaster.GetStreamPosition());
         },5000);

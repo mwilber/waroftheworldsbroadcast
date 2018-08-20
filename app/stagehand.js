@@ -32,6 +32,22 @@ export class StageHand {
         this._processQueue(Math.floor(currTime));
     }
 
+    Reset(){
+        console.log('[StageHand]', 'resetting');
+        this.scriptPointer = 0;
+        this.queue = [];
+        this._cleanAllActors();
+    }
+
+    _cleanAllActors(){
+        for( let actor of this.stage.querySelectorAll('.actor') ){
+            if( actor ){
+                console.log('[StageHand]', 'removing actor', actor);
+                this.stage.removeChild(actor);
+            }
+        }
+    }
+
     _cleanStage(currTime){
         for( let actor of this.stage.querySelectorAll('.actor') ){
             if( currTime > actor.dataset.expiration ){

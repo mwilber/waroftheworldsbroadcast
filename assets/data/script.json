@@ -10,21 +10,13 @@
             "end":150,
             "actor": "car left",
             "duration": 10,
-            "randomize":5,
-            "maxct":1
-        },
-        {
-            "start":120,
-            "end":200,
-            "actor": "car right",
-            "duration": 10,
             "randomize":1,
             "maxct":1
         },
         {
-            "start":130,
-            "end":150,
-            "actor": "car left",
+            "start":200,
+            "end":250,
+            "actor": "car right",
             "duration": 10,
             "randomize":1,
             "maxct":1
