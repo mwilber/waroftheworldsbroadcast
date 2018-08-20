@@ -46,8 +46,13 @@ export class StageHand {
 
         for( let qPtr of this.queue ){
             let classRef = '.actor.'+qPtr.actor.replace(' ','.');
+            let rndSeed = Math.floor(Math.random()*qPtr.randomize);
+            // Limit number of actors to script maxct
             if( this.stage.querySelectorAll(classRef).length < qPtr.maxct ){
-                this._placeActor(qPtr.actor, currTime+qPtr.duration);
+                console.log('[StageHand]', 'random seed', rndSeed);
+                if(rndSeed === 0){
+                    this._placeActor(qPtr.actor, currTime+qPtr.duration);
+                }
             }
         }
     }
