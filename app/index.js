@@ -1,6 +1,9 @@
 require ('./fetch');
 require ('./promise');
 
+// function requireAll(r) { r.keys().forEach(r); }
+// requireAll(require.context('./modules/', true, /\.js$/));
+
 // Load application styles
 import 'styles/index.scss';
 
