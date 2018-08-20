@@ -45,7 +45,10 @@ export class StageHand {
         this._cleanStage(currTime);
 
         for( let qPtr of this.queue ){
-            this._placeActor(qPtr.actor, currTime+qPtr.duration);
+            let classRef = '.actor.'+qPtr.actor.replace(' ','.');
+            if( this.stage.querySelectorAll(classRef).length < qPtr.maxct ){
+                this._placeActor(qPtr.actor, currTime+qPtr.duration);
+            }
         }
     }
 
