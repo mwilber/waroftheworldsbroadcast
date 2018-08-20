@@ -1,0 +1,19 @@
+@keyframes carleft {
+    from {
+        transform: translateX(900px);
+    }
+  
+    to {
+        transform: translateX(0px);
+    }
+}
+
+@keyframes carright {
+    from {
+        transform: translateX(0px);
+    }
+  
+    to {
+        transform: translateX(900px);
+    }
+}

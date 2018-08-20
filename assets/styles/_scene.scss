@@ -46,10 +46,23 @@
     
     .car{
         position:absolute;
-        left:-600px;
+        left:-300px;
         top:545px;
         width:296px;
         height:208px;
+        z-index: 500;
+
+        animation-duration: 10s;
+        animation-iteration-count: 1;
+        animation-timing-function: linear;
+
+        &.left{
+            animation-name: carleft;
+        }
+
+        &.right{
+            animation-name: carright;
+        }
     }
     
     .tripod{
@@ -62,7 +75,7 @@
     
     #trees{
         position:absolute;
-    
+        z-index: 900;
     }
 }
 
@@ -94,6 +107,7 @@
 	left: 0px;
 	/*background:transparent url('../images/window.png');*/
     background:none;
+    z-index: 1000;
     
     img{
         // display:none;

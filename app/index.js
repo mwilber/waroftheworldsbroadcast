@@ -24,6 +24,9 @@ soundBlaster.LoadStream('broadcast',
     },
     function(event){
         //console.log('time handler called', soundBlaster.GetStreamPosition());
+        if( soundBlaster.GetStreamPosition() > 150 ){
+
+        }
     },
     function(event){
         console.log('play handler called');
@@ -50,3 +53,24 @@ preloader.PreloadAssets().then(()=>{
 });
 
 
+SetCar(1);
+SetCar(2);
+
+
+function SetCar(carPtr)
+{   
+    let stage = document.querySelector('#stage');
+    let actor = document.createElement('img');
+
+    if( carPtr == 1 ){
+        actor.src = 'assets/images/car1.png';
+        actor.className = 'car left';
+    }else if( carPtr == 2 ){
+        actor.src = 'assets/images/car2.png';
+        actor.className = 'car right';
+    }
+    
+    stage.appendChild(actor);
+
+
+}
