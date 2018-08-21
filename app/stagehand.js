@@ -23,7 +23,7 @@ export class StageHand {
             if( currTime > this.script[sidx].start && currTime < this.script[sidx].end ){
                 //console.log('[StageHand]', 'position found');
                 this._loadQueue(this.script[sidx]);
-                this.scriptPointer++;
+                this.scriptPointer = sidx+1;
                 break;
             }
         }
