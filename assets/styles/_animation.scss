@@ -17,3 +17,7 @@
         transform: translateX(900px);
     }
 }
+
+@keyframes comet {
+    100% { background-position: -10200px; }
+ }

@@ -27,7 +27,7 @@ soundBlaster.LoadStream('broadcast',
         console.log('load handler called'); 
         soundBlaster.SetStreamVolume(0.1); 
         soundBlaster.PlayStream();
-        soundBlaster.SetStreamPosition(3553);
+        soundBlaster.SetStreamPosition(150);
     },
     function(event){
         //console.log('time handler called', soundBlaster.GetStreamPosition());

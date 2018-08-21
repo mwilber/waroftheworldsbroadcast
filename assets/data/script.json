@@ -14,10 +14,34 @@
             "maxct":1
         },
         {
+            "start":150,
+            "end":300,
+            "actor": "comet high",
+            "duration": 1,
+            "randomize":1,
+            "maxct":1
+        },
+        {
+            "start":200,
+            "end":300,
+            "actor": "comet med",
+            "duration": 1,
+            "randomize":1,
+            "maxct":1
+        },
+        {
             "start":200,
             "end":250,
             "actor": "car right",
             "duration": 10,
+            "randomize":1,
+            "maxct":1
+        },
+        {
+            "start":250,
+            "end":300,
+            "actor": "comet low",
+            "duration": 1,
             "randomize":1,
             "maxct":1
         }
