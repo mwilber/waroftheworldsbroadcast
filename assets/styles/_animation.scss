@@ -23,15 +23,15 @@
  }
 
 @keyframes tripodwalk {
-    100% { background-position: -4545px; }
+    100% { background-position: -4500px; }
 }
 
  @keyframes tripodtranslate {
     from {
-        transform: translateX(450px);
+        transform: translateX(500px);
     }
   
     to {
-        transform: translateX(-450px);
+        transform: translateX(-500px);
     }
 }

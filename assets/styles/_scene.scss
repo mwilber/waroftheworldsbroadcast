@@ -73,20 +73,29 @@
 
     .tripod{
 
-        //animation: tripodtranslate 30s 1 linear;
-        //transform: translateX(450px);
+        animation: tripodtranslate 30s 1 linear;
+        transform: translateX(500px);
 
         &:before{
             content: '';
             position:absolute;
             width: 500px;
-            height: 313px;
-            background: transparent url('../images/tripod_walk.png') left center no-repeat;
+            height: 310px;
             background-position: 0;
             background-size: cover;
             z-index: 100;
 
             animation: tripodwalk 1s infinite steps(9);
+            
+        }
+
+        &.walk:before{
+            background: transparent url('../images/tripod_walk.png') left center no-repeat;
+            
+        }
+
+        &.beam:before{
+            background: transparent url('../images/tripod_beam.png') left center no-repeat;
             
         }
 
