@@ -21,3 +21,17 @@
 @keyframes comet {
     100% { background-position: -10200px; }
  }
+
+@keyframes tripodwalk {
+    100% { background-position: -4545px; }
+}
+
+ @keyframes tripodtranslate {
+    from {
+        transform: translateX(450px);
+    }
+  
+    to {
+        transform: translateX(-450px);
+    }
+}
