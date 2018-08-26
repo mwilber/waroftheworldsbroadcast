@@ -84,3 +84,57 @@ window.fetch('assets/data/script.json').then(function(response){
 .catch(function(error){
     console.error('fetch failed:', error);
 });
+
+function SetScale(){
+	var tscale = 40;
+	var rbottom = 10;
+	var wleft = 0;
+
+	var wscale = (window.innerHeight*1.15)/1050;
+	if((750*wscale)>(window.innerWidth*0.9)){
+		wscale = (window.innerWidth*1.1)/750;
+		wleft = -( ((750*wscale)-window.innerWidth) );
+		tscale = (window.innerHeight/(1050*wscale))*47.5;
+	}
+
+	var rscale = (window.innerHeight*.7)/500;
+	if((((450*rscale)+(750*wscale))>window.innerWidth) && ( (500*rscale) < window.innerHeight*.8)){
+		rscale = (window.innerHeight*.4)/500;
+		rbottom = 10;
+	}else if((((450*rscale)+(750*wscale))>window.innerWidth)){
+		rscale = (window.innerWidth-(750*wscale))/450;
+	}
+	
+	var rxfrm = 'display:none;';
+	if(rscale > 0.2){
+		rxfrm = 'display:block; ';
+		rxfrm += 'bottom:'+rbottom+'%; ';
+		rxfrm += 'transform:scale('+rscale+'); ';
+		rxfrm += '-ms-transform:scale('+rscale+'); ';
+		rxfrm += '-moz-transform:scale('+rscale+'); ';
+		rxfrm += '-webkit-transform:scale('+rscale+'); ';
+	}
+	document.querySelector('#radio').style.cssText = rxfrm;
+
+	
+	var stageCSS = 
+		'left:'+wleft+'px; '+
+		'transform:scale('+wscale+'); '+
+		'-ms-transform:scale('+wscale+'); '+
+		'-moz-transform:scale('+wscale+'); '+
+        '-webkit-transform:scale('+wscale+'); ';
+
+    console.log('stageframe css', stageCSS);
+        
+    document.querySelector('#stageframe').style.cssText = stageCSS;
+
+	document.querySelector('#tabletop').style.height = tscale+'%';
+
+}
+
+
+window.addEventListener('resize', function(event){
+	SetScale();
+});
+
+SetScale();

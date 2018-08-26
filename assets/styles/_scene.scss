@@ -182,7 +182,8 @@
     width: 150%;
     height: 40%;
 	margin-left:-25%;
-	background:transparent url('../images/wood_surface.jpg') center center repeat-x;
+    background:transparent url('../images/wood_surface.jpg') center center repeat-x;
+    background-size: cover;
 	-webkit-transform: rotate(359deg);
 	-moz-transform: rotate(359deg);
 	-o-transform: rotate(359deg);
