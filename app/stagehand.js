@@ -92,6 +92,10 @@ export class StageHand {
         let actor = document.createElement('div');
         actor.className = 'actor '+classes;
         actor.dataset['expiration'] = expiration;
+
+        let mask = document.createElement('div');
+        mask.className = 'mask';
+        actor.appendChild(mask);
         
         stage.appendChild(actor);
 

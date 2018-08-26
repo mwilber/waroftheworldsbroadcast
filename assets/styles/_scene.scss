@@ -84,18 +84,33 @@
             background-position: 0;
             background-size: cover;
             z-index: 100;
-
+            background: transparent url('../images/tripod_walk.png') left center no-repeat;
             animation: tripodwalk 1s infinite steps(9);
             
         }
 
-        &.walk:before{
-            background: transparent url('../images/tripod_walk.png') left center no-repeat;
-            
-        }
+        .mask{
 
-        &.beam:before{
-            background: transparent url('../images/tripod_beam.png') left center no-repeat;
+            animation: tripodfade 6s infinite linear;
+            position:absolute;
+                width: 500px;
+                height: 310px;
+                background-position: 0;
+                background-size: cover;
+                z-index: 101;
+
+            &:before{
+                content: '';
+                position:absolute;
+                width: 500px;
+                height: 310px;
+                background-position: 0;
+                background-size: cover;
+                z-index: 101;
+                opacity: inherit;
+                background: transparent url('../images/tripod_beam.png') left center no-repeat;
+                animation: tripodwalk 1s infinite steps(9);
+            }
             
         }
 

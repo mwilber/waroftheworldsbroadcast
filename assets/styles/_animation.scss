@@ -35,3 +35,30 @@
         transform: translateX(-500px);
     }
 }
+
+@keyframes tripodfade {
+    0%{
+        opacity: 0;
+    }
+    5%{
+        opacity: 1;
+    }
+    10%{
+        opacity: 1;
+    }
+    15%{
+        opacity: 0;
+    }
+    85%{
+        opacity: 0;
+    }
+    90%{
+        opacity: 1;
+    }
+    95%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
