@@ -32,6 +32,13 @@ export class StageHand {
 
         // Process the Queue
         this._processQueue(Math.floor(currTime));
+
+        // Call Update() on all lthe plugins
+        for( let plugin in this.plugins ){
+            if (this.plugins.hasOwnProperty(plugin)) {
+                this.plugins[plugin].Update(currTime);
+            }
+        }
     }
 
     Reset(){
@@ -61,14 +68,14 @@ export class StageHand {
 
         for( let qPtr of this.queue ){
             let classRef = '.actor.'+qPtr.actor.replace(' ','.');
-            let rndSeed = Math.floor(Math.random()*qPtr.randomize);
+            let rndSeed = Math.random();
             // Limit number of actors to script maxct
             if( this.stage.querySelectorAll(classRef).length < qPtr.maxct ){
                 console.log('[StageHand]', 'random seed', rndSeed);
-                if(rndSeed === 0){
+                if(rndSeed < qPtr.randomize){
                     if( qPtr.plugin ){
                         console.log('calling plugin', qPtr.plugin);
-                        this.plugins[qPtr.plugin].Process(qPtr.actor, currTime+qPtr.duration);
+                        this.plugins[qPtr.plugin].Process(qPtr, currTime);
                     }else{
                         this._placeActor(qPtr.actor, currTime+qPtr.duration);
                     }

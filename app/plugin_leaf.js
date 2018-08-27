@@ -3,26 +3,25 @@ export class Leaf{
     constructor(stage){
 
         this.stage = stage;
-        this.vines = [{
-            x: 512,
-            y: 0,
-            s: 125
-        }];
+        this.vines = [];
 
     }
 
-    Process(classes, expiration){
-        if(Math.random() > 0.5){
-            let xpos = Math.floor(Math.random()*(window.innerWidth*.6)-125);
-            this.vines.push({
-                x: xpos,
-                y: 0,
-                s: (250 * (1-(xpos/window.innerWidth)))
-            });
-        }
+    Process(script, time){
+        // Add a new vine
+        let xpos = Math.floor(Math.random()*(window.innerWidth*.6)-125);
+        this.vines.push({
+            x: xpos,
+            y: 0,
+            s: (250 * (1-(xpos/window.innerWidth))),
+            d: script.duration
+        });
+    }
 
+    Update(time){
+        // Grow the vines
         for( let idx in this.vines ){
-            if( this.vines[idx].y < window.innerHeight ){
+            if( this.vines.hasOwnProperty(idx) && this.vines[idx].y < window.innerHeight ){
                 console.log('[Leaf]', 'vine', this.vines[idx]);
                 var setsize = this.vines[idx].s;
                 var randomScale = Math.random();
@@ -30,7 +29,7 @@ export class Leaf{
                     setsize = Math.floor(setsize*randomScale);
                 }
 
-                this._placeActor(this.vines[idx].x, this.vines[idx].y, setsize, expiration);
+                this._placeActor(this.vines[idx].x, this.vines[idx].y, setsize, time+this.vines[idx].d);
 
                 this.vines[idx].x += Math.floor(Math.random()*100)-50;
                 this.vines[idx].y += Math.floor(this.vines[idx].s/4 + (Math.random()*this.vines[idx].s/2));
