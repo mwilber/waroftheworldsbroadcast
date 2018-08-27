@@ -86,18 +86,16 @@
             z-index: 100;
             background: transparent url('../images/tripod_walk.png') left center no-repeat;
             animation: tripodwalk 1s infinite steps(9);
-            
         }
 
         .mask{
-
             animation: tripodfade 6s infinite linear;
             position:absolute;
-                width: 500px;
-                height: 310px;
-                background-position: 0;
-                background-size: cover;
-                z-index: 101;
+            width: 500px;
+            height: 310px;
+            background-position: 0;
+            background-size: cover;
+            z-index: 101;
 
             &:before{
                 content: '';
@@ -161,6 +159,16 @@
 	height: 100%;
 	overflow:hidden;
     /*background-color:rgba(255,0,0,0.5);*/
+
+    .leaf{
+        position:absolute;
+        left:300px;
+        bottom:200px;
+        width:296px;
+        height:208px;
+        background: transparent url('../images/leaves.png') center no-repeat;
+        z-index: 500;
+    }
     
     img{
         position:absolute;

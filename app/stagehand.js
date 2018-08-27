@@ -1,13 +1,15 @@
 export class StageHand {
 
-    constructor(script){
+    constructor(script, plugins){
 
         script = script || {};
+        plugins = plugins || null;
 
         this.scriptPointer = 0;
         this.script = script;
         this.queue = [];
 
+        this.plugins = plugins;
         this.stage = document.querySelector('#stage');
 
     }
@@ -64,7 +66,12 @@ export class StageHand {
             if( this.stage.querySelectorAll(classRef).length < qPtr.maxct ){
                 console.log('[StageHand]', 'random seed', rndSeed);
                 if(rndSeed === 0){
-                    this._placeActor(qPtr.actor, currTime+qPtr.duration);
+                    if( qPtr.plugin ){
+                        console.log('calling plugin', qPtr.plugin);
+                        this.plugins[qPtr.plugin]._placeActor(qPtr.actor, currTime+qPtr.duration);
+                    }else{
+                        this._placeActor(qPtr.actor, currTime+qPtr.duration);
+                    }
                 }
             }
         }
@@ -97,7 +104,7 @@ export class StageHand {
         mask.className = 'mask';
         actor.appendChild(mask);
         
-        stage.appendChild(actor);
+        this.stage.appendChild(actor);
 
     }
 }

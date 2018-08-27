@@ -10,9 +10,14 @@ import 'styles/index.scss';
 import {Preloader} from './preloader';
 import { SoundBlaster } from './soundblaster';
 import { StageHand } from './stagehand';
+import { Leaf } from './plugin_leaf';
 
 let stageHand = null;
 let actIdx = [];
+
+var plugins = {
+    "leaf": new Leaf(document.querySelector('#plants'))
+};
 
 let preloader = new Preloader([
     'assets/images/car1.png',
@@ -73,7 +78,7 @@ window.fetch('assets/data/script.json').then(function(response){
         console.warn('act data not found in json')
     }
     if( data.script ){
-        stageHand = new StageHand(data.script);
+        stageHand = new StageHand(data.script, plugins);
         window.setInterval(function(){
             stageHand.Manage(soundBlaster.GetStreamPosition());
         },5000);

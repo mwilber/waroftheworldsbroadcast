@@ -22,6 +22,15 @@
             "maxct":1
         },
         {
+            "start":150,
+            "end":300,
+            "actor": "leaf",
+            "duration": 500,
+            "randomize":1,
+            "maxct":10,
+            "plugin":"leaf"
+        },
+        {
             "start":200,
             "end":300,
             "actor": "comet med",
