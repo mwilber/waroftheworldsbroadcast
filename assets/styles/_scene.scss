@@ -164,9 +164,10 @@
         position:absolute;
         right:300px;
         bottom:200px;
-        width:296px;
-        height:208px;
+        width:250px;
+        height:250px;
         background: transparent url('../images/leaves.png') center no-repeat;
+        background-size:contain;
         z-index: 500;
     }
     
