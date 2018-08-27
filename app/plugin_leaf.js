@@ -19,6 +19,10 @@ export class Leaf{
     }
 
     Update(time){
+
+        this._turnGrey(time);
+        this._cleanStage(time);
+
         // Grow the vines
         for( let idx in this.vines ){
             if( this.vines.hasOwnProperty(idx) && this.vines[idx].y < window.innerHeight ){
@@ -33,6 +37,23 @@ export class Leaf{
 
                 this.vines[idx].x += Math.floor(Math.random()*100)-50;
                 this.vines[idx].y += Math.floor(this.vines[idx].s/4 + (Math.random()*this.vines[idx].s/2));
+            }
+        }
+    }
+
+    _turnGrey(currTime){
+        for( let actor of this.stage.querySelectorAll('.actor') ){
+            if( currTime > (actor.dataset.expiration*0.2) ){
+                actor.classList.add('dead');
+                //this.stage.removeChild(actor);
+            }
+        }
+    }
+
+    _cleanStage(currTime){
+        for( let actor of this.stage.querySelectorAll('.actor') ){
+            if( currTime > actor.dataset.expiration ){
+                this.stage.removeChild(actor);
             }
         }
     }

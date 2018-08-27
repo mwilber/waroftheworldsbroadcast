@@ -25,8 +25,8 @@
             "start":150,
             "end":300,
             "actor": "leaf",
-            "duration": 500,
-            "randomize":0.5,
+            "duration": 50,
+            "randomize":0.4,
             "maxct":10,
             "plugin":"leaf"
         },
