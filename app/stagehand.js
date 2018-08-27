@@ -68,7 +68,7 @@ export class StageHand {
                 if(rndSeed === 0){
                     if( qPtr.plugin ){
                         console.log('calling plugin', qPtr.plugin);
-                        this.plugins[qPtr.plugin]._placeActor(qPtr.actor, currTime+qPtr.duration);
+                        this.plugins[qPtr.plugin].Process(qPtr.actor, currTime+qPtr.duration);
                     }else{
                         this._placeActor(qPtr.actor, currTime+qPtr.duration);
                     }
