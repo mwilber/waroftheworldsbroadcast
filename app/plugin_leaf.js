@@ -33,7 +33,7 @@ export class Leaf{
                     setsize = Math.floor(setsize*randomScale);
                 }
 
-                this._placeActor(this.vines[idx].x, this.vines[idx].y, setsize, time+this.vines[idx].d);
+                this._placeActor(this.vines[idx].x, this.vines[idx].y, setsize, this.vines[idx].d, time+this.vines[idx].d);
 
                 this.vines[idx].x += Math.floor(Math.random()*100)-50;
                 this.vines[idx].y += Math.floor(this.vines[idx].s/4 + (Math.random()*this.vines[idx].s/2));
@@ -43,7 +43,7 @@ export class Leaf{
 
     _turnGrey(currTime){
         for( let actor of this.stage.querySelectorAll('.actor') ){
-            if( currTime > (actor.dataset.expiration*0.8) ){
+            if( currTime > actor.dataset.expiration-(actor.dataset.duration*0.2) ){
                 actor.classList.add('dead');
                 //this.stage.removeChild(actor);
             }
@@ -58,7 +58,7 @@ export class Leaf{
         }
     }
 
-    _placeActor(x, y, s, expiration)
+    _placeActor(x, y, s, duration, expiration)
     {   
         console.log('[Leaf]', 'placing actor', x, y);
 
@@ -67,12 +67,14 @@ export class Leaf{
         let actor = document.createElement('div');
         actor.className = 'actor leaf';
         actor.dataset['expiration'] = expiration;
+        actor.dataset['duration'] = duration;
 
-        let customstyle = "height: "+s+"px; width: "+s+"px; right: "+x+"px; bottom: "+y+"px; transform: rotate("+rot+"deg);";
+        let customstyle = "height: "+s+"px; width: "+s+"px; right: "+x+"px; bottom: "+y+"px;";
         actor.style.cssText = customstyle;
 
         let mask = document.createElement('div');
         mask.className = 'mask';
+        mask.style.cssText = "transform: rotate("+rot+"deg);";
         actor.appendChild(mask);
         
         this.stage.appendChild(actor);
