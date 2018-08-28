@@ -169,6 +169,12 @@
         background: transparent url('../images/leaves.png') center no-repeat;
         background-size:contain;
         z-index: 500;
+
+        transition: filter 5s;
+
+        &.dead{
+            filter: grayscale(1);
+        }
     }
     
     img{

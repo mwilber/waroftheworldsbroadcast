@@ -43,7 +43,7 @@ export class Leaf{
 
     _turnGrey(currTime){
         for( let actor of this.stage.querySelectorAll('.actor') ){
-            if( currTime > (actor.dataset.expiration*0.2) ){
+            if( currTime > (actor.dataset.expiration*0.8) ){
                 actor.classList.add('dead');
                 //this.stage.removeChild(actor);
             }
