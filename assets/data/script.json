@@ -22,21 +22,20 @@
             "maxct":1
         },
         {
-            "start":150,
-            "end":300,
-            "actor": "leaf",
-            "duration": 100,
-            "randomize":0.4,
-            "maxct":10,
-            "plugin":"leaf"
-        },
-        {
             "start":200,
             "end":300,
             "actor": "comet med",
             "duration": 1,
             "randomize":1,
             "maxct":1
+        },
+        {
+            "start":200,
+            "end":300,
+            "actor": "tripod",
+            "duration": 30,
+            "randomize":0.7,
+            "maxct":3
         },
         {
             "start":200,
@@ -53,6 +52,15 @@
             "duration": 1,
             "randomize":1,
             "maxct":1
+        },
+        {
+            "start":350,
+            "end":600,
+            "actor": "leaf",
+            "duration": 100,
+            "randomize":0.4,
+            "maxct":10,
+            "plugin":"leaf"
         }
     ],
     "scriptold": {
