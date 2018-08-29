@@ -12,6 +12,13 @@ import { SoundBlaster } from './soundblaster';
 import { StageHand } from './stagehand';
 import { Leaf } from './plugin_leaf';
 
+let imgReady = false;
+let audReady = false;
+let scrReady = false;
+let audPlaying = false;
+
+let tmrIntro = null;
+
 let stageHand = null;
 let actIdx = [];
 
@@ -27,44 +34,108 @@ let preloader = new Preloader([
 
 let soundBlaster = new SoundBlaster();
 
-soundBlaster.LoadStream('broadcast',
-    function(event){
-        console.log('load handler called'); 
-        soundBlaster.SetStreamVolume(0.1); 
-        soundBlaster.PlayStream();
-        soundBlaster.SetStreamPosition(150);
-    },
-    function(event){
-        //console.log('time handler called', soundBlaster.GetStreamPosition());
-        if( soundBlaster.GetStreamPosition() > 150 ){
+///////////////////////////////////////////////////////////////////////////
+// Audio
+///////////////////////////////////////////////////////////////////////////
 
+function InitAudio(){
+
+    soundBlaster.LoadStream('broadcast',
+        function(event){
+            console.log('load handler called'); 
+            audReady = true;
+            StartAudio();
+            tmrIntro = window.setTimeout(function(){
+                if(!audPlaying){
+                    // Show the play button
+                    document.getElementById('manplay').classList.add('active');
+                }
+            }, 5000);
+        },
+        function(event){
+            //console.log('time handler called', soundBlaster.GetStreamPosition());
+            if( soundBlaster.GetStreamPosition() > 150 ){
+
+            }
+        },
+        function(event){
+            console.log('play handler called');
+            audPlaying = true;
+            
+            if( !imgReady ){
+                tmrIntro = window.setTimeout(function(){
+                    // Load the images here
+                    document.querySelector('.panel.one').classList.remove('active');
+                    document.querySelector('.panel.one').classList.add('hidden');
+                    document.querySelector('.panel.two').classList.add('active');
+                    InitImages();
+                },5000);
+            }
+        },
+        function(event){
+            console.log('ended handler called');
+            // Loop the broadcast
+            soundBlaster.SetStreamPosition(0);
+            soundBlaster.PlayStream();
+            // Reset the stage hand
+            stageHand.Reset();
         }
-    },
-    function(event){
-        console.log('play handler called');
-    },
-    function(event){
-        console.log('ended handler called');
-        // Loop the broadcast
-        soundBlaster.SetStreamPosition(0);
-        soundBlaster.PlayStream();
-        // Reset the stage hand
-        stageHand.Reset();
-    }
-);
+    );
 
-var preloaderPointer = window.setInterval(function(){
-    //console.log('tick', preloader.PercentComplete());
-},100);
+}
 
-preloader.PreloadAssets().then(()=>{
-    // TODO: add some sort of check for number of images loaded successfully
-    window.clearInterval(preloaderPointer);
-    preloader.RenderAssets();
+document.getElementById('manplay').addEventListener('click', function(){
+    StartAudio();
+})
 
-}).catch((error)=>{
-    console.error('error loading assets', error);
-});
+function StartAudio(){
+    soundBlaster.SetStreamVolume(0.1); 
+    soundBlaster.PlayStream();
+    soundBlaster.SetStreamPosition(150);
+}
+
+///////////////////////////////////////////////////////////////////////////
+// Images
+///////////////////////////////////////////////////////////////////////////
+
+function InitImages(){
+
+    var preloaderPointer = window.setInterval(function(){
+        //console.log('tick', preloader.PercentComplete());
+    },100);
+
+    tmrIntro = window.setTimeout(function(){
+        tmrIntro = null;
+        if(imgReady){
+            BeginProduction();
+        }
+    }, 5000);
+
+    preloader.PreloadAssets().then(()=>{
+        // TODO: add some sort of check for number of images loaded successfully
+        window.clearInterval(preloaderPointer);
+        preloader.RenderAssets();
+        imgReady = true;
+        if(tmrIntro === null){
+            BeginProduction();
+        }
+    }).catch((error)=>{
+        console.error('error loading assets', error);
+    });
+
+}
+
+function BeginProduction(){
+    document.querySelector('#intro').classList.add('hidden');
+
+    window.setInterval(function(){
+        stageHand.Manage(soundBlaster.GetStreamPosition());
+    },5000);
+}
+
+///////////////////////////////////////////////////////////////////////////
+// Script
+///////////////////////////////////////////////////////////////////////////
 
 window.fetch('assets/data/script.json').then(function(response){
     //console.log('fetch', response);
@@ -79,9 +150,11 @@ window.fetch('assets/data/script.json').then(function(response){
     }
     if( data.script ){
         stageHand = new StageHand(data.script, plugins);
-        window.setInterval(function(){
-            stageHand.Manage(soundBlaster.GetStreamPosition());
-        },5000);
+        scrReady = true;
+        // Display first panel
+        document.querySelector('.panel.one').classList.add('active');
+        // Fetch audio
+        InitAudio();
     }else{
         throw('script data not found in json');
     }
