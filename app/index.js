@@ -38,130 +38,152 @@ let soundBlaster = new SoundBlaster();
 // Audio
 ///////////////////////////////////////////////////////////////////////////
 
-function InitAudio(){
+function LoadAudio(){
 
-    soundBlaster.LoadStream('broadcast',
-        function(event){
-            console.log('load handler called'); 
-            audReady = true;
-            StartAudio();
-            tmrIntro = window.setTimeout(function(){
-                if(!audPlaying){
-                    // Show the play button
-                    document.getElementById('manplay').classList.add('active');
+    return new Promise(function(resolve, reject){
+
+        soundBlaster.LoadStream('broadcast',
+            function(event){
+                console.log('load handler called'); 
+                audReady = true;
+                resolve("audio loaded");
+            },
+            function(event){
+                //console.log('time handler called', soundBlaster.GetStreamPosition());
+                if( soundBlaster.GetStreamPosition() > 150 ){
+
                 }
-            }, 5000);
-        },
-        function(event){
-            //console.log('time handler called', soundBlaster.GetStreamPosition());
-            if( soundBlaster.GetStreamPosition() > 150 ){
+            },
+            function(event){
+                console.log('play handler called');
+                audPlaying = true;
+                
+                // if( !imgReady ){
+                //     tmrIntro = window.setTimeout(function(){
+                //         // Load the images here
+                //         document.querySelector('.panel.one').classList.remove('active');
+                //         document.querySelector('.panel.one').classList.add('hidden');
+                //         document.querySelector('.panel.two').classList.add('active');
+                //         InitImages();
+                //     },5000);
+                // }
+            },
+            function(event){
+                console.log('ended handler called');
+                // Loop the broadcast
+                soundBlaster.SetStreamPosition(0);
+                soundBlaster.PlayStream();
+                // Reset the stage hand
+                stageHand.Reset();
+            }
+        );
 
-            }
-        },
-        function(event){
-            console.log('play handler called');
-            audPlaying = true;
-            
-            if( !imgReady ){
-                tmrIntro = window.setTimeout(function(){
-                    // Load the images here
-                    document.querySelector('.panel.one').classList.remove('active');
-                    document.querySelector('.panel.one').classList.add('hidden');
-                    document.querySelector('.panel.two').classList.add('active');
-                    InitImages();
-                },5000);
-            }
-        },
-        function(event){
-            console.log('ended handler called');
-            // Loop the broadcast
-            soundBlaster.SetStreamPosition(0);
-            soundBlaster.PlayStream();
-            // Reset the stage hand
-            stageHand.Reset();
-        }
-    );
+    });
 
 }
 
-document.getElementById('manplay').addEventListener('click', function(){
-    StartAudio();
-})
 
-function StartAudio(){
-    soundBlaster.SetStreamVolume(0.1); 
-    soundBlaster.PlayStream();
-    soundBlaster.SetStreamPosition(150);
-}
 
 ///////////////////////////////////////////////////////////////////////////
 // Images
 ///////////////////////////////////////////////////////////////////////////
 
-function InitImages(){
+function LoadImages(){
 
-    var preloaderPointer = window.setInterval(function(){
-        //console.log('tick', preloader.PercentComplete());
-    },100);
+    return new Promise(function(resolve, reject){
 
-    tmrIntro = window.setTimeout(function(){
-        tmrIntro = null;
-        if(imgReady){
-            BeginProduction();
-        }
-    }, 5000);
+        var preloaderPointer = window.setInterval(function(){
+            //console.log('tick', preloader.PercentComplete());
+        },100);
 
-    preloader.PreloadAssets().then(()=>{
-        // TODO: add some sort of check for number of images loaded successfully
-        window.clearInterval(preloaderPointer);
-        preloader.RenderAssets();
-        imgReady = true;
-        if(tmrIntro === null){
-            BeginProduction();
-        }
-    }).catch((error)=>{
-        console.error('error loading assets', error);
+        // tmrIntro = window.setTimeout(function(){
+        //     tmrIntro = null;
+        //     if(imgReady){
+        //         BeginProduction();
+        //     }
+        // }, 5000);
+
+        preloader.PreloadAssets().then(()=>{
+            // TODO: add some sort of check for number of images loaded successfully
+            window.clearInterval(preloaderPointer);
+            preloader.RenderAssets();
+            imgReady = true;
+            resolve(true);
+            // if(tmrIntro === null){
+            //     BeginProduction();
+            // }
+        }).catch((error)=>{
+            reject(error);
+        });
+
     });
 
-}
-
-function BeginProduction(){
-    document.querySelector('#intro').classList.add('hidden');
-
-    window.setInterval(function(){
-        stageHand.Manage(soundBlaster.GetStreamPosition());
-    },5000);
 }
 
 ///////////////////////////////////////////////////////////////////////////
 // Script
 ///////////////////////////////////////////////////////////////////////////
 
-window.fetch('assets/data/script.json').then(function(response){
-    //console.log('fetch', response);
-    return response.json();
-})
-.then(function(data){
-    console.log('fetch data', data);
-    if( data.acts ){
-        actIdx = data.acts;
-    }else{
-        console.warn('act data not found in json')
-    }
-    if( data.script ){
-        stageHand = new StageHand(data.script, plugins);
-        scrReady = true;
-        // Display first panel
-        document.querySelector('.panel.one').classList.add('active');
-        // Fetch audio
-        InitAudio();
-    }else{
-        throw('script data not found in json');
-    }
-})
-.catch(function(error){
-    console.error('fetch failed:', error);
+function LoadScript(){
+
+    return new Promise(function(resolve, reject){
+        window.fetch('assets/data/script.json').then(function(response){
+            //console.log('fetch', response);
+            return response.json();
+        })
+        .then(function(data){
+            //console.log('fetch data', data);
+            if( data.acts ){
+                actIdx = data.acts;
+            }else{
+                reject('act data not found in json')
+
+            }
+            if( data.script ){
+                scrReady = true;
+                resolve(data.script);
+            }else{
+                throw('script data not found in json');
+            }
+        })
+        .catch(function(error){
+            reject(error);
+        });
+    });
+
+}
+
+
+LoadScript().then(function(script){
+    console.log('LoadScript', script);
+    stageHand = new StageHand(script, plugins);
+    // Display first panel
+    document.querySelector('.panel.one').classList.add('active');
+    // Fetch audio
+    LoadAudio().then(function(){
+        console.log('then after audio ready');
+        StartAudio();
+        tmrIntro = window.setTimeout(function(){
+            if(!audPlaying){
+                // Show the play button
+                document.getElementById('manplay').classList.add('active');
+            }
+        }, 5000);
+        document.querySelector('.panel.one').classList.remove('active');
+        document.querySelector('.panel.one').classList.add('hidden');
+        document.querySelector('.panel.two').classList.add('active');
+        LoadImages().then(function(){
+            console.log('images ready');
+            BeginProduction();
+        }).catch(function(err){
+            console.error('error loading iamges', err);
+        });
+    });
+}).catch(function(err){
+    console.error('LoadScript', 'error', err);
 });
+
+
 
 function SetScale(){
 	var tscale = 40;
@@ -210,6 +232,24 @@ function SetScale(){
 
 }
 
+function StartAudio(){
+    soundBlaster.SetStreamVolume(0.1); 
+    soundBlaster.PlayStream();
+    soundBlaster.SetStreamPosition(150);
+}
+
+function BeginProduction(){
+    document.querySelector('#intro').classList.add('hidden');
+
+    window.setInterval(function(){
+        stageHand.Manage(soundBlaster.GetStreamPosition());
+    },5000);
+}
+
+
+document.getElementById('manplay').addEventListener('click', function(){
+    StartAudio();
+});
 
 window.addEventListener('resize', function(event){
 	SetScale();
