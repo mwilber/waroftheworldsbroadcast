@@ -15,7 +15,6 @@ import { Leaf } from './plugin_leaf';
 
 let imgReady = false;
 let audReady = false;
-let scrReady = false;
 let audPlaying = false;
 
 let tmrIntro = null;
@@ -77,26 +76,28 @@ function Init(){
     }).then((data)=>{
         if( !data.acts ){
             throw('act data not found in json')
+        }else{
+            this.actIdx = data.acts;
         }
         if( !data.script ){
             throw('script data not found in json')
+        }else{
+            console.log('[LoadScript]', data);
+            // Show the intro panel
+            document.querySelector('.panel.one').classList.add('active');
+            // Set up the StageHand
+            stageHand = new StageHand(data.script, plugins);
+            // Load the Audio file
+            soundBlaster.LoadStream('broadcast', handleSoundLoaded, handleSoundTimer, handleSoundPlay, handleSoundEnded );
+            // Load image files
+            preloader.PreloadAssets().then(()=>{
+                // TODO: add some sort of check for number of images loaded successfully
+                preloader.RenderAssets();
+                imgReady = true;
+            }).catch((error)=>{
+                console.error('[Load Images]',error);
+            });
         }
-
-        console.log('[LoadScript]', data);
-        // Show the intro panel
-        document.querySelector('.panel.one').classList.add('active');
-        // Set up the StageHand
-        stageHand = new StageHand(data.script, plugins);
-        // Load the Audio file
-        soundBlaster.LoadStream('broadcast', handleSoundLoaded, handleSoundTimer, handleSoundPlay, handleSoundEnded );
-        // Load image files
-        preloader.PreloadAssets().then(()=>{
-            // TODO: add some sort of check for number of images loaded successfully
-            preloader.RenderAssets();
-            imgReady = true;
-        }).catch((error)=>{
-            console.error('[Load Images]',error);
-        });
 
     }).catch((error)=>{
         console.error('[LoadScript]',error);
