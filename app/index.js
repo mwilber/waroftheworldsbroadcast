@@ -11,7 +11,7 @@ import {Preloader} from './preloader';
 import { SoundBlaster } from './soundblaster';
 import { StageHand } from './stagehand';
 import { Leaf } from './plugin_leaf';
-import { LoadAudio, LoadImages, LoadScript } from './loaders';
+import { LoadManager } from './loadmanager';
 
 
 let imgReady = false;
@@ -33,6 +33,7 @@ let preloader = new Preloader([
     'assets/images/car2.png',
     'assets/images/leaves.png',
 ]);
+let loadManager = new LoadManager();
 
 let soundBlaster = new SoundBlaster();
 
@@ -40,34 +41,44 @@ let soundBlaster = new SoundBlaster();
 
 function Init(){
 
-    LoadScript().then(function(script){
-        console.log('LoadScript', script);
-        stageHand = new StageHand(script, plugins);
-        // Display first panel
-        document.querySelector('.panel.one').classList.add('active');
-        // Fetch audio
-        LoadAudio().then(function(){
-            console.log('then after audio ready');
-            StartAudio();
-            tmrIntro = window.setTimeout(function(){
-                if(!audPlaying){
-                    // Show the play button
-                    document.getElementById('manplay').classList.add('active');
-                }
-            }, 5000);
-            document.querySelector('.panel.one').classList.remove('active');
-            document.querySelector('.panel.one').classList.add('hidden');
-            document.querySelector('.panel.two').classList.add('active');
-            LoadImages().then(function(){
-                console.log('images ready');
-                BeginProduction();
-            }).catch(function(err){
-                console.error('error loading iamges', err);
-            });
-        });
-    }).catch(function(err){
-        console.error('LoadScript', 'error', err);
-    });
+    loadManager.LoadScript().then((script)=>{
+        if(script){
+            console.log('[LoadScript]', script);
+        }else{
+            throw('loadManager return resolves to false');
+        }
+    }).catch((error)=>{
+        console.error('[LoadScript]',error);
+    })
+
+    // LoadScript().then(function(script){
+    //     console.log('LoadScript', script);
+    //     stageHand = new StageHand(script, plugins);
+    //     // Display first panel
+    //     document.querySelector('.panel.one').classList.add('active');
+    //     // Fetch audio
+    //     LoadAudio().then(function(){
+    //         console.log('then after audio ready');
+    //         StartAudio();
+    //         tmrIntro = window.setTimeout(function(){
+    //             if(!audPlaying){
+    //                 // Show the play button
+    //                 document.getElementById('manplay').classList.add('active');
+    //             }
+    //         }, 5000);
+    //         document.querySelector('.panel.one').classList.remove('active');
+    //         document.querySelector('.panel.one').classList.add('hidden');
+    //         document.querySelector('.panel.two').classList.add('active');
+    //         LoadImages().then(function(){
+    //             console.log('images ready');
+    //             BeginProduction();
+    //         }).catch(function(err){
+    //             console.error('error loading iamges', err);
+    //         });
+    //     });
+    // }).catch(function(err){
+    //     console.error('LoadScript', 'error', err);
+    // });
 
 }
 
