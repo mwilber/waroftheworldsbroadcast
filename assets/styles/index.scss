@@ -36,12 +36,12 @@ body{
 
 	&.hidden{
 		display: block;
-		animation: 5s fadeout 1 ease-in;
+		animation: 2s fadeout 1 ease-in;
 	}
 
 	&.active{
 		display: block;
-		animation: 5s fadein 1 ease-in;
+		animation: 2s fadein 1 ease-in;
 	}
 }
 
@@ -58,7 +58,7 @@ body{
 	&.hidden{
 		display: block;
 		opacity: 0;
-		animation: 5s fadeout 1 ease-in;
+		animation: 2s fadeout 1 ease-in;
 	}
 }
 

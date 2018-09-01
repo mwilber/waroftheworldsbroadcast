@@ -38,18 +38,65 @@ let loadManager = new LoadManager();
 let soundBlaster = new SoundBlaster();
 
 
+let handleSoundLoaded = function(event){
+    console.log('load handler called'); 
+    audReady = true;
+    StartAudio();
+    window.setTimeout(function(){
+        if(!audPlaying){
+            // Show the play button
+            document.getElementById('manplay').classList.add('active');
+        }
+    }, 1000);
+};
+
+let handleSoundTimer = function(event){
+    //console.log('time handler called', soundBlaster.GetStreamPosition());
+    if( soundBlaster.GetStreamPosition() > 150 ){
+
+    }
+};
+
+let handleSoundEnded = function(event){
+    console.log('ended handler called');
+    // Loop the broadcast
+    soundBlaster.SetStreamPosition(0);
+    soundBlaster.PlayStream();
+    // Reset the stage hand
+    stageHand.Reset();
+};
+
+let handleSoundPlay = function(event){
+    console.log('play handler called');
+    audPlaying = true;
+};
 
 function Init(){
 
     loadManager.LoadScript().then((script)=>{
         if(script){
             console.log('[LoadScript]', script);
+            // Show the intro panel
+            document.querySelector('.panel.one').classList.add('active');
+            // Set up the StageHand
+            stageHand = new StageHand(script, plugins);
+            // Load the Audio file
+            soundBlaster.LoadStream('broadcast', handleSoundLoaded, handleSoundTimer, handleSoundPlay, handleSoundEnded );
+            // Load image files
+            preloader.PreloadAssets().then(()=>{
+                // TODO: add some sort of check for number of images loaded successfully
+                preloader.RenderAssets();
+                imgReady = true;
+            }).catch((error)=>{
+                console.error('[Load Images]',error);
+            });
+
         }else{
             throw('loadManager return resolves to false');
         }
     }).catch((error)=>{
         console.error('[LoadScript]',error);
-    })
+    });
 
     // LoadScript().then(function(script){
     //     console.log('LoadScript', script);
@@ -81,6 +128,35 @@ function Init(){
     // });
 
 }
+
+function StartAudio(){
+    soundBlaster.SetStreamVolume(0.1); 
+    soundBlaster.PlayStream();
+    soundBlaster.SetStreamPosition(0);
+
+    window.setTimeout(function(){
+        if(audPlaying && imgReady){
+            BeginProduction();
+        }else{
+            // TODO: Display loading indicator
+            document.querySelector('.panel.one').classList.remove('active');
+            document.querySelector('.panel.one').classList.add('hidden');
+            document.querySelector('.panel.two').classList.add('active');
+        }
+    },11000);
+}
+
+function BeginProduction(){
+    document.querySelector('#intro').classList.add('hidden');
+
+    window.setInterval(function(){
+        stageHand.Manage(soundBlaster.GetStreamPosition());
+    },5000);
+}
+
+
+
+
 
 function SetScale(){
 	var tscale = 40;
@@ -129,19 +205,7 @@ function SetScale(){
 
 }
 
-function StartAudio(){
-    soundBlaster.SetStreamVolume(0.1); 
-    soundBlaster.PlayStream();
-    soundBlaster.SetStreamPosition(150);
-}
 
-function BeginProduction(){
-    document.querySelector('#intro').classList.add('hidden');
-
-    window.setInterval(function(){
-        stageHand.Manage(soundBlaster.GetStreamPosition());
-    },5000);
-}
 
 
 document.getElementById('manplay').addEventListener('click', function(){
