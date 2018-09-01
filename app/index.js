@@ -12,6 +12,13 @@ import { SoundBlaster } from './soundblaster';
 import { StageHand } from './stagehand';
 import { Leaf } from './plugin_leaf';
 
+
+let imgReady = false;
+let audReady = false;
+let audPlaying = false;
+
+let tmrIntro = null;
+
 let stageHand = null;
 let actIdx = [];
 
@@ -27,68 +34,111 @@ let preloader = new Preloader([
 
 let soundBlaster = new SoundBlaster();
 
-soundBlaster.LoadStream('broadcast',
-    function(event){
-        console.log('load handler called'); 
-        soundBlaster.SetStreamVolume(0.1); 
-        soundBlaster.PlayStream();
-        soundBlaster.SetStreamPosition(150);
-    },
-    function(event){
-        //console.log('time handler called', soundBlaster.GetStreamPosition());
-        if( soundBlaster.GetStreamPosition() > 150 ){
 
+let handleSoundLoaded = function(event){
+    console.log('load handler called'); 
+    audReady = true;
+    StartAudio();
+    window.setTimeout(function(){
+        if(!audPlaying){
+            // Show the play button
+            document.getElementById('manplay').classList.add('active');
         }
-    },
-    function(event){
-        console.log('play handler called');
-    },
-    function(event){
-        console.log('ended handler called');
-        // Loop the broadcast
-        soundBlaster.SetStreamPosition(0);
-        soundBlaster.PlayStream();
-        // Reset the stage hand
-        stageHand.Reset();
+    }, 1000);
+};
+
+let handleSoundTimer = function(event){
+    //console.log('time handler called', soundBlaster.GetStreamPosition());
+    if( soundBlaster.GetStreamPosition() > 150 ){
+
     }
-);
+};
 
-var preloaderPointer = window.setInterval(function(){
-    //console.log('tick', preloader.PercentComplete());
-},100);
+let handleSoundEnded = function(event){
+    console.log('ended handler called');
+    // Loop the broadcast
+    soundBlaster.SetStreamPosition(0);
+    soundBlaster.PlayStream();
+    // Reset the stage hand
+    stageHand.Reset();
+};
 
-preloader.PreloadAssets().then(()=>{
-    // TODO: add some sort of check for number of images loaded successfully
-    window.clearInterval(preloaderPointer);
-    preloader.RenderAssets();
+let handleSoundPlay = function(event){
+    console.log('play handler called');
+    audPlaying = true;
+};
 
-}).catch((error)=>{
-    console.error('error loading assets', error);
-});
+function Init(){
 
-window.fetch('assets/data/script.json').then(function(response){
-    //console.log('fetch', response);
-    return response.json();
-})
-.then(function(data){
-    console.log('fetch data', data);
-    if( data.acts ){
-        actIdx = data.acts;
-    }else{
-        console.warn('act data not found in json')
+    window.fetch('assets/data/script.json').then(function(response){
+        //console.log('fetch', response);
+        return response.json();
+    }).then((data)=>{
+        if( !data.acts ){
+            throw('act data not found in json')
+        }else{
+            actIdx = data.acts;
+        }
+        if( !data.script ){
+            throw('script data not found in json')
+        }else{
+            console.log('[LoadScript]', data);
+            // Show the intro panel
+            document.querySelector('.panel.one').classList.add('active');
+            // Set up the StageHand
+            stageHand = new StageHand(data.script, plugins);
+            // Load the Audio file
+            soundBlaster.LoadStream('broadcast', handleSoundLoaded, handleSoundTimer, handleSoundPlay, handleSoundEnded );
+            // Load image files
+            preloader.PreloadAssets().then(()=>{
+                // TODO: add some sort of check for number of images loaded successfully
+                preloader.RenderAssets();
+                imgReady = true;
+            }).catch((error)=>{
+                console.error('[Load Images]',error);
+            });
+        }
+
+    }).catch((error)=>{
+        console.error('[LoadScript]',error);
+    });
+
+}
+
+function StartAudio(){
+    soundBlaster.SetStreamVolume(0.1); 
+    soundBlaster.PlayStream();
+    soundBlaster.SetStreamPosition(0);
+
+    // If the manual start button appears, this will be called again.
+    // Clear out the timer if it's already going.
+    if(tmrIntro !== null){
+        window.clearTimeout(tmrIntro);
     }
-    if( data.script ){
-        stageHand = new StageHand(data.script, plugins);
-        window.setInterval(function(){
-            stageHand.Manage(soundBlaster.GetStreamPosition());
-        },5000);
-    }else{
-        throw('script data not found in json');
-    }
-})
-.catch(function(error){
-    console.error('fetch failed:', error);
-});
+    tmrIntro = window.setTimeout(function(){
+        if(audPlaying && imgReady){
+            BeginProduction();
+        }else{
+            // TODO: Display loading indicator
+            document.querySelector('.panel.one').classList.remove('active');
+            document.querySelector('.panel.one').classList.add('hidden');
+            document.querySelector('.panel.two').classList.add('active');
+        }
+    },11000);
+}
+
+function BeginProduction(){
+    // Trigger the intro panels to fade out
+    document.querySelector('#intro').classList.add('hidden');
+    // Stage Heartbeat
+    window.setInterval(function(){
+        stageHand.Manage(soundBlaster.GetStreamPosition());
+    },5000);
+}
+
+
+
+
 
 function SetScale(){
 	var tscale = 40;
@@ -138,8 +188,15 @@ function SetScale(){
 }
 
 
+
+
+document.getElementById('manplay').addEventListener('click', function(){
+    StartAudio();
+});
+
 window.addEventListener('resize', function(event){
 	SetScale();
 });
 
 SetScale();
+Init();
