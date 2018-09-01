@@ -109,7 +109,12 @@ function StartAudio(){
     soundBlaster.PlayStream();
     soundBlaster.SetStreamPosition(0);
 
-    window.setTimeout(function(){
+    // If the manual start button appears, this will be called again.
+    // Clear out the timer if it's already going.
+    if(tmrIntro !== null){
+        window.clearTimeout(tmrIntro);
+    }
+    tmrIntro = window.setTimeout(function(){
         if(audPlaying && imgReady){
             BeginProduction();
         }else{
@@ -122,8 +127,9 @@ function StartAudio(){
 }
 
 function BeginProduction(){
+    // Trigger the intro panels to fade out
     document.querySelector('#intro').classList.add('hidden');
-
+    // Stage Heartbeat
     window.setInterval(function(){
         stageHand.Manage(soundBlaster.GetStreamPosition());
     },5000);
