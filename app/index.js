@@ -77,7 +77,7 @@ function Init(){
         if( !data.acts ){
             throw('act data not found in json')
         }else{
-            this.actIdx = data.acts;
+            actIdx = data.acts;
         }
         if( !data.script ){
             throw('script data not found in json')
