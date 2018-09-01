@@ -2,8 +2,6 @@ export class LoadManager{
 
     constructor(){
 
-        this.minWait = 5000;
-
         this.state = {
             'script': {
                 status: 'init',
@@ -49,16 +47,6 @@ export class LoadManager{
         return function(self){
             return new Promise(function(resolve, reject){
 
-                self._setState('script','loading');
-                self.state.script.timer = window.setTimeout(function(){
-                    if(self._getState('script') !== 'loading'){
-                        self._setState('script','ready');
-                        resolve(self._getData('script'));
-                    }else{
-                        self._setState('script','waiting');
-                    }
-                },self.minWait);
-
                 window.fetch('assets/data/script.json').then(function(response){
                     //console.log('fetch', response);
                     return response.json();
@@ -70,12 +58,8 @@ export class LoadManager{
                     }
                     if( data.script ){
                         self._setData('script', data);
-                        if(self._getState('script') !== 'loading'){
-                            self._setState('script','ready');
-                            resolve(self._getData('script'));
-                        }else{
-                            self._setState('script','waiting');
-                        }
+                        self._setState('script','ready');
+                        resolve(self._getData('script'));
                     }else{
                         throw('script data not found in json');
                     }
