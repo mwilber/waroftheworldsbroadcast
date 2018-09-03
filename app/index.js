@@ -7,7 +7,8 @@ require ('./promise');
 // Load application styles
 import 'styles/index.scss';
 
-import { } from '@fortawesome/fontawesome-pro/js/all'
+import { } from '@fortawesome/fontawesome-pro/js/fontawesome.min'
+import { } from '@fortawesome/fontawesome-pro/js/regular.min'
 
 import {Preloader} from './preloader';
 import { SoundBlaster } from './soundblaster';
@@ -32,6 +33,10 @@ let preloader = new Preloader([
     'assets/images/car1.png',
     'assets/images/car2.png',
     'assets/images/leaves.png',
+    'assets/images/wall_tile.png',
+    'assets/images/comet.png',
+    'assets/images/tripod_walk.png',
+    'assets/images/tripod_beam.png'
 ]);
 
 let soundBlaster = new SoundBlaster();
@@ -121,12 +126,20 @@ function StartAudio(){
         if(audPlaying && imgReady){
             BeginProduction();
         }else{
-            // TODO: Display loading indicator
+            var preloaderPointer = window.setInterval(function(){
+                //console.log('tick', preloader.PercentComplete());
+                let progress = preloader.PercentComplete();
+                if(progress === 100){
+                    BeginProduction();
+                }else{
+                    document.querySelector('.progress .number').innerHTML = progress;
+                }
+            },2000);
             document.querySelector('.panel.one').classList.remove('active');
             document.querySelector('.panel.one').classList.add('hidden');
             document.querySelector('.panel.two').classList.add('active');
         }
-    },11000);
+    },5000);
 }
 
 function BeginProduction(){
