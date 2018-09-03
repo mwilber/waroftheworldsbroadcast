@@ -56,6 +56,18 @@ let handleSoundLoaded = function(event){
 
 let handleSoundTimer = function(event){
     //console.log('time handler called', soundBlaster.GetStreamPosition());
+
+    // Get the time
+    let minutes = Math.floor(soundBlaster.GetStreamPosition()/60);
+    let seconds = Math.floor(soundBlaster.GetStreamPosition()%60);
+    // Add leading zero to seconds
+    if(seconds < 10){
+        seconds = '0'+seconds;
+    }
+    // Display the time
+    document.querySelector('.clock .time').innerHTML = minutes+":"+seconds;
+
+    // Light up the ACT display
     for( let idx=1; idx < actIdx.length; idx++ ){
         document.querySelector('.act-'+(idx)).classList.remove('active');
         if(soundBlaster.GetStreamPosition() > actIdx[idx-1] && soundBlaster.GetStreamPosition() < actIdx[idx]){
