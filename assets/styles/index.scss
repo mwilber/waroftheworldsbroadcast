@@ -121,6 +121,23 @@ body{
 	&.active{
 		transform: translateX(0);
 	}
+
+	.section{
+		
+		margin: 10px;
+
+		&.acts{
+			ul{
+				li{
+					color:#666;
+
+					&.active{
+						color: #fff;
+					}
+				}
+			}
+		}
+	}
 }
 
 @import 'animation';

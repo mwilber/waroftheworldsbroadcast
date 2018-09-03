@@ -56,9 +56,17 @@ let handleSoundLoaded = function(event){
 
 let handleSoundTimer = function(event){
     //console.log('time handler called', soundBlaster.GetStreamPosition());
-    if( soundBlaster.GetStreamPosition() > 150 ){
-
+    for( let idx=1; idx < actIdx.length; idx++ ){
+        document.querySelector('.act-'+(idx)).classList.remove('active');
+        if(soundBlaster.GetStreamPosition() > actIdx[idx-1] && soundBlaster.GetStreamPosition() < actIdx[idx]){
+            document.querySelector('.act-'+(idx)).classList.add('active');
+        }
     }
+    document.querySelector('.act-'+(actIdx.length)).classList.remove('active');
+    if(soundBlaster.GetStreamPosition() > actIdx[actIdx.length-1]){
+        document.querySelector('.act-'+(actIdx.length)).classList.add('active');
+    }
+
 };
 
 let handleSoundEnded = function(event){
@@ -239,6 +247,31 @@ document.querySelector('.backward').addEventListener('click',function(){
 
 document.querySelector('.forward').addEventListener('click',function(){
     soundBlaster.AdvanceStream(false);
+});
+
+document.querySelector('.skipbackward').addEventListener('click',function(){
+    let gotoPos = 0;
+    let prevAct = 0;
+    for( let act of actIdx ){
+        if(soundBlaster.GetStreamPosition() > act+30){
+            gotoPos = act;
+        }else if(soundBlaster.GetStreamPosition() > act){
+            gotoPos = prevAct;
+        }
+        prevAct = act;
+    }
+    soundBlaster.SetStreamPosition(gotoPos);
+    return;
+});
+
+document.querySelector('.skipforward').addEventListener('click',function(){
+    for( let act of actIdx ){
+        if(act > soundBlaster.GetStreamPosition()){
+            soundBlaster.SetStreamPosition(act);
+            return;
+        }
+    }
+    soundBlaster.SetStreamPosition(0);
 });
 
 window.addEventListener('resize', function(event){
