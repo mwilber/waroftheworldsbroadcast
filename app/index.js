@@ -190,7 +190,9 @@ function SetScale(){
 }
 
 
-
+document.querySelector('.btn-action').addEventListener('click',function(){
+    document.querySelector('.sidebar').classList.toggle('active');
+});
 
 document.getElementById('manplay').addEventListener('click', function(){
     StartAudio();

@@ -82,20 +82,42 @@ body{
 .btn-action{
 	display: block;
 	position: fixed;
-	top: 5%;
-    left: 5%;
+	bottom: 10px;
+    right: 10px;
     width: 4em;
     height: 4em;
     background: rgba(0, 0, 0, 0.9);
     border: solid 1px rgba(255,255,255,0.5);
     border-radius: 50%;
     color: #fff;
-	z-index: 5000;
+	z-index: 5001;
 	text-align: center;
 	
 	svg{
 		font-size: 2em;
 		margin-top: 25%;
+	}
+}
+
+.sidebar{
+	display: block;
+	position: fixed;
+	top: 0;
+    right: 0;
+	width: 80%;
+	max-width: 400px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+	border-left: solid 1px rgba(255,255,255,0.5);
+	
+	z-index: 5000;
+
+	transform: translateX(100%);
+
+	transition: transform 250ms;
+
+	&.active{
+		transform: translateX(0);
 	}
 }
 
