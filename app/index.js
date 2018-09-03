@@ -7,7 +7,8 @@ require ('./promise');
 // Load application styles
 import 'styles/index.scss';
 
-import { } from '@fortawesome/fontawesome-pro/js/all'
+import { } from '@fortawesome/fontawesome-pro/js/fontawesome.min'
+import { } from '@fortawesome/fontawesome-pro/js/regular.min'
 
 import {Preloader} from './preloader';
 import { SoundBlaster } from './soundblaster';
@@ -32,6 +33,10 @@ let preloader = new Preloader([
     'assets/images/car1.png',
     'assets/images/car2.png',
     'assets/images/leaves.png',
+    'assets/images/wall_tile.png',
+    'assets/images/comet.png',
+    'assets/images/tripod_walk.png',
+    'assets/images/tripod_beam.png'
 ]);
 
 let soundBlaster = new SoundBlaster();
@@ -118,8 +123,7 @@ function StartAudio(){
         window.clearTimeout(tmrIntro);
     }
     tmrIntro = window.setTimeout(function(){
-        //if(audPlaying && imgReady){
-        if(false){
+        if(audPlaying && imgReady){
             BeginProduction();
         }else{
             var preloaderPointer = window.setInterval(function(){
@@ -130,7 +134,7 @@ function StartAudio(){
                 }else{
                     document.querySelector('.progress .number').innerHTML = progress;
                 }
-            },100);
+            },2000);
             document.querySelector('.panel.one').classList.remove('active');
             document.querySelector('.panel.one').classList.add('hidden');
             document.querySelector('.panel.two').classList.add('active');
