@@ -125,7 +125,11 @@ function StartAudio(){
             var preloaderPointer = window.setInterval(function(){
                 //console.log('tick', preloader.PercentComplete());
                 let progress = preloader.PercentComplete();
-                document.querySelector('.progress .number').innerHTML = progress;
+                if(progress === 100){
+                    BeginProduction();
+                }else{
+                    document.querySelector('.progress .number').innerHTML = progress;
+                }
             },100);
             document.querySelector('.panel.one').classList.remove('active');
             document.querySelector('.panel.one').classList.add('hidden');
