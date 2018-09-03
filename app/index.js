@@ -7,6 +7,8 @@ require ('./promise');
 // Load application styles
 import 'styles/index.scss';
 
+import { } from '@fortawesome/fontawesome-pro/js/all'
+
 import {Preloader} from './preloader';
 import { SoundBlaster } from './soundblaster';
 import { StageHand } from './stagehand';
