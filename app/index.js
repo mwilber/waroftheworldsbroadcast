@@ -8,7 +8,7 @@ require ('./promise');
 import 'styles/index.scss';
 
 import { } from '@fortawesome/fontawesome-pro/js/fontawesome.min'
-import { } from '@fortawesome/fontawesome-pro/js/regular.min'
+import { } from '@fortawesome/fontawesome-pro/js/all.min'
 
 import {Preloader} from './preloader';
 import { SoundBlaster } from './soundblaster';
@@ -56,9 +56,29 @@ let handleSoundLoaded = function(event){
 
 let handleSoundTimer = function(event){
     //console.log('time handler called', soundBlaster.GetStreamPosition());
-    if( soundBlaster.GetStreamPosition() > 150 ){
 
+    // Get the time
+    let minutes = Math.floor(soundBlaster.GetStreamPosition()/60);
+    let seconds = Math.floor(soundBlaster.GetStreamPosition()%60);
+    // Add leading zero to seconds
+    if(seconds < 10){
+        seconds = '0'+seconds;
     }
+    // Display the time
+    document.querySelector('.clock .time').innerHTML = minutes+":"+seconds;
+
+    // Light up the ACT display
+    for( let idx=1; idx < actIdx.length; idx++ ){
+        document.querySelector('.act-'+(idx)).classList.remove('active');
+        if(soundBlaster.GetStreamPosition() > actIdx[idx-1] && soundBlaster.GetStreamPosition() < actIdx[idx]){
+            document.querySelector('.act-'+(idx)).classList.add('active');
+        }
+    }
+    document.querySelector('.act-'+(actIdx.length)).classList.remove('active');
+    if(soundBlaster.GetStreamPosition() > actIdx[actIdx.length-1]){
+        document.querySelector('.act-'+(actIdx.length)).classList.add('active');
+    }
+
 };
 
 let handleSoundEnded = function(event){
@@ -219,6 +239,51 @@ document.querySelector('.btn-action').addEventListener('click',function(){
 
 document.getElementById('manplay').addEventListener('click', function(){
     StartAudio();
+});
+
+document.querySelector('.playpause').addEventListener('click', function(){
+    if( document.querySelector('.playpause svg').classList.contains('fa-pause') ){
+        soundBlaster.PauseStream();
+        document.querySelector('.playpause svg').classList.remove('fa-pause');
+        document.querySelector('.playpause svg').classList.add('fa-play');
+    }else{
+        soundBlaster.PlayStream();
+        document.querySelector('.playpause svg').classList.add('fa-pause');
+        document.querySelector('.playpause svg').classList.remove('fa-play');
+    }
+});
+
+document.querySelector('.backward').addEventListener('click',function(){
+    soundBlaster.AdvanceStream(true);
+});
+
+document.querySelector('.forward').addEventListener('click',function(){
+    soundBlaster.AdvanceStream(false);
+});
+
+document.querySelector('.skipbackward').addEventListener('click',function(){
+    let gotoPos = 0;
+    let prevAct = 0;
+    for( let act of actIdx ){
+        if(soundBlaster.GetStreamPosition() > act+30){
+            gotoPos = act;
+        }else if(soundBlaster.GetStreamPosition() > act){
+            gotoPos = prevAct;
+        }
+        prevAct = act;
+    }
+    soundBlaster.SetStreamPosition(gotoPos);
+    return;
+});
+
+document.querySelector('.skipforward').addEventListener('click',function(){
+    for( let act of actIdx ){
+        if(act > soundBlaster.GetStreamPosition()){
+            soundBlaster.SetStreamPosition(act);
+            return;
+        }
+    }
+    soundBlaster.SetStreamPosition(0);
 });
 
 window.addEventListener('resize', function(event){
