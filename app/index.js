@@ -118,15 +118,20 @@ function StartAudio(){
         window.clearTimeout(tmrIntro);
     }
     tmrIntro = window.setTimeout(function(){
-        if(audPlaying && imgReady){
+        //if(audPlaying && imgReady){
+        if(false){
             BeginProduction();
         }else{
-            // TODO: Display loading indicator
+            var preloaderPointer = window.setInterval(function(){
+                //console.log('tick', preloader.PercentComplete());
+                let progress = preloader.PercentComplete();
+                document.querySelector('.progress .number').innerHTML = progress;
+            },100);
             document.querySelector('.panel.one').classList.remove('active');
             document.querySelector('.panel.one').classList.add('hidden');
             document.querySelector('.panel.two').classList.add('active');
         }
-    },11000);
+    },5000);
 }
 
 function BeginProduction(){
