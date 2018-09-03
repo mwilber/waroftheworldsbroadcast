@@ -43,6 +43,21 @@ export class SoundBlaster{
         this.streamContext.play();
     }
 
+    PauseStream(){
+        this.streamContext.pause();
+    }
+
+    AdvanceStream(backward){
+        if( typeof backward === 'undefined' ){
+            backward = true;
+        }
+        if(backward){
+            this.streamContext.currentTime -= 30;
+        }else{
+            this.streamContext.currentTime += 30;
+        }
+    }
+
     SetStreamVolume(newVol){
         this.streamContext.volume = newVol;
     }

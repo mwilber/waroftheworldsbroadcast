@@ -8,7 +8,7 @@ require ('./promise');
 import 'styles/index.scss';
 
 import { } from '@fortawesome/fontawesome-pro/js/fontawesome.min'
-import { } from '@fortawesome/fontawesome-pro/js/regular.min'
+import { } from '@fortawesome/fontawesome-pro/js/all.min'
 
 import {Preloader} from './preloader';
 import { SoundBlaster } from './soundblaster';
@@ -219,6 +219,26 @@ document.querySelector('.btn-action').addEventListener('click',function(){
 
 document.getElementById('manplay').addEventListener('click', function(){
     StartAudio();
+});
+
+document.querySelector('.playpause').addEventListener('click', function(){
+    if( document.querySelector('.playpause svg').classList.contains('fa-pause') ){
+        soundBlaster.PauseStream();
+        document.querySelector('.playpause svg').classList.remove('fa-pause');
+        document.querySelector('.playpause svg').classList.add('fa-play');
+    }else{
+        soundBlaster.PlayStream();
+        document.querySelector('.playpause svg').classList.add('fa-pause');
+        document.querySelector('.playpause svg').classList.remove('fa-play');
+    }
+});
+
+document.querySelector('.backward').addEventListener('click',function(){
+    soundBlaster.AdvanceStream(true);
+});
+
+document.querySelector('.forward').addEventListener('click',function(){
+    soundBlaster.AdvanceStream(false);
 });
 
 window.addEventListener('resize', function(event){
