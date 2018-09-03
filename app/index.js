@@ -192,6 +192,16 @@ function SetScale(){
 
 document.querySelector('.btn-action').addEventListener('click',function(){
     document.querySelector('.sidebar').classList.toggle('active');
+
+    console.log('[Action Button]', document.querySelector('.sidebar').classList.contains('active'));
+
+    if( document.querySelector('.sidebar').classList.contains('active') ){
+        document.querySelector('.btn-action svg').classList.remove('fa-bars');
+        document.querySelector('.btn-action svg').classList.add('fa-times');
+    }else{
+        document.querySelector('.btn-action svg').classList.add('fa-bars');
+        document.querySelector('.btn-action svg').classList.remove('fa-times');
+    }
 });
 
 document.getElementById('manplay').addEventListener('click', function(){
