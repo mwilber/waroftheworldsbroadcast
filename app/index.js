@@ -241,6 +241,23 @@ document.getElementById('manplay').addEventListener('click', function(){
     StartAudio();
 });
 
+document.querySelector('.volume').addEventListener('click', function(){
+    if( document.querySelector('.volume svg').classList.contains('fa-volume') ){
+        soundBlaster.SetStreamVolume(1);
+        document.querySelector('.volume svg').classList.remove('fa-volume');
+        document.querySelector('.volume svg').classList.add('fa-volume-up');
+    }else if( document.querySelector('.volume svg').classList.contains('fa-volume-up') ){
+        soundBlaster.SetStreamVolume(0);
+        document.querySelector('.volume svg').classList.remove('fa-volume-up');
+        document.querySelector('.volume svg').classList.add('fa-volume-mute');
+    }else{
+        soundBlaster.SetStreamVolume(0.5);
+        document.querySelector('.volume svg').classList.remove('fa-volume-up');
+        document.querySelector('.volume svg').classList.remove('fa-volume-mute');
+        document.querySelector('.volume svg').classList.add('fa-volume');
+    }
+});
+
 document.querySelector('.playpause').addEventListener('click', function(){
     if( document.querySelector('.playpause svg').classList.contains('fa-pause') ){
         soundBlaster.PauseStream();
