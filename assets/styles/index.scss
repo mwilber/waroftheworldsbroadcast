@@ -126,6 +126,35 @@ body{
 		
 		margin: 10px;
 
+		&.description{
+
+			.read-more{
+				display: initial;
+			}
+			.read-less{
+				display:none;
+			}
+
+			p:nth-of-type(n+2){
+				display:none;
+			}
+
+			&.more{
+
+				.read-more{
+					display: none;
+				}
+				.read-less{
+					display:initial;
+				}
+
+				p:nth-of-type(n+2){
+					display:block;
+				}
+
+			}
+		}
+
 		&.acts{
 			ul{
 				li{
