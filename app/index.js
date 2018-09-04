@@ -241,6 +241,13 @@ document.getElementById('manplay').addEventListener('click', function(){
     StartAudio();
 });
 
+document.querySelector('.description .read-more').addEventListener('click',function(){
+    document.querySelector('.description').classList.add('more');
+});
+document.querySelector('.description .read-less').addEventListener('click',function(){
+    document.querySelector('.description').classList.remove('more');
+});
+
 document.querySelector('.volume').addEventListener('click', function(){
     if( document.querySelector('.volume svg').classList.contains('fa-volume') ){
         soundBlaster.SetStreamVolume(1);
