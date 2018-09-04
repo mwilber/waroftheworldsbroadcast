@@ -133,7 +133,7 @@ function Init(){
 }
 
 function StartAudio(){
-    soundBlaster.SetStreamVolume(0.1); 
+    soundBlaster.SetStreamVolume(0.5); 
     soundBlaster.PlayStream();
     soundBlaster.SetStreamPosition(0);
 
@@ -159,7 +159,7 @@ function StartAudio(){
             document.querySelector('.panel.one').classList.add('hidden');
             document.querySelector('.panel.two').classList.add('active');
         }
-    },5000);
+    },1000);
 }
 
 function BeginProduction(){

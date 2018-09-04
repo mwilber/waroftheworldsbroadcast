@@ -249,5 +249,19 @@
 	transform-origin: 100% 100%;
 	-ms-transform-origin: 100% 100%;
 	-moz-transform-origin: 100% 100%;
-	-webkit-transform-origin: 100% 100%;
+    -webkit-transform-origin: 100% 100%;
+    
+    .little-light{
+        position: absolute;
+        top: 218px;
+        left: 118px;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: transparent;
+        background: -moz-radial-gradient(center, ellipse cover, rgba(255,250,209,0.5) 0%, rgba(255,243,175,0.72) 15%, rgba(255,242,170,0.66) 17%, rgba(255,242,170,0) 41%);
+background: -webkit-radial-gradient(center, ellipse cover, rgba(255,250,209,0.5) 0%,rgba(255,243,175,0.72) 15%,rgba(255,242,170,0.66) 17%,rgba(255,242,170,0) 41%);
+background: radial-gradient(ellipse at center, rgba(255,250,209,0.5) 0%,rgba(255,243,175,0.72) 15%,rgba(255,242,170,0.66) 17%,rgba(255,242,170,0) 41%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80fffad1', endColorstr='#00fff2aa',GradientType=1 );
+    }
 }
