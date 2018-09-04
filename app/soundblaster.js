@@ -93,7 +93,7 @@ export class SoundBlaster{
                         window.setInterval(function(selfb){
                             return function(){
                                 //console.log(selfb.meter.volume);
-                                document.querySelector('.little-light').style.transform = 'scale('+(selfb.meter.volume*10)+')';
+                                document.querySelector('.little-light').style.transform = 'scale('+(selfb.meter.volume*20)+')';
                             }
                             
                         }(self), 100);
@@ -161,6 +161,7 @@ export class SoundBlaster{
       this.audioSources[alias].bufferSource.loop = false;
     }
 
+    // Functions taken from volume-meter [https://github.com/cwilso/volume-meter/blob/master/volume-meter.js]
     createAudioMeter(audioContext,clipLevel,averaging,clipLag) {
         var processor = audioContext.createScriptProcessor(512);
         processor.onaudioprocess = this.volumeAudioProcess;
