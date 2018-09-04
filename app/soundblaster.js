@@ -89,12 +89,14 @@ export class SoundBlaster{
                         self.meter = self.createAudioMeter(tmpcontext);
                         source.connect(self.meter);
 
+                        // TODO: Move this out into index
                         window.setInterval(function(selfb){
                             return function(){
-                                console.log(selfb.meter.volume);
+                                //console.log(selfb.meter.volume);
+                                document.querySelector('.little-light').style.transform = 'scale('+(selfb.meter.volume*10)+')';
                             }
                             
-                        }(self), 1000);
+                        }(self), 100);
 
                         self.streamContext.addEventListener("loadeddata", loadHandler);
                         self.streamContext.addEventListener("timeupdate", timeHandler);

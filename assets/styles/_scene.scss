@@ -249,5 +249,14 @@
 	transform-origin: 100% 100%;
 	-ms-transform-origin: 100% 100%;
 	-moz-transform-origin: 100% 100%;
-	-webkit-transform-origin: 100% 100%;
+    -webkit-transform-origin: 100% 100%;
+    
+    .little-light{
+        position: absolute;
+        top: 218px;
+        left: 118px;
+        width: 100px;
+        height: 100px;
+        background: #fff;
+    }
 }
