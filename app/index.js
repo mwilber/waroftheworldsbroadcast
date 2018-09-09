@@ -6,9 +6,12 @@ require ('./promise');
 
 // Load application styles
 import 'styles/index.scss';
+import 'material-design-lite/material.min.css';
 
 import { } from '@fortawesome/fontawesome-pro/js/fontawesome.min'
 import { } from '@fortawesome/fontawesome-pro/js/all.min'
+
+import 'material-design-lite/material.min.js';
 
 import {Preloader} from './preloader';
 import { SoundBlaster } from './soundblaster';
