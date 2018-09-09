@@ -17,7 +17,10 @@ import {Preloader} from './preloader';
 import { SoundBlaster } from './soundblaster';
 import { StageHand } from './stagehand';
 import { Leaf } from './plugin_leaf';
+import { SocialShare } from './socialshare';
 
+
+let socialShare = new SocialShare();
 
 let imgReady = false;
 let audReady = false;
@@ -303,6 +306,19 @@ document.querySelector('.skipforward').addEventListener('click',function(){
         }
     }
     soundBlaster.SetStreamPosition(0);
+});
+
+document.querySelector('.share.fb').addEventListener('click',function(){
+    socialShare.fbshare(shareMeta.title, shareMeta.link, shareMeta.image, shareMeta.description);
+});
+document.querySelector('.share.tw').addEventListener('click',function(){
+    socialShare.twshare(shareMeta.title, shareMeta.link, shareMeta.description);
+});
+document.querySelector('.share.pn').addEventListener('click',function(){
+    socialShare.pnshare(shareMeta.title, shareMeta.link, shareMeta.image, shareMeta.description);
+});
+document.querySelector('.share.gp').addEventListener('click',function(){
+    socialShare.gpshare(shareMeta.link);
 });
 
 window.addEventListener('resize', function(event){

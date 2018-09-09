@@ -48,6 +48,16 @@
 
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
+
+	<script type="text/javascript">
+		var shareMeta = {
+			title: '<%= htmlWebpackPlugin.options.data.title %>',
+			description: '<%= htmlWebpackPlugin.options.data.description %>',
+			image: '<%= htmlWebpackPlugin.options.data.image %>',
+			link: '<%= htmlWebpackPlugin.options.data.link %>'
+		};
+	</script>
+
 	<!-- <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-9ralMzdK1QYsk4yBY680hmsb4/hJ98xK3w0TIaJ3ll4POWpWUYaA2bRjGGujGT8w" crossorigin="anonymous"> -->
 	<!-- <script defer src="https://pro.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-eAVkiER0fL/ySiqS7dXu8TLpoR8d9KRzIYtG0Tz7pi24qgQIIupp0fn2XA1H90fP" crossorigin="anonymous"></script> -->
 </head>
@@ -77,10 +87,19 @@
 				<a class="read-less" href="#">Collapse</a>
 			</div>
 			<div class="section credit">
-					<p>War of the Worlds Broadcast was created by software developer Matthew Wilber. 
-					<br/>	
-					For more information, visit <a href="http://www.greenzeta.com" target="_blank">greenzeta.com</a>.</p>
-				</div>
+				<p>War of the Worlds Broadcast was created by software developer Matthew Wilber. 
+				<br/>	
+				For more information, visit <a href="http://www.greenzeta.com" target="_blank">greenzeta.com</a>.</p>
+			</div>
+			<div class="section share">
+				<h1>Share</h1>
+				<ul>
+					<li><a class="share fb" href="#">fb</a></li>
+					<li><a class="share tw" href="#">tw</a></li>
+					<li><a class="share pn" href="#">pn</a></li>
+					<li><a class="share gp" href="#">gp</a></li>
+				</ul>
+			</div>
 			<div class="section player-ctrls">
 				<a class="player-ctrl skipbackward"><i class="material-icons">skip_previous</i></a>
 				<a class="player-ctrl backward"><i class="material-icons">fast_rewind</i></a>
