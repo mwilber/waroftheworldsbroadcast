@@ -232,11 +232,9 @@ document.querySelector('.btn-action').addEventListener('click',function(){
     console.log('[Action Button]', document.querySelector('.sidebar').classList.contains('active'));
 
     if( document.querySelector('.sidebar').classList.contains('active') ){
-        document.querySelector('.btn-action svg').classList.remove('fa-bars');
-        document.querySelector('.btn-action svg').classList.add('fa-times');
+        document.querySelector('.btn-action .material-icons').innerHTML = 'close';
     }else{
-        document.querySelector('.btn-action svg').classList.add('fa-bars');
-        document.querySelector('.btn-action svg').classList.remove('fa-times');
+        document.querySelector('.btn-action .material-icons').innerHTML = 'menu';
     }
 });
 
@@ -252,31 +250,25 @@ document.querySelector('.description .read-less').addEventListener('click',funct
 });
 
 document.querySelector('.volume').addEventListener('click', function(){
-    if( document.querySelector('.volume svg').classList.contains('fa-volume') ){
+    if( document.querySelector('.volume .material-icons').innerHTML === 'volume_down' ){
         soundBlaster.SetStreamVolume(1);
-        document.querySelector('.volume svg').classList.remove('fa-volume');
-        document.querySelector('.volume svg').classList.add('fa-volume-up');
-    }else if( document.querySelector('.volume svg').classList.contains('fa-volume-up') ){
+        document.querySelector('.volume .material-icons').innerHTML = 'volume_up';
+    }else if( document.querySelector('.volume .material-icons').innerHTML === 'volume_up' ){
         soundBlaster.SetStreamVolume(0);
-        document.querySelector('.volume svg').classList.remove('fa-volume-up');
-        document.querySelector('.volume svg').classList.add('fa-volume-mute');
+        document.querySelector('.volume .material-icons').innerHTML = 'volume_off';
     }else{
         soundBlaster.SetStreamVolume(0.5);
-        document.querySelector('.volume svg').classList.remove('fa-volume-up');
-        document.querySelector('.volume svg').classList.remove('fa-volume-mute');
-        document.querySelector('.volume svg').classList.add('fa-volume');
+        document.querySelector('.volume .material-icons').innerHTML = 'volume_down';
     }
 });
 
 document.querySelector('.playpause').addEventListener('click', function(){
-    if( document.querySelector('.playpause svg').classList.contains('fa-pause') ){
+    if( document.querySelector('.playpause .material-icons').innerHTML === 'pause' ){
         soundBlaster.PauseStream();
-        document.querySelector('.playpause svg').classList.remove('fa-pause');
-        document.querySelector('.playpause svg').classList.add('fa-play');
+        document.querySelector('.playpause .material-icons').innerHTML = 'play_arrow';
     }else{
         soundBlaster.PlayStream();
-        document.querySelector('.playpause svg').classList.add('fa-pause');
-        document.querySelector('.playpause svg').classList.remove('fa-play');
+        document.querySelector('.playpause .material-icons').innerHTML = 'pause';
     }
 });
 

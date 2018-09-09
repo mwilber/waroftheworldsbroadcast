@@ -120,6 +120,7 @@ body{
 
 	&.active{
 		transform: translateX(0);
+		overflow: auto;
 	}
 
 	.section{
@@ -152,6 +153,12 @@ body{
 					display:block;
 				}
 
+			}
+		}
+
+		&.player-ctrls{
+			.player-ctrl{
+				cursor: pointer;
 			}
 		}
 
