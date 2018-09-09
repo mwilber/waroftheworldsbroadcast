@@ -19,12 +19,7 @@ import { StageHand } from './stagehand';
 import { Leaf } from './plugin_leaf';
 import { SocialShare } from './socialshare';
 
-const shareMeta = {
-    title: 'TITLE_HERE',
-    description: 'DESCRIPTION_HERE',
-    image: 'http://www.waroftheworldsbroadcast.com/images/share.png',
-    link: 'http://www.waroftheworldsbroadcast.com/'
-};
+
 let socialShare = new SocialShare();
 
 let imgReady = false;
@@ -317,7 +312,7 @@ document.querySelector('.share.fb').addEventListener('click',function(){
     socialShare.fbshare(shareMeta.title, shareMeta.link, shareMeta.image, shareMeta.description);
 });
 document.querySelector('.share.tw').addEventListener('click',function(){
-    socialShare.twshare(shareMeta.title, shareMeta.link, shareMeta.image, shareMeta.description);
+    socialShare.twshare(shareMeta.title, shareMeta.link, shareMeta.description);
 });
 document.querySelector('.share.pn').addEventListener('click',function(){
     socialShare.pnshare(shareMeta.title, shareMeta.link, shareMeta.image, shareMeta.description);

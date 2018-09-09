@@ -14,7 +14,7 @@ export class SocialShare{
 
     fbshare(pTitle, pLink, pImage, pMessage){
         
-        var fbcontent = "https://www.facebook.com/dialog/feed?app_id=360055791010268&link="+escape(pLink)+"&photo="+escape(pImage)+"&name="+escape(pTitle)+"&message="+escape(pMessage)+"&description="+escape(social['description'])+"&redirect_uri=https://facebook.com/";
+        var fbcontent = "https://www.facebook.com/dialog/feed?app_id=360055791010268&link="+escape(pLink)+"&photo="+escape(pImage)+"&name="+escape(pTitle)+"&description="+escape(pMessage)+"&redirect_uri=https://facebook.com/";
         //openpopup(fbcontent,'facebook',1000,450);
         //navigator.app.loadUrl(url, { openExternal:true });
         window.open(fbcontent, '_system');
@@ -26,7 +26,7 @@ export class SocialShare{
         //alert('error 201');
         //DebugOut('twshare');
         //var twurl = "https://twitter.com/home?status="+escape(pTitle)+escape(" - ")+escape(pLink)+" "+escape(pTagline);
-        var twurl = "http://twitter.com/share?text="+escape(pTitle)+"&url="+escape(pLink)+"&hashtags=#arcostume,#webxr";
+        var twurl = "http://twitter.com/share?text="+escape(pTagline)+" - "+escape(pTitle)+"&url="+escape(pLink)+"&hashtags=#arcostume,#webxr";
         //openpopup(twurl,'tweeters',550,450);
         //(url, { openExternal:true });
         //alert('error 201: '+twurl);
@@ -36,7 +36,7 @@ export class SocialShare{
     }
 
     gpshare(pLink){
-        var gpcontent = "https://plus.google.com/share?url="+escape(pLink)+"&description="+escape(social['description']);
+        var gpcontent = "https://plus.google.com/share?url="+escape(pLink)+"&description=";
         window.open(gpcontent, '_system');
         //openpopup(url,'gplus',550,450);
         //_gaq.push(['_trackEvent', 'Share', 'googleplus', '']);
