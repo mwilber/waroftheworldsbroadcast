@@ -5,11 +5,11 @@ require ('./promise');
 // requireAll(require.context('./modules/', true, /\.js$/));
 
 // Load application styles
-import 'styles/index.scss';
 import 'material-design-lite/material.min.css';
+import 'styles/index.scss';
 
-import { } from '@fortawesome/fontawesome-pro/js/fontawesome.min'
-import { } from '@fortawesome/fontawesome-pro/js/all.min'
+//import { } from '@fortawesome/fontawesome-pro/js/fontawesome.min'
+//import { } from '@fortawesome/fontawesome-pro/js/all.min'
 
 import 'material-design-lite/material.min.js';
 
