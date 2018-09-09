@@ -22,9 +22,10 @@ import { SocialShare } from './socialshare';
 const shareMeta = {
     title: 'TITLE_HERE',
     description: 'DESCRIPTION_HERE',
-    image: 'IMAGE_URL',
-    link: 'http://waroftheworldsbroadcast.com'
+    image: 'http://www.waroftheworldsbroadcast.com/images/share.png',
+    link: 'http://www.waroftheworldsbroadcast.com/'
 };
+let socialShare = new SocialShare();
 
 let imgReady = false;
 let audReady = false;
@@ -310,6 +311,19 @@ document.querySelector('.skipforward').addEventListener('click',function(){
         }
     }
     soundBlaster.SetStreamPosition(0);
+});
+
+document.querySelector('.share.fb').addEventListener('click',function(){
+    socialShare.fbshare(shareMeta.title, shareMeta.link, shareMeta.image, shareMeta.description);
+});
+document.querySelector('.share.tw').addEventListener('click',function(){
+    socialShare.twshare(shareMeta.title, shareMeta.link, shareMeta.image, shareMeta.description);
+});
+document.querySelector('.share.pn').addEventListener('click',function(){
+    socialShare.pnshare(shareMeta.title, shareMeta.link, shareMeta.image, shareMeta.description);
+});
+document.querySelector('.share.gp').addEventListener('click',function(){
+    socialShare.gpshare(shareMeta.link);
 });
 
 window.addEventListener('resize', function(event){
