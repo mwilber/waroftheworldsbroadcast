@@ -17,7 +17,14 @@ import {Preloader} from './preloader';
 import { SoundBlaster } from './soundblaster';
 import { StageHand } from './stagehand';
 import { Leaf } from './plugin_leaf';
+import { SocialShare } from './socialshare';
 
+const shareMeta = {
+    title: 'TITLE_HERE',
+    description: 'DESCRIPTION_HERE',
+    image: 'IMAGE_URL',
+    link: 'http://waroftheworldsbroadcast.com'
+};
 
 let imgReady = false;
 let audReady = false;

@@ -1,5 +1,13 @@
 export class SocialShare{
 
+    // Object format
+    // {
+    //     title: 'TITLE_HERE',
+    //     description: 'DESCRIPTION_HERE',
+    //     image: 'IMAGE_URL',
+    //     link: 'PAGE_URL'
+    // }
+
     /////////////////////////////////////////////////////////////////////////////
     //  Social Share Popup Functions
     /////////////////////////////////////////////////////////////////////////////
