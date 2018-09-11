@@ -26,7 +26,8 @@ let imgReady = false;
 let audReady = false;
 let audPlaying = false;
 
-let tmrIntro = null;
+var tmrShowLoader = null;
+var tmrLoader = null;
 
 let stageHand = null;
 let actIdx = [];
@@ -116,8 +117,10 @@ function Init(){
             throw('script data not found in json')
         }else{
             console.log('[LoadScript]', data);
-            // Show the intro panel
-            document.querySelector('.panel.one').classList.add('active');
+            tmrShowLoader = window.setTimeout(function(){
+                // Show the loader panel
+                document.getElementById('loader').classList.add('active');
+            },7000);
             // Set up the StageHand
             stageHand = new StageHand(data.script, plugins);
             // Load the Audio file
@@ -145,32 +148,33 @@ function StartAudio(){
 
     // If the manual start button appears, this will be called again.
     // Clear out the timer if it's already going.
-    if(tmrIntro !== null){
-        window.clearTimeout(tmrIntro);
-    }
-    tmrIntro = window.setTimeout(function(){
+    // if(tmrIntro !== null){
+    //     window.clearTimeout(tmrIntro);
+    // }
+    // tmrIntro = window.setTimeout(function(){
         if(audPlaying && imgReady){
             BeginProduction();
         }else{
-            var preloaderPointer = window.setInterval(function(){
+            tmrLoader = window.setInterval(function(){
                 //console.log('tick', preloader.PercentComplete());
                 let progress = preloader.PercentComplete();
                 if(progress === 100){
+                    document.querySelector('.progress .number').innerHTML = progress;
+                    window.clearInterval(tmrLoader);
                     BeginProduction();
                 }else{
                     document.querySelector('.progress .number').innerHTML = progress;
                 }
             },2000);
-            document.querySelector('.panel.one').classList.remove('active');
-            document.querySelector('.panel.one').classList.add('hidden');
-            document.querySelector('.panel.two').classList.add('active');
         }
-    },1000);
+    // },1000);
 }
 
 function BeginProduction(){
+    //alert(tmrShowLoader);
+    window.clearTimeout(tmrShowLoader);
     // Trigger the intro panels to fade out
-    document.querySelector('#intro').classList.add('hidden');
+    document.getElementById('the-room').classList.add('active');
     // Stage Heartbeat
     window.setInterval(function(){
         stageHand.Manage(soundBlaster.GetStreamPosition());
@@ -228,18 +232,6 @@ function SetScale(){
 
 }
 
-
-document.querySelector('.btn-action').addEventListener('click',function(){
-    document.querySelector('.sidebar').classList.toggle('active');
-
-    console.log('[Action Button]', document.querySelector('.sidebar').classList.contains('active'));
-
-    if( document.querySelector('.sidebar').classList.contains('active') ){
-        document.querySelector('.btn-action .material-icons').innerHTML = 'close';
-    }else{
-        document.querySelector('.btn-action .material-icons').innerHTML = 'menu';
-    }
-});
 
 document.getElementById('manplay').addEventListener('click', function(){
     StartAudio();
@@ -325,5 +317,5 @@ window.addEventListener('resize', function(event){
 	SetScale();
 });
 
-//SetScale();
-//Init();
+SetScale();
+Init();
