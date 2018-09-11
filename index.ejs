@@ -47,6 +47,7 @@
 	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
 
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="assets/css/material.min.css">
 	<link rel="stylesheet" href="assets/css/app-shell.css">
 
 
@@ -64,7 +65,7 @@
 </head>
 <body style="background: #000;">
     <div class="container">
-		<div id="intro">
+		<!-- <div id="intro">
 			<div class="panel one">
 				<h1>For forty minutes of one night, Martians were real.</h1>
 				<a id="manplay" href="#" >Continue</a>
@@ -73,7 +74,7 @@
 				<h1>Relive the night of October 30th, 1938.</h1>
 				<h1 class="progress"><span class="number"></span>%</h1>
 			</div>
-		</div>
+		</div> -->
 		<a class="btn-action mdl-button mdl-js-button mdl-button--fab">
 			<i class="material-icons">menu</i>
 		</a>
@@ -121,24 +122,26 @@
 				For more information, visit <a href="http://www.greenzeta.com" target="_blank">greenzeta.com</a>.</p>
 			</div>
 		</div>
-        <div id="wall"></div>
-		<div id="stageframe">
-			<div id="stage">
-				<img id="backdrop" data-cache="assets/images/starfield.png"/>
-				<img id="trees" data-cache="assets/images/trees.png"/>
-				<!-- <div class="tripod">
-					<div class="mask"></div>
-				</div> -->
+		<div id="the-room">
+			<div id="wall"></div>
+			<div id="stageframe">
+				<div id="stage">
+					<img id="backdrop" data-cache="assets/images/starfield.png"/>
+					<img id="trees" data-cache="assets/images/trees.png"/>
+					<!-- <div class="tripod">
+						<div class="mask"></div>
+					</div> -->
+				</div>
+				<div id="window">
+					<img data-cache="assets/images/window.png"/>
+				</div>
 			</div>
-			<div id="window">
-				<img data-cache="assets/images/window.png"/>
+			<div id="plants"></div>
+			<div id="tabletop"><div class="texture"></div></div>
+			<div id="radio">
+				<div class="little-light"></div>
+				<img data-cache="assets/images/radio_lg.png"/>
 			</div>
-		</div>
-		<div id="plants"></div>
-		<div id="tabletop"><div class="texture"></div></div>
-		<div id="radio">
-			<div class="little-light"></div>
-			<img data-cache="assets/images/radio_lg.png"/>
 		</div>
     </div>
 </body>

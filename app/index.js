@@ -5,7 +5,7 @@ require ('./promise');
 // requireAll(require.context('./modules/', true, /\.js$/));
 
 // Load application styles
-import 'material-design-lite/material.min.css';
+import 'styles/app-shell.scss'; // TODO: Remove this before production
 import 'styles/main.scss';
 
 //import { } from '@fortawesome/fontawesome-pro/js/fontawesome.min'
@@ -325,5 +325,5 @@ window.addEventListener('resize', function(event){
 	SetScale();
 });
 
-SetScale();
-Init();
+//SetScale();
+//Init();

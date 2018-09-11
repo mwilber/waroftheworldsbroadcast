@@ -154,4 +154,41 @@ a:active {
         float: left;
         list-style: none; }
 
+#the-room {
+  opacity: 0; }
+
+.btn-vintage {
+  display: block;
+  text-align: center;
+  margin: 10% 10px;
+  height: 60px;
+  width: 60px;
+  line-height: 62px;
+  /* match button height to center vertically */
+  background: #221e25;
+  color: #FDFBDA;
+  border: 1px solid #eaca6e;
+  border-radius: 50%;
+  font-size: 30px;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  box-shadow: inset -2px -2px 2px -2px #ffedad, 1px 1px 1px 1px #73604c, inset 1px 1px 1px 1px #73604c, 0px 0px 1px 1px #ffedad, 2px 2px 5px 5px rgba(20, 20, 20, 0.7), inset 2px 2px 6px 3px #000000;
+  color: #ff3333; }
+  .btn-vintage span {
+    background-color: #630000;
+    color: transparent;
+    text-shadow: 1px 1px 1px #ff6666;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text; }
+  .btn-vintage:active, .btn-vintage.active {
+    box-shadow: inset -2px -2px 2px -2px #ffedad, 1px 1px 1px 1px #73604c, inset 1px 1px 1px 1px #73604c, 0px 0px 1px 1px #ffedad, 0px 0px 1px 4px rgba(20, 20, 20, 0.7), inset 4px 4px 6px 3px #000000;
+    transform: scale(0.98); }
+    .btn-vintage:active span, .btn-vintage.active span {
+      background-color: #ffffff;
+      color: transparent;
+      text-shadow: -1px -1px 15px #ff3333; }
+
 /*# sourceMappingURL=app-shell.css.map */
