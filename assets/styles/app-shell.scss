@@ -33,7 +33,7 @@ a:active{
 
 
 #intro{
-	position: fixed;
+	position: relative;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -66,7 +66,34 @@ a:active{
 
 }
 
+#loader{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
 
+	opacity: 0;
+
+	background: #111313;
+
+	transition: opacity 250ms linear;
+
+	&.active{
+		opacity: 1;
+	}
+
+	.panel{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+
+		text-align: center;
+
+		transform: translate(-50%,-50%);
+	}
+}
 
 .btn-action.mdl-button{
 	display: block;
@@ -228,6 +255,18 @@ a:active{
 
 #the-room{
 	opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+	z-index: 100;
+	
+	transition: opacity 2s linear;
+
+	&.active{
+		opacity: 1;
+	}
 }
 
 @import 'vintage-button';
