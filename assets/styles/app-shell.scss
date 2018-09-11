@@ -20,8 +20,8 @@ body{
 	background-color:#000;
 	color:#fff;
 	font-family: 'Quattrocento', serif;
-	background: #000;
-
+	background: #111313;
+	color: #b8c3c6;
 }
 
 a,
@@ -31,26 +31,6 @@ a:active{
 	color: #ffffff;
 }
 
-.panel{
-	position: absolute;
-	display:none;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-
-	background: #000;
-
-	&.hidden{
-		display: block;
-		animation: 2s fadeout 1 ease-in;
-	}
-
-	&.active{
-		display: block;
-		animation: 2s fadein 1 ease-in;
-	}
-}
 
 #intro{
 	position: fixed;
@@ -58,20 +38,17 @@ a:active{
 	left: 0;
 	width: 100%;
 	height: 100%;
-	z-index: 5000;
+	z-index: 1;
 
-	background: #000;
+	.panel{
+		position: absolute;
+		top: 50%;
+		left: 50%;
 
-	&.hidden{
-		display: block;
-		opacity: 0;
-		animation: 2s fadeout 1 ease-in;
-		z-index: 3000;
-	}
-}
+		text-align: center;
 
-.panel{
-	&.one{
+		transform: translate(-50%,-50%);
+
 		#manplay{
 			display:none;
 			color: #fff;
@@ -84,8 +61,12 @@ a:active{
 				animation: 2s fadein 1;
 			}
 		}
+
 	}
+
 }
+
+
 
 .btn-action.mdl-button{
 	display: block;
