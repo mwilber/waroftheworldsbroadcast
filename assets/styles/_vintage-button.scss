@@ -4,24 +4,23 @@
 	margin: 10% 10px;
 	height: 60px;
 	width: 60px;
-	line-height: 60px; /* match button height to center vertically */
+	line-height: 62px; /* match button height to center vertically */
 	background: #221e25;
 	color: #FDFBDA;
-	border: 3px solid #eaca6e;
+	border: 1px solid #eaca6e;
 	border-radius: 50%;
     font-size: 30px;
     text-decoration: none;
 	cursor: pointer;
 	-webkit-user-select: none;
 	-moz-user-select: none;
-	box-shadow: 
-		inset -3px -3px 3px -2px #ffedad, 
-		1px 1px 1px 2px #73604c, 
-		inset 1px 1px 4px 2px #73604c, 
-		-1px -1px 0px 0px #ffedad, 
-		1px 2px 6px 4px rgba(20, 20, 20, 0.7), 
-		inset 2px 2px 6px 6px #000000;
-	transition: all .07s linear;
+    box-shadow: 
+    inset -2px -2px 2px -2px #ffedad, 
+    1px 1px 1px 1px #73604c, 
+    inset 1px 1px 1px 1px #73604c, 
+    0px 0px 1px 1px #ffedad, 
+    2px 2px 5px 5px rgba(20, 20, 20, 0.7), 
+    inset 2px 2px 6px 3px #000000;
 	color: #ff3333;
 
 	span{
@@ -36,13 +35,14 @@
 
 	}	
 	&:active, &.active{
-		box-shadow: 
-			inset -3px -3px 3px -2px #ffedad, 
-			1px 1px 1px 2px #73604c, 
-			inset 1px 1px 4px 2px #73604c, 
-			-1px -1px 0px 0px #ffedad, 
-			0px 0px 2px 4px rgba(20, 20, 20, 0.7), 
-			inset 4px 4px 6px 6px #000000;
+        box-shadow:
+            inset -2px -2px 2px -2px #ffedad, 
+            1px 1px 1px 1px #73604c, 
+            inset 1px 1px 1px 1px #73604c, 
+            0px 0px 1px 1px #ffedad, 
+            0px 0px 1px 4px rgba(20, 20, 20, 0.7), 
+            inset 4px 4px 6px 3px #000000;
+        transform: scale(0.98);
 		span{
 			background-color: #ffffff;
 			color: transparent;

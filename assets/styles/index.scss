@@ -117,7 +117,7 @@ a:active{
 	height: 100%;
 	color: #b8c3c6;
 	background: rgba(0, 0, 0, 0.95);
-	background: rgb(54, 63, 66);
+	background: #2c2f30;
 	border-left: solid 1px rgba(255,255,255,0.25);
 	
 	z-index: 4000;
@@ -140,17 +140,24 @@ a:active{
 		margin: 0 10px;
 		padding: 10px;
 		clear: both;
-		border-top: solid 1px #4f5f63;
+		border-top: solid 1px #555c5e;
 		border-bottom: solid 1px #22292a;
+		text-align: center;
 
 		&.description{
 
+			p{
+				text-align: justify;
+			}
+
+			.btn-vintage{
+				margin: 0 0 16px;
+			}
+
 			.read-more{
-				margin: 0;
-				display: block;
+				display: inline-block;
 			}
 			.read-less{
-				margin: 0;
 				display:none;
 			}
 
@@ -164,7 +171,7 @@ a:active{
 					display: none;
 				}
 				.read-less{
-					display:block;
+					display:inline-block;
 				}
 
 				p:nth-of-type(n+2){
@@ -180,7 +187,18 @@ a:active{
 			}
 		}
 
-		&.acts{
+		&.acts.clock{
+
+			.btn-vintage.clock{
+				width: 200px;
+				
+				border-radius: 25px;
+			}
+
+			.btn-vintage{
+				margin: 10px;
+			}
+
 			ul{
 				li{
 					color:#666;
