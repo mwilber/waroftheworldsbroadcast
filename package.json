@@ -7,7 +7,8 @@
   "homepage": "https://github.com/mwilber/webpack-boilerplate.git",
   "scripts": {
     "dev": "cross-env NODE_ENV=dev webpack-dev-server --port 8699 --progress --open --config webpack.config.dev.js",
-    "build": "webpack -p --progress --config webpack.config.build.js"
+    "build": "webpack -p --progress --config webpack.config.build.js",
+    "sass-build": "node-sass --source-map true assets/styles/app-shell.scss -o assets/css"
   },
   "repository": {
     "type": "git",

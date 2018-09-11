@@ -6,7 +6,7 @@ require ('./promise');
 
 // Load application styles
 import 'material-design-lite/material.min.css';
-import 'styles/index.scss';
+import 'styles/main.scss';
 
 //import { } from '@fortawesome/fontawesome-pro/js/fontawesome.min'
 //import { } from '@fortawesome/fontawesome-pro/js/all.min'
