@@ -134,7 +134,7 @@ function Init(){
 
 function WatchLoad(){
     
-    console.log('[WatchLoad]', audPlaying, ctShowLoader);
+    //console.log('[WatchLoad]', audPlaying, ctShowLoader);
     ctShowLoader++;
 
     //console.log('tick', preloader.PercentComplete());
