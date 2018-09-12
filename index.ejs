@@ -47,6 +47,8 @@
 	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
 
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="assets/css/material.min.css">
+	<link rel="stylesheet" href="assets/css/app-shell.css">
 
 
 	<script type="text/javascript">
@@ -56,24 +58,60 @@
 			image: '<%= htmlWebpackPlugin.options.data.image %>',
 			link: '<%= htmlWebpackPlugin.options.data.link %>'
 		};
+
+		function ToggleSidebar(){
+			document.querySelector('.sidebar').classList.toggle('active');
+
+			console.log('[Action Button]', document.querySelector('.sidebar').classList.contains('active'));
+
+			if( document.querySelector('.sidebar').classList.contains('active') ){
+				document.querySelector('.btn-action .material-icons').innerHTML = 'close';
+			}else{
+				document.querySelector('.btn-action .material-icons').innerHTML = 'menu';
+			}
+		}
 	</script>
 
 	<!-- <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-9ralMzdK1QYsk4yBY680hmsb4/hJ98xK3w0TIaJ3ll4POWpWUYaA2bRjGGujGT8w" crossorigin="anonymous"> -->
 	<!-- <script defer src="https://pro.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-eAVkiER0fL/ySiqS7dXu8TLpoR8d9KRzIYtG0Tz7pi24qgQIIupp0fn2XA1H90fP" crossorigin="anonymous"></script> -->
 </head>
-<body style="background: #000;">
+<body>
     <div class="container">
 		<div id="intro">
 			<div class="panel one">
-				<h1>For forty minutes of one night, Martians were real.</h1>
-				<a id="manplay" href="#" >Continue</a>
+				<h1>In 1938,
+				<br/>
+				Martians were real.</h1>
+				<div class="silhouette">
+					<div class="glow-a"></div>
+					<div class="glow-b"></div>
+					<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="512px"
+							height="512px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+						<g id="Layer_3">
+							<path fill="#050101" d="M256.485,495.563c43.628,0.594,83.165,1.719,87.133,1.831c9.072,0.26,7.862,13.454,7.862,13.454l137.521-0.188l0.055-7.815
+								l-9.733-10.605l4.943,0.04l-0.048-10.869l-17.265,0.052l0.244-164.821c0,0,4.99-0.239,5.021-8.067
+								c0.028-7.652-5.162-7.901-5.162-7.901s-3.652-120.596-74.085-207.369C352.048,42.884,302.158,1.315,256,0h-0.001
+								c-46.158,1.315-96.049,42.884-136.973,93.304c-70.431,86.773-74.083,207.369-74.083,207.369s-5.192,0.249-5.163,7.901
+								c0.03,7.828,5.021,8.067,5.021,8.067l0.244,164.821l-17.264-0.052l-0.047,10.869l4.945-0.04l-9.734,10.605l0.054,7.815
+								l137.52,0.188c0,0-1.209-13.194,7.863-13.454c3.969-0.112,43.504-1.237,87.133-1.831H256.485z"/>
+						</g>
+					</svg>
+					<div class="tuner">
+						Tune In
+						<a id="manplay" class="btn-vintage" href="#" ><span class="material-icons">play_arrow</span></a>
+					</div>
+				</div>
+				
+				
 			</div>
+		</div>
+		<div id="loader" class="inactive">
 			<div class="panel two">
-				<h1>Relive the night of October 30th, 1938.</h1>
+				<h1>Preparing plague bacillus</h1>
 				<h1 class="progress"><span class="number"></span>%</h1>
 			</div>
 		</div>
-		<a class="btn-action mdl-button mdl-js-button mdl-button--fab">
+		<a class="btn-action mdl-button mdl-js-button mdl-button--fab" onclick="ToggleSidebar()">
 			<i class="material-icons">menu</i>
 		</a>
 		<div class="sidebar">
@@ -120,24 +158,26 @@
 				For more information, visit <a href="http://www.greenzeta.com" target="_blank">greenzeta.com</a>.</p>
 			</div>
 		</div>
-        <div id="wall"></div>
-		<div id="stageframe">
-			<div id="stage">
-				<img id="backdrop" data-cache="assets/images/starfield.png"/>
-				<img id="trees" data-cache="assets/images/trees.png"/>
-				<!-- <div class="tripod">
-					<div class="mask"></div>
-				</div> -->
+		<div id="the-room" class="inactive">
+			<div id="wall"></div>
+			<div id="stageframe">
+				<div id="stage">
+					<img id="backdrop" data-cache="assets/images/starfield.png"/>
+					<img id="trees" data-cache="assets/images/trees.png"/>
+					<!-- <div class="tripod">
+						<div class="mask"></div>
+					</div> -->
+				</div>
+				<div id="window">
+					<img data-cache="assets/images/window.png"/>
+				</div>
 			</div>
-			<div id="window">
-				<img data-cache="assets/images/window.png"/>
+			<div id="plants"></div>
+			<div id="tabletop"><div class="texture"></div></div>
+			<div id="radio">
+				<div class="little-light"></div>
+				<img data-cache="assets/images/radio_lg.png"/>
 			</div>
-		</div>
-		<div id="plants"></div>
-		<div id="tabletop"><div class="texture"></div></div>
-		<div id="radio">
-			<div class="little-light"></div>
-			<img data-cache="assets/images/radio_lg.png"/>
 		</div>
     </div>
 </body>
