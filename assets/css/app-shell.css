@@ -108,6 +108,7 @@ a:active {
   right: 25px;
   width: 75px;
   height: 75px;
+  margin: 0;
   background: rgba(0, 0, 0, 0.9);
   border: solid 1px rgba(255, 255, 255, 0.25);
   border-radius: 50%;

@@ -4,14 +4,17 @@ export class SoundBlaster{
 
         // Polyfill the AudioContext Object
         window.AudioContext = window.AudioContext // Default
-            || window.webkitAudioContext // Safari and old versions of Chrome
+            //|| window.webkitAudioContext // Safari and old versions of Chrome
             || false; 
 
         this.audioElement = null;
         this.streamContext = null;
         this.streamAnalyzer = null;
         this.meter = null;
-        this.audioContext = new AudioContext();
+        this.audioContext = null;
+        if( AudioContext ){
+            this.audioContext = new AudioContext();
+        }
         this.audioSources = {
             'broadcast': {
                 src: 'assets/audio/381030.mp3',
@@ -87,25 +90,26 @@ export class SoundBlaster{
                 return function (result){
                     if(result){
                         self.streamContext = result;
-                        let tmpcontext = new AudioContext();
-                        self.streamAnalyzer = tmpcontext.createAnalyser();
+                        if( AudioContext ){
+                            let tmpcontext = new AudioContext();
+                            self.streamAnalyzer = tmpcontext.createAnalyser();
 
-                        let source = tmpcontext.createMediaElementSource(result);
-                        source.connect(self.streamAnalyzer);
-                        self.streamAnalyzer.connect(tmpcontext.destination);
+                            let source = tmpcontext.createMediaElementSource(result);
+                            source.connect(self.streamAnalyzer);
+                            self.streamAnalyzer.connect(tmpcontext.destination);
 
-                        self.meter = self.createAudioMeter(tmpcontext);
-                        source.connect(self.meter);
+                            self.meter = self.createAudioMeter(tmpcontext);
+                            source.connect(self.meter);
 
-                        // TODO: Move this out into index
-                        window.setInterval(function(selfb){
-                            return function(){
-                                //console.log(selfb.meter.volume);
-                                document.querySelector('.little-light').style.transform = 'scale('+(selfb.meter.volume*20)+')';
-                            }
-                            
-                        }(self), 100);
-
+                            // TODO: Move this out into index
+                            window.setInterval(function(selfb){
+                                return function(){
+                                    //console.log(selfb.meter.volume);
+                                    document.querySelector('.little-light').style.transform = 'scale('+(selfb.meter.volume*20)+')';
+                                }
+                                
+                            }(self), 100);
+                        }
                         self.streamContext.addEventListener("loadeddata", loadHandler);
                         self.streamContext.addEventListener("timeupdate", timeHandler);
                         self.streamContext.addEventListener("play", playHandler);
@@ -121,13 +125,18 @@ export class SoundBlaster{
     fetchStream(alias) {
         return function(self){
             return new Promise(function(resolve, reject){
-                let streamRef = new Audio();
-                if (streamRef.canPlayType('audio/mpeg;')) {
-                    streamRef.type= 'audio/mpeg';
-                    streamRef.src= self.audioSources[alias].src;
-                } else {
-                    reject('env cannot play mp3 format');
-                }
+                let streamRef = document.createElement('audio');
+                let sourceRef = document.createElement('source');
+                //document.appendChild(streamRef);
+                //if (streamRef.canPlayType('audio/mpeg;')) {
+                    sourceRef.type= 'audio/mpeg';
+                    sourceRef.src= self.audioSources[alias].src;
+                //} else {
+                //    reject('env cannot play mp3 format');
+                //}
+
+                document.querySelector('body').appendChild(streamRef);
+                streamRef.appendChild(sourceRef);
     
                 streamRef.load();//suspends and restores all audio element
                 resolve(streamRef);
