@@ -2,6 +2,11 @@
 export class SoundBlaster{
     constructor(){
 
+        // Polyfill the AudioContext Object
+        window.AudioContext = window.AudioContext // Default
+            || window.webkitAudioContext // Safari and old versions of Chrome
+            || false; 
+
         this.audioElement = null;
         this.streamContext = null;
         this.streamAnalyzer = null;
@@ -43,7 +48,10 @@ export class SoundBlaster{
 
     PlayStream(){
         // Play audio element here
-        this.streamContext.play();
+        this.streamContext.play().catch(function(err){
+            console.error('[SoundBlaster]', 'play', err);
+            document.querySelector('.tuner').classList.add('active');
+        });
     }
 
     PauseStream(){
