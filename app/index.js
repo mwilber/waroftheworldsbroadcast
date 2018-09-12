@@ -99,7 +99,7 @@ let handleSoundEnded = function(event){
 
 let handleSoundPlay = function(event){
     console.log('play handler called');
-    audPlaying = true;
+    //audPlaying = true;
 };
 
 function Init(){
@@ -160,8 +160,10 @@ function StartAudio(){
                 let progress = preloader.PercentComplete();
                 if(progress === 100){
                     document.querySelector('.progress .number').innerHTML = progress;
-                    window.clearInterval(tmrLoader);
-                    BeginProduction();
+                    if(audPlaying && imgReady){
+                        window.clearInterval(tmrLoader);
+                        BeginProduction();
+                    }
                 }else{
                     document.querySelector('.progress .number').innerHTML = progress;
                 }
@@ -174,6 +176,7 @@ function BeginProduction(){
     //alert(tmrShowLoader);
     window.clearTimeout(tmrShowLoader);
     // Trigger the intro panels to fade out
+    document.querySelector('.silhouette').classList.add('active');
     document.getElementById('the-room').classList.add('active');
     // Stage Heartbeat
     window.setInterval(function(){
