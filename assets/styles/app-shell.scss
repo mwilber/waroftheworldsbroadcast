@@ -44,6 +44,10 @@ a:active{
 	height: 100%;
 	z-index: 1;
 
+	&.manplay{
+		z-index: 1000;
+	}
+
 	.panel{
 		position: absolute;
 		top: 50%;
@@ -96,20 +100,33 @@ a:active{
 				top: 0;
 				left: 0;
 			}
-		}
 
-		#manplay{
-			display:none;
-			color: #fff;
-			font-size: 30px;
-			border: solid 1px #fff;
-			text-decoration: none;
-			padding: 5px 10px;
-			&.active{
-				display: initial;
-				animation: 2s fadein 1;
+			.tuner{
+				display: none;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				z-index: 1000;
+
+				&.active{
+					display:block;
+				}
 			}
 		}
+
+		// #manplay{
+		// 	display:none;
+		// 	color: #fff;
+		// 	font-size: 30px;
+		// 	border: solid 1px #fff;
+		// 	text-decoration: none;
+		// 	padding: 5px 10px;
+		// 	&.active{
+		// 		display: initial;
+		// 		animation: 2s fadein 1;
+		// 	}
+		// }
 
 	}
 
@@ -311,7 +328,7 @@ a:active{
     width: 100%;
 	z-index: 100;
 	
-	transition: opacity 2s linear;
+	transition: opacity 2s linear 500ms;
 
 	&.active{
 		opacity: 1;

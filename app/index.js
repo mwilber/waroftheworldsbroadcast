@@ -26,7 +26,7 @@ let imgReady = false;
 let audReady = false;
 let audPlaying = false;
 
-var tmrShowLoader = null;
+var ctShowLoader = 0;
 var tmrLoader = null;
 
 let stageHand = null;
@@ -53,12 +53,6 @@ let handleSoundLoaded = function(event){
     console.log('load handler called'); 
     audReady = true;
     StartAudio();
-    window.setTimeout(function(){
-        if(!audPlaying){
-            // Show the play button
-            document.getElementById('manplay').classList.add('active');
-        }
-    }, 1000);
 };
 
 let handleSoundTimer = function(event){
@@ -99,7 +93,7 @@ let handleSoundEnded = function(event){
 
 let handleSoundPlay = function(event){
     console.log('play handler called');
-    //audPlaying = true;
+    audPlaying = true;
 };
 
 function Init(){
@@ -117,10 +111,6 @@ function Init(){
             throw('script data not found in json')
         }else{
             console.log('[LoadScript]', data);
-            tmrShowLoader = window.setTimeout(function(){
-                // Show the loader panel
-                document.getElementById('loader').classList.add('active');
-            },7000);
             // Set up the StageHand
             stageHand = new StageHand(data.script, plugins);
             // Load the Audio file
@@ -133,6 +123,7 @@ function Init(){
             }).catch((error)=>{
                 console.error('[Load Images]',error);
             });
+            tmrLoader = window.setInterval(WatchLoad,1000);
         }
 
     }).catch((error)=>{
@@ -141,40 +132,41 @@ function Init(){
 
 }
 
+function WatchLoad(){
+    
+    console.log('[WatchLoad]', audPlaying, ctShowLoader);
+    ctShowLoader++;
+
+    //console.log('tick', preloader.PercentComplete());
+    let progress = preloader.PercentComplete();
+    document.querySelector('.progress .number').innerHTML = progress;
+    
+    if(audPlaying && imgReady){
+        window.clearInterval(tmrLoader);
+        BeginProduction(); 
+    }else if(audPlaying && ctShowLoader > 5){
+        if(!document.getElementById('loader').classList.contains('active')){
+            document.getElementById('loader').classList.add('active');
+        }
+    }
+}
+
 function StartAudio(){
     soundBlaster.SetStreamVolume(0.5); 
     soundBlaster.PlayStream();
     soundBlaster.SetStreamPosition(0);
 
-    // If the manual start button appears, this will be called again.
-    // Clear out the timer if it's already going.
-    // if(tmrIntro !== null){
-    //     window.clearTimeout(tmrIntro);
-    // }
-    // tmrIntro = window.setTimeout(function(){
-        if(audPlaying && imgReady){
-            BeginProduction();
-        }else{
-            tmrLoader = window.setInterval(function(){
-                //console.log('tick', preloader.PercentComplete());
-                let progress = preloader.PercentComplete();
-                if(progress === 100){
-                    document.querySelector('.progress .number').innerHTML = progress;
-                    if(audPlaying && imgReady){
-                        window.clearInterval(tmrLoader);
-                        BeginProduction();
-                    }
-                }else{
-                    document.querySelector('.progress .number').innerHTML = progress;
-                }
-            },2000);
+    document.getElementById('intro').classList.remove('manplay');
+    window.setTimeout(function(){
+        if(!audPlaying){
+            // Show the play button
+            document.getElementById('intro').classList.add('manplay');
+            document.querySelector('.tuner').classList.add('active');
         }
-    // },1000);
+    }, 1000);
 }
 
 function BeginProduction(){
-    //alert(tmrShowLoader);
-    window.clearTimeout(tmrShowLoader);
     // Trigger the intro panels to fade out
     document.querySelector('.silhouette').classList.add('active');
     document.getElementById('the-room').classList.add('active');
@@ -237,6 +229,7 @@ function SetScale(){
 
 
 document.getElementById('manplay').addEventListener('click', function(){
+    //soundBlaster.PlayStream();
     StartAudio();
 });
 
