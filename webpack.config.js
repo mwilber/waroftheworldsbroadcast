@@ -14,9 +14,9 @@ const appHtmlData = {
     'author': 'Matthew Wilber',
     'title': 'War of the Worlds Broadcast',
     'description': 'For forty minutes Martians were real. Relive the night of October 30th, 1938.',
-    'image': 'http://www.waroftheworldsbroadcast.com/images/share.png',
-    'link': 'http://www.waroftheworldsbroadcast.com/',
-    'themecolor': '#1E0A00',
+    'image': 'https://www.waroftheworldsbroadcast.com/assets/images/share.png',
+    'link': 'https://www.waroftheworldsbroadcast.com/',
+    'themecolor': '#2c2f30',
     'fbappid': '162325253971329',
 };
 
