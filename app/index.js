@@ -233,7 +233,7 @@ function SetScale(){
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        if( false ){
+        if( true ){
             navigator.serviceWorker.register('/sw.js').then(registration => {
                 console.log('SW registered: ', registration);
             }).catch(registrationError => {
