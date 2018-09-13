@@ -11,8 +11,8 @@
     "sass-build": "node-sass --source-map true assets/styles/app-shell.scss -o assets/css",
     "copy-assets": "mkdir -p dist/assets/images && cp -r assets/images/* dist/assets/images && mkdir -p dist/assets/audio && cp -r assets/audio/* dist/assets/audio && mkdir -p dist/assets/css && cp -r assets/css/* dist/assets/css && mkdir -p dist/assets/data && cp -r assets/data/* dist/assets/data",
     "sw-init": "workbox wizard",
-    "sw-generate": "workbox generateSW",
-    "sw-test": "npm run build && workbox generateSW && http-server dist -c-1"
+    "sw-generate": "workbox injectManifest",
+    "sw-test": "npm run build && workbox injectManifest && http-server dist -c-1"
   },
   "repository": {
     "type": "git",
