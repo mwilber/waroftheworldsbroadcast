@@ -227,6 +227,28 @@ function SetScale(){
 
 }
 
+//////////////////////////////////////////////////////////////////////////////////////
+// Event handlers
+//////////////////////////////////////////////////////////////////////////////////////
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        if( false ){
+            navigator.serviceWorker.register('/sw.js').then(registration => {
+                console.log('SW registered: ', registration);
+            }).catch(registrationError => {
+                console.log('SW registration failed: ', registrationError);
+            });
+        }else{
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                for(let registration of registrations) {  
+                    registration.unregister();
+                }
+            });
+        }
+    });
+}
+
 
 document.getElementById('manplay').addEventListener('click', function(){
     //soundBlaster.PlayStream();
