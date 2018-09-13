@@ -7,8 +7,12 @@
   "homepage": "https://github.com/mwilber/webpack-boilerplate.git",
   "scripts": {
     "dev": "cross-env NODE_ENV=dev webpack-dev-server --host 0.0.0.0 --port 8699 --progress --open --config webpack.config.dev.js",
-    "build": "webpack -p --progress --config webpack.config.build.js",
-    "sass-build": "node-sass --source-map true assets/styles/app-shell.scss -o assets/css"
+    "build": "webpack -p --progress --config webpack.config.build.js && npm run sass-build && npm run copy-assets",
+    "sass-build": "node-sass --source-map true assets/styles/app-shell.scss -o assets/css",
+    "copy-assets": "mkdir -p dist/assets/images && cp -r assets/images/* dist/assets/images && mkdir -p dist/assets/audio && cp -r assets/audio/* dist/assets/audio && mkdir -p dist/assets/css && cp -r assets/css/* dist/assets/css && mkdir -p dist/assets/data && cp -r assets/data/* dist/assets/data",
+    "sw-init": "workbox wizard",
+    "sw-generate": "workbox generateSW",
+    "sw-test": "npm run build && workbox generateSW && http-server dist -c-1"
   },
   "repository": {
     "type": "git",
@@ -27,6 +31,7 @@
     "ejs-loader": "^0.3.1",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
+    "http-server": "^0.11.1",
     "node-sass": "^4.9.3",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.0",
@@ -34,6 +39,7 @@
     "webpack": "^4.18.0",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.8",
-    "webpack-merge": "^4.1.4"
+    "webpack-merge": "^4.1.4",
+    "workbox-cli": "^3.5.0"
   }
 }
