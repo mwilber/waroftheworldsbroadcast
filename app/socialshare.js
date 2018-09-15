@@ -26,7 +26,7 @@ export class SocialShare{
         //alert('error 201');
         //DebugOut('twshare');
         //var twurl = "https://twitter.com/home?status="+escape(pTitle)+escape(" - ")+escape(pLink)+" "+escape(pTagline);
-        var twurl = "http://twitter.com/share?text="+escape(pTagline)+" - "+escape(pTitle)+"&url="+escape(pLink)+"&hashtags=#arcostume,#webxr";
+        var twurl = "http://twitter.com/share?text="+escape(pTagline)+"&url="+escape(pLink)+"&hashtags=#arcostume,#webxr";
         //openpopup(twurl,'tweeters',550,450);
         //(url, { openExternal:true });
         //alert('error 201: '+twurl);

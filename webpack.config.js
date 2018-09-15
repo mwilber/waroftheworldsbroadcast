@@ -13,7 +13,7 @@ const appHtmlTitle = 'Webpack Boilerplate';
 const appHtmlData = {
     'author': 'Matthew Wilber',
     'title': 'War of the Worlds Broadcast',
-    'description': 'For forty minutes Martians were real. Relive the night of October 30th, 1938.',
+    'description': 'In 1938, Martians were real. Relive the night of October the 30th with War of the Worlds Broadcast.',
     'image': 'https://www.waroftheworldsbroadcast.com/assets/images/share.png',
     'link': 'https://www.waroftheworldsbroadcast.com/',
     'themecolor': '#2c2f30',
