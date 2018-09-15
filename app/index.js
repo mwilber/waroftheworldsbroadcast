@@ -25,6 +25,7 @@ let socialShare = new SocialShare();
 let imgReady = false;
 let audReady = false;
 let audPlaying = false;
+let historicalTime = true;
 
 var ctShowLoader = 0;
 var tmrLoader = null;
@@ -66,7 +67,14 @@ let handleSoundTimer = function(event){
         seconds = '0'+seconds;
     }
     // Display the time
-    document.querySelector('.clock .time').innerHTML = minutes+":"+seconds;
+    if( historicalTime ){
+        if(minutes < 10){
+            minutes = '0'+minutes;
+        }
+        document.querySelector('.clock .time').innerHTML = "8:"+minutes+"pm";
+    }else{
+        document.querySelector('.clock .time').innerHTML = minutes+":"+seconds;
+    }
 
     // Light up the ACT display
     for( let idx=1; idx < actIdx.length; idx++ ){
@@ -319,15 +327,23 @@ document.querySelector('.skipforward').addEventListener('click',function(){
     soundBlaster.SetStreamPosition(0);
 });
 
+document.querySelector('.btn-clock').addEventListener('click', function(){
+    console.log('clock', 'click');
+    historicalTime = !historicalTime;
+});
+
 document.querySelector('.act-1').addEventListener('click',function(){
+    console.log('act-1', 'click');
     soundBlaster.SetStreamPosition(actIdx[0]);
 });
 
 document.querySelector('.act-2').addEventListener('click',function(){
+    console.log('act-2', 'click');
     soundBlaster.SetStreamPosition(actIdx[1]);
 });
 
 document.querySelector('.act-3').addEventListener('click',function(){
+    console.log('act-3', 'click');
     soundBlaster.SetStreamPosition(actIdx[2]);
 });
 
