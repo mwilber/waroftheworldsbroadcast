@@ -318,6 +318,18 @@ document.querySelector('.skipforward').addEventListener('click',function(){
     soundBlaster.SetStreamPosition(0);
 });
 
+document.querySelector('.act-1').addEventListener('click',function(){
+    soundBlaster.SetStreamPosition(actIdx[0]);
+});
+
+document.querySelector('.act-2').addEventListener('click',function(){
+    soundBlaster.SetStreamPosition(actIdx[1]);
+});
+
+document.querySelector('.act-3').addEventListener('click',function(){
+    soundBlaster.SetStreamPosition(actIdx[2]);
+});
+
 document.querySelector('.share.fb').addEventListener('click',function(){
     socialShare.fbshare(shareMeta.title, shareMeta.link, shareMeta.image, shareMeta.description);
 });
