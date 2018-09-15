@@ -280,6 +280,8 @@ document.querySelector('.playpause').addEventListener('click', function(){
     }else{
         soundBlaster.PlayStream();
         document.querySelector('.playpause .material-icons').innerHTML = 'pause';
+        document.getElementById('intro').classList.remove('manplay');
+        document.querySelector('.tuner').classList.remove('active');
     }
 });
 
