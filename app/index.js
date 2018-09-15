@@ -154,6 +154,7 @@ function WatchLoad(){
 function StartAudio(){
     soundBlaster.SetStreamVolume(0.5); 
     soundBlaster.PlayStream();
+    document.querySelector('.playpause .material-icons').innerHTML = 'pause';
     soundBlaster.SetStreamPosition(0);
 
     document.getElementById('intro').classList.remove('manplay');
