@@ -16,6 +16,10 @@ html, body, .container{
 	padding: 0px;
 }
 
+.container{
+	position: relative;
+}
+
 body{
 	background-color:#000;
 	color:#fff;
