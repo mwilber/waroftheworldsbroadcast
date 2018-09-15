@@ -205,7 +205,6 @@ function SetScale(){
 		rxfrm = 'display:block; ';
 		rxfrm += 'bottom:'+rbottom+'%; ';
 		rxfrm += 'transform:scale('+rscale+'); ';
-		rxfrm += '-ms-transform:scale('+rscale+'); ';
 		rxfrm += '-moz-transform:scale('+rscale+'); ';
 		rxfrm += '-webkit-transform:scale('+rscale+'); ';
 	}
@@ -215,7 +214,6 @@ function SetScale(){
 	var stageCSS = 
 		'left:'+wleft+'px; '+
 		'transform:scale('+wscale+'); '+
-		'-ms-transform:scale('+wscale+'); '+
 		'-moz-transform:scale('+wscale+'); '+
         '-webkit-transform:scale('+wscale+'); ';
 
@@ -233,7 +231,7 @@ function SetScale(){
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        if( true ){
+        if( false ){
             navigator.serviceWorker.register('/sw.js').then(registration => {
                 console.log('SW registered: ', registration);
             }).catch(registrationError => {
