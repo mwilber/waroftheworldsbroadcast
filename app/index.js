@@ -27,6 +27,8 @@ let audReady = false;
 let audPlaying = false;
 let historicalTime = true;
 
+let startPos = 140;
+
 var ctShowLoader = 0;
 var tmrLoader = null;
 
@@ -106,6 +108,9 @@ let handleSoundPlay = function(event){
 
 function Init(){
 
+    // Start at a random time between 2:20 - 3:30
+    startPos = 140 + Math.floor(Math.random()*70);
+
     window.fetch('assets/data/script.json').then(function(response){
         //console.log('fetch', response);
         return response.json();
@@ -165,7 +170,8 @@ function StartAudio(){
     soundBlaster.SetStreamVolume(0.5); 
     soundBlaster.PlayStream();
     document.querySelector('.playpause .material-icons').innerHTML = 'pause';
-    soundBlaster.SetStreamPosition(0);
+    console.log('Starting audio at:', startPos);
+    soundBlaster.SetStreamPosition(startPos);
 
     document.getElementById('intro').classList.remove('manplay');
     window.setTimeout(function(){
