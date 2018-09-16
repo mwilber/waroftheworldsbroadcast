@@ -148,9 +148,11 @@ function WatchLoad(){
     //console.log('tick', preloader.PercentComplete());
     let progress = preloader.PercentComplete();
     document.querySelector('.progress .number').innerHTML = progress;
+    document.querySelector('.progress-bar').style.width = progress+"%";
     
     if(audPlaying && imgReady){
         window.clearInterval(tmrLoader);
+        document.querySelector('.progress-bar').style.width = "100%";
         BeginProduction(); 
     }else if(audPlaying && ctShowLoader > 5){
         if(!document.getElementById('loader').classList.contains('active')){
@@ -365,4 +367,4 @@ window.addEventListener('resize', function(event){
 });
 
 SetScale();
-//Init();
+Init();
