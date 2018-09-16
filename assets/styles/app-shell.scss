@@ -61,6 +61,20 @@ a:active{
 
 		transform: translate(-50%,-50%);
 
+		h1 {
+			margin: 24px;
+
+			@media screen and (max-width: 800px) {
+				font-size: 40px;
+				line-height: 1.25em;
+				margin: 1em 0 0 0;
+			}
+
+			@media screen and (max-width: 500px) {
+				font-size: 30px;
+			}
+		}
+
 		.silhouette{
 			position: relative;
 			display: inline-block;
