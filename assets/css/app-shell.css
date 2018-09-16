@@ -11,6 +11,9 @@ html, body, .container {
   margin: 0px;
   padding: 0px; }
 
+.container {
+  position: relative; }
+
 body {
   background-color: #000;
   color: #fff;
@@ -34,7 +37,7 @@ a:active {
   width: 100%;
   height: 100%;
   z-index: 1; }
-  #intro.manplay {
+  #intro.manplay .tuner {
     z-index: 1000; }
   #intro .panel {
     position: absolute;
@@ -98,8 +101,49 @@ a:active {
     position: absolute;
     top: 50%;
     left: 50%;
+    width: 100%;
     text-align: center;
     transform: translate(-50%, -50%); }
+    #loader .panel h1 {
+      margin: 24px; }
+      @media screen and (max-width: 800px) {
+        #loader .panel h1 {
+          font-size: 40px;
+          line-height: 1.25em;
+          margin: 1em 0 0 0; } }
+    #loader .panel .progress {
+      display: none; }
+    #loader .panel .syringe {
+      position: relative;
+      width: 540px;
+      left: 50%;
+      top: 0;
+      transform: translate(-50%, 0); }
+      @media screen and (max-width: 800px) {
+        #loader .panel .syringe {
+          transform: translate(-50%, 0) scale(0.75); } }
+      @media screen and (max-width: 500px) {
+        #loader .panel .syringe {
+          transform: translate(-50%, 0) scale(0.5); } }
+      #loader .panel .syringe .progress-bar-container {
+        position: absolute;
+        top: 50px;
+        left: 205px;
+        width: 173px;
+        height: 30px;
+        background: #000000; }
+        #loader .panel .syringe .progress-bar-container .progress-bar {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 0;
+          height: 100%;
+          border-radius: 10px;
+          background: #00ff00;
+          box-shadow: 0 0 60px 5px #00ff00; }
+      #loader .panel .syringe svg {
+        position: relative;
+        z-index: 1; }
 
 .btn-action.mdl-button {
   display: block;
