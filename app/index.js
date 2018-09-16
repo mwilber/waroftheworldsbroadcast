@@ -365,4 +365,4 @@ window.addEventListener('resize', function(event){
 });
 
 SetScale();
-Init();
+//Init();
