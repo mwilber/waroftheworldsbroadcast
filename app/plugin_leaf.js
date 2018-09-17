@@ -9,7 +9,7 @@ export class Leaf{
 
     Process(script, time){
         // Add a new vine
-        let xpos = Math.floor(Math.random()*(window.innerWidth*.6)-125);
+        let xpos = Math.floor(Math.random()*(window.innerWidth*1)-125);
         this.vines.push({
             x: xpos,
             y: 0,
