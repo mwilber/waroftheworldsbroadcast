@@ -12,9 +12,9 @@ export class SoundBlaster{
         this.streamAnalyzer = null;
         this.meter = null;
         this.audioContext = null;
-        if( AudioContext ){
-            this.audioContext = new AudioContext();
-        }
+        // if( AudioContext ){
+        //     this.audioContext = new AudioContext();
+        // }
         this.audioSources = {
             'broadcast': {
                 src: 'assets/audio/381030.mp3',
@@ -90,7 +90,8 @@ export class SoundBlaster{
                 return function (result){
                     if(result){
                         self.streamContext = result;
-                        if( AudioContext ){
+                        //if( AudioContext ){
+                        if(false){
                             let tmpcontext = new AudioContext();
                             self.streamAnalyzer = tmpcontext.createAnalyser();
 
@@ -110,10 +111,10 @@ export class SoundBlaster{
                                 
                             }(self), 100);
                         }
-                        self.streamContext.addEventListener("loadeddata", loadHandler);
-                        self.streamContext.addEventListener("timeupdate", timeHandler);
-                        self.streamContext.addEventListener("play", playHandler);
-                        self.streamContext.addEventListener("ended", endHandler);
+                        //self.streamContext.addEventListener("loadeddata", loadHandler);
+                        //self.streamContext.addEventListener("timeupdate", timeHandler);
+                        //self.streamContext.addEventListener("play", playHandler);
+                        //self.streamContext.addEventListener("ended", endHandler);
                     }
                 }
             }(this))
@@ -125,20 +126,24 @@ export class SoundBlaster{
     fetchStream(alias) {
         return function(self){
             return new Promise(function(resolve, reject){
-                let streamRef = document.createElement('audio');
-                let sourceRef = document.createElement('source');
-                //document.appendChild(streamRef);
-                //if (streamRef.canPlayType('audio/mpeg;')) {
-                    sourceRef.type= 'audio/mpeg';
-                    sourceRef.src= self.audioSources[alias].src;
-                //} else {
-                //    reject('env cannot play mp3 format');
-                //}
+                let streamRef = document.getElementById('media');
+                // let streamRef = document.createElement('audio');
+                // let sourceRef = document.createElement('source');
+                // //document.appendChild(streamRef);
+                // //if (streamRef.canPlayType('audio/mpeg;')) {
+                //     sourceRef.type= 'audio/mpeg';
+                //     sourceRef.src= self.audioSources[alias].src;
+                // //} else {
+                // //    reject('env cannot play mp3 format');
+                // //}
 
-                document.querySelector('body').appendChild(streamRef);
-                streamRef.appendChild(sourceRef);
+                // document.querySelector('body').appendChild(streamRef);
+                // streamRef.appendChild(sourceRef);
     
-                streamRef.load();//suspends and restores all audio element
+                // streamRef.load();//suspends and restores all audio element
+
+                //InitChromecast();
+
                 resolve(streamRef);
             });
         }(this);

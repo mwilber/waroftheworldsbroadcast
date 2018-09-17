@@ -20,7 +20,7 @@ import { Leaf } from './plugin_leaf';
 import { SocialShare } from './socialshare';
 
 
-let socialShare = new SocialShare();
+//let socialShare = new SocialShare();
 
 let imgReady = false;
 let audReady = false;
@@ -36,7 +36,7 @@ let stageHand = null;
 let actIdx = [];
 
 var plugins = {
-    "leaf": new Leaf(document.querySelector('#plants'))
+    //"leaf": new Leaf(document.querySelector('#plants'))
 };
 
 let preloader = new Preloader([
@@ -127,7 +127,8 @@ function Init(){
             // Set up the StageHand
             stageHand = new StageHand(data.script, plugins);
             // Load the Audio file
-            soundBlaster.LoadStream('broadcast', handleSoundLoaded, handleSoundTimer, handleSoundPlay, handleSoundEnded );
+            //soundBlaster.LoadStream('broadcast', handleSoundLoaded, handleSoundTimer, handleSoundPlay, handleSoundEnded );
+            audPlaying = true;
             // Load image files
             preloader.PreloadAssets().then(()=>{
                 // TODO: add some sort of check for number of images loaded successfully
@@ -136,7 +137,8 @@ function Init(){
             }).catch((error)=>{
                 console.error('[Load Images]',error);
             });
-            tmrLoader = window.setInterval(WatchLoad,1000);
+            //tmrLoader = window.setInterval(WatchLoad,1000);
+            BeginProduction(); 
         }
 
     }).catch((error)=>{
@@ -167,6 +169,7 @@ function WatchLoad(){
 }
 
 function StartAudio(){
+    return;
     soundBlaster.SetStreamVolume(0.5); 
     soundBlaster.PlayStream();
     document.querySelector('.playpause .material-icons').innerHTML = 'pause';
@@ -188,9 +191,9 @@ function BeginProduction(){
     document.querySelector('.silhouette').classList.add('active');
     document.getElementById('the-room').classList.add('active');
     // Stage Heartbeat
-    window.setInterval(function(){
-        stageHand.Manage(soundBlaster.GetStreamPosition());
-    },5000);
+    // window.setInterval(function(){
+    //     stageHand.Manage(soundBlaster.GetStreamPosition());
+    // },5000);
 }
 
 function SetAudioPosition(pPos){
@@ -249,131 +252,6 @@ function SetScale(){
 // Event handlers
 //////////////////////////////////////////////////////////////////////////////////////
 
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        if( false ){
-            navigator.serviceWorker.register('/sw.js').then(registration => {
-                console.log('SW registered: ', registration);
-            }).catch(registrationError => {
-                console.log('SW registration failed: ', registrationError);
-            });
-        }else{
-            navigator.serviceWorker.getRegistrations().then(function(registrations) {
-                for(let registration of registrations) {  
-                    registration.unregister();
-                }
-            });
-        }
-    });
-}
 
-
-document.getElementById('manplay').addEventListener('click', function(){
-    //soundBlaster.PlayStream();
-    StartAudio();
-});
-
-document.querySelector('.description .read-more').addEventListener('click',function(){
-    document.querySelector('.description').classList.add('more');
-});
-document.querySelector('.description .read-less').addEventListener('click',function(){
-    document.querySelector('.description').classList.remove('more');
-});
-
-document.querySelector('.volume').addEventListener('click', function(){
-    if( document.querySelector('.volume .material-icons').innerHTML === 'volume_down' ){
-        soundBlaster.SetStreamVolume(1);
-        document.querySelector('.volume .material-icons').innerHTML = 'volume_up';
-    }else if( document.querySelector('.volume .material-icons').innerHTML === 'volume_up' ){
-        soundBlaster.SetStreamVolume(0);
-        document.querySelector('.volume .material-icons').innerHTML = 'volume_off';
-    }else{
-        soundBlaster.SetStreamVolume(0.5);
-        document.querySelector('.volume .material-icons').innerHTML = 'volume_down';
-    }
-});
-
-document.querySelector('.playpause').addEventListener('click', function(){
-    if( document.querySelector('.playpause .material-icons').innerHTML === 'pause' ){
-        soundBlaster.PauseStream();
-        document.querySelector('.playpause .material-icons').innerHTML = 'play_arrow';
-    }else{
-        soundBlaster.PlayStream();
-        document.querySelector('.playpause .material-icons').innerHTML = 'pause';
-        document.getElementById('intro').classList.remove('manplay');
-        document.querySelector('.tuner').classList.remove('active');
-    }
-});
-
-document.querySelector('.backward').addEventListener('click',function(){
-    soundBlaster.AdvanceStream(true);
-});
-
-document.querySelector('.forward').addEventListener('click',function(){
-    soundBlaster.AdvanceStream(false);
-});
-
-document.querySelector('.skipbackward').addEventListener('click',function(){
-    let gotoPos = 0;
-    let prevAct = 0;
-    for( let act of actIdx ){
-        if(soundBlaster.GetStreamPosition() > act+30){
-            gotoPos = act;
-        }else if(soundBlaster.GetStreamPosition() > act){
-            gotoPos = prevAct;
-        }
-        prevAct = act;
-    }
-    SetAudioPosition(gotoPos);
-    return;
-});
-
-document.querySelector('.skipforward').addEventListener('click',function(){
-    for( let act of actIdx ){
-        if(act > soundBlaster.GetStreamPosition()){
-            SetAudioPosition(act);
-            return;
-        }
-    }
-    SetAudioPosition(0);
-});
-
-document.querySelector('.btn-clock').addEventListener('click', function(){
-    console.log('clock', 'click');
-    historicalTime = !historicalTime;
-});
-
-document.querySelector('.act-1').addEventListener('click',function(){
-    console.log('act-1', 'click');
-    SetAudioPosition(actIdx[0]);
-});
-
-document.querySelector('.act-2').addEventListener('click',function(){
-    console.log('act-2', 'click');
-    SetAudioPosition(actIdx[1]);
-});
-
-document.querySelector('.act-3').addEventListener('click',function(){
-    console.log('act-3', 'click');
-    SetAudioPosition(actIdx[2]);
-});
-
-document.querySelector('.share.fb').addEventListener('click',function(){
-    socialShare.fbshare(shareMeta.title, shareMeta.link, shareMeta.image, shareMeta.description);
-});
-document.querySelector('.share.tw').addEventListener('click',function(){
-    socialShare.twshare(shareMeta.title, shareMeta.link, shareMeta.description);
-});
-document.querySelector('.share.pn').addEventListener('click',function(){
-    socialShare.pnshare(shareMeta.title, shareMeta.link, shareMeta.image, shareMeta.description);
-});
-document.querySelector('.share.gp').addEventListener('click',function(){
-    socialShare.gpshare(shareMeta.link);
-});
-
-window.addEventListener('resize', function(event){
-	SetScale();
-});
-
-SetScale();
-Init();
+//SetScale();
+//Init();

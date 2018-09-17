@@ -45,6 +45,16 @@ a:active {
     left: 50%;
     text-align: center;
     transform: translate(-50%, -50%); }
+    #intro .panel h1 {
+      margin: 24px; }
+      @media screen and (max-width: 800px) {
+        #intro .panel h1 {
+          font-size: 40px;
+          line-height: 1.25em;
+          margin: 1em 0 0 0; } }
+      @media screen and (max-width: 500px) {
+        #intro .panel h1 {
+          font-size: 30px; } }
     #intro .panel .silhouette {
       position: relative;
       display: inline-block;
