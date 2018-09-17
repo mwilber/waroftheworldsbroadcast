@@ -95,7 +95,7 @@ let handleSoundTimer = function(event){
 let handleSoundEnded = function(event){
     console.log('ended handler called');
     // Loop the broadcast
-    soundBlaster.SetStreamPosition(0);
+    SetAudioPosition(0);
     soundBlaster.PlayStream();
     // Reset the stage hand
     stageHand.Reset();
@@ -171,7 +171,7 @@ function StartAudio(){
     soundBlaster.PlayStream();
     document.querySelector('.playpause .material-icons').innerHTML = 'pause';
     console.log('Starting audio at:', startPos);
-    soundBlaster.SetStreamPosition(startPos);
+    SetAudioPosition(startPos);
 
     document.getElementById('intro').classList.remove('manplay');
     window.setTimeout(function(){
@@ -193,7 +193,10 @@ function BeginProduction(){
     },5000);
 }
 
-
+function SetAudioPosition(pPos){
+    soundBlaster.SetStreamPosition(pPos);
+    stageHand.ResetQueue();
+}
 
 
 
@@ -321,18 +324,18 @@ document.querySelector('.skipbackward').addEventListener('click',function(){
         }
         prevAct = act;
     }
-    soundBlaster.SetStreamPosition(gotoPos);
+    SetAudioPosition(gotoPos);
     return;
 });
 
 document.querySelector('.skipforward').addEventListener('click',function(){
     for( let act of actIdx ){
         if(act > soundBlaster.GetStreamPosition()){
-            soundBlaster.SetStreamPosition(act);
+            SetAudioPosition(act);
             return;
         }
     }
-    soundBlaster.SetStreamPosition(0);
+    SetAudioPosition(0);
 });
 
 document.querySelector('.btn-clock').addEventListener('click', function(){
@@ -342,17 +345,17 @@ document.querySelector('.btn-clock').addEventListener('click', function(){
 
 document.querySelector('.act-1').addEventListener('click',function(){
     console.log('act-1', 'click');
-    soundBlaster.SetStreamPosition(actIdx[0]);
+    SetAudioPosition(actIdx[0]);
 });
 
 document.querySelector('.act-2').addEventListener('click',function(){
     console.log('act-2', 'click');
-    soundBlaster.SetStreamPosition(actIdx[1]);
+    SetAudioPosition(actIdx[1]);
 });
 
 document.querySelector('.act-3').addEventListener('click',function(){
     console.log('act-3', 'click');
-    soundBlaster.SetStreamPosition(actIdx[2]);
+    SetAudioPosition(actIdx[2]);
 });
 
 document.querySelector('.share.fb').addEventListener('click',function(){

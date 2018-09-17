@@ -41,6 +41,11 @@ export class StageHand {
         }
     }
 
+    ResetQueue(){
+        this.scriptPointer = 0;
+        this.queue = [];
+    }
+
     Reset(){
         console.log('[StageHand]', 'resetting');
         this.scriptPointer = 0;
