@@ -186,6 +186,7 @@
         &.dead{
             filter: grayscale(1);
             animation: dissolve 20s cubic-bezier(1.000, 0.025, 0.990, -0.010) 1;
+            animation-fill-mode: forwards;
         }
     }
     
