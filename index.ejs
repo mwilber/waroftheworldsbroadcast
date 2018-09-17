@@ -64,9 +64,29 @@
 
 		var castMode = getQueryVariable('mode') || '';
 
-		if( castMode === 'ccast' ){
-			dynamicallyLoadScript('//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js');
-		}
+		window['__onGCastApiAvailable'] = function(isAvailable) {
+			if (isAvailable) {
+				initializeCastApi();
+			}
+		};
+
+		initializeCastApi = function() {
+			cast.framework.CastContext.getInstance().setOptions({
+				receiverApplicationId: '54A2143D',
+				autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
+			});
+		};
+
+		window.addEventListener("load", function(event) {
+			console.log("All resources finished loading!");
+			if( castMode === 'ccast' ){
+				dynamicallyLoadScript('//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js');
+			}else{
+				dynamicallyLoadScript('//www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1');
+			}
+		});
+
+		
 
 		function ToggleSidebar(){
 			document.querySelector('.sidebar').classList.toggle('active');
@@ -181,6 +201,11 @@
 					<li><a class="share pn btn-vintage" href="#"><span><img src="assets/images/pinterest-p-brands.svg" alt="pinterest"></span></a></li>
 					<li><a class="share gp btn-vintage" href="#"><span><img src="assets/images/google-plus-g-brands.svg" alt="google plus"></span></a></li>
 				</ul>
+			</div>
+			<div class="section chromecast">
+				<div class="btn-vintage">
+					<google-cast-launcher></google-cast-launcher>
+				</div>
 			</div>
 			<div class="section player-ctrls">
 				<ul>

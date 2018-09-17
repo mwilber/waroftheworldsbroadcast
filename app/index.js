@@ -63,7 +63,7 @@ let handleSoundLoaded = function(event){
 
     if(castMode === 'ccast'){
         // Set up chromecast receiver
-        window.mediaElement = self.streamContext;
+        window.mediaElement = soundBlaster.streamContext;
         window.mediaManager = new cast.receiver.MediaManager(window.mediaElement);
         window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
         window.castReceiverManager.start();
