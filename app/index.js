@@ -60,6 +60,15 @@ let soundBlaster = new SoundBlaster();
 let handleSoundLoaded = function(event){
     console.log('load handler called'); 
     audReady = true;
+
+    if(castMode === 'ccast'){
+        // Set up chromecast receiver
+        window.mediaElement = self.streamContext;
+        window.mediaManager = new cast.receiver.MediaManager(window.mediaElement);
+        window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
+        window.castReceiverManager.start();
+    }
+
     StartAudio();
 };
 

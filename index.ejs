@@ -54,9 +54,6 @@
 	<link rel="stylesheet" href="assets/css/material.min.css">
 	<link rel="stylesheet" href="assets/css/app-shell.css">
 
-	<!-- Chromecast API -->
-	<script src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
-
 	<script type="text/javascript">
 		var shareMeta = {
 			title: '<%= htmlWebpackPlugin.options.data.title %>',
@@ -64,6 +61,12 @@
 			image: '<%= htmlWebpackPlugin.options.data.image %>',
 			link: '<%= htmlWebpackPlugin.options.data.link %>'
 		};
+
+		var castMode = getQueryVariable('mode') || '';
+
+		if( castMode === 'ccast' ){
+			dynamicallyLoadScript('//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js');
+		}
 
 		function ToggleSidebar(){
 			document.querySelector('.sidebar').classList.toggle('active');
@@ -75,6 +78,25 @@
 			}else{
 				document.querySelector('.btn-action .material-icons').innerHTML = 'menu';
 			}
+		}
+
+		function getQueryVariable(variable) {
+			var query = window.location.search.substring(1);
+			var vars = query.split('&');
+			for (var i = 0; i < vars.length; i++) {
+				var pair = vars[i].split('=');
+				if (decodeURIComponent(pair[0]) == variable) {
+					return decodeURIComponent(pair[1]);
+				}
+			}
+			console.log('Query variable %s not found', variable);
+		}
+
+		function dynamicallyLoadScript(url) {
+			var script = document.createElement("script"); // Make a script DOM node
+			script.src = url; // Set it's src to the provided URL
+
+			document.head.appendChild(script); // Add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
 		}
 	</script>
 

@@ -86,11 +86,6 @@ export class SoundBlaster{
                     if(result){
                         self.streamContext = result;
 
-                        window.mediaElement = self.streamContext;
-                        window.mediaManager = new cast.receiver.MediaManager(window.mediaElement);
-                        window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
-                        window.castReceiverManager.start();
-
                         if( AudioContext ){
                             let tmpcontext = new AudioContext();
                             self.streamAnalyzer = tmpcontext.createAnalyser();
