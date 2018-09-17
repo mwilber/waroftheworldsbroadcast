@@ -46,6 +46,13 @@ export class StageHand {
         this.scriptPointer = 0;
         this.queue = [];
         this._cleanAllActors();
+
+        // Call Reset() on all lthe plugins
+        for( let plugin in this.plugins ){
+            if (this.plugins.hasOwnProperty(plugin)) {
+                this.plugins[plugin].Reset();
+            }
+        }
     }
 
     _cleanAllActors(){

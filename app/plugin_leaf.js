@@ -41,12 +41,25 @@ export class Leaf{
         }
     }
 
+    Reset(){
+        console.log('[Plugin Leaves]', 'resetting');
+        this.vines = [];
+        this._cleanAllActors();
+
+    }
+
     _turnGrey(currTime){
         for( let actor of this.stage.querySelectorAll('.actor') ){
             if( currTime > actor.dataset.expiration-(actor.dataset.duration*0.2) ){
                 actor.classList.add('dead');
                 //this.stage.removeChild(actor);
             }
+        }
+    }
+
+    _cleanAllActors(){
+        for( let actor of this.stage.querySelectorAll('.actor') ){
+            this.stage.removeChild(actor);
         }
     }
 
