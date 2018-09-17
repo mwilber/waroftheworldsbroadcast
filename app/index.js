@@ -36,7 +36,7 @@ let stageHand = null;
 let actIdx = [];
 
 var plugins = {
-    //"leaf": new Leaf(document.querySelector('#plants'))
+    "leaf": new Leaf(document.querySelector('#plants'))
 };
 
 let preloader = new Preloader([
@@ -127,7 +127,7 @@ function Init(){
             // Set up the StageHand
             stageHand = new StageHand(data.script, plugins);
             // Load the Audio file
-            //soundBlaster.LoadStream('broadcast', handleSoundLoaded, handleSoundTimer, handleSoundPlay, handleSoundEnded );
+            soundBlaster.LoadStream('broadcast', handleSoundLoaded, handleSoundTimer, handleSoundPlay, handleSoundEnded );
             audPlaying = true;
             // Load image files
             preloader.PreloadAssets().then(()=>{
@@ -137,8 +137,7 @@ function Init(){
             }).catch((error)=>{
                 console.error('[Load Images]',error);
             });
-            //tmrLoader = window.setInterval(WatchLoad,1000);
-            BeginProduction(); 
+            tmrLoader = window.setInterval(WatchLoad,1000);
         }
 
     }).catch((error)=>{
@@ -191,9 +190,9 @@ function BeginProduction(){
     document.querySelector('.silhouette').classList.add('active');
     document.getElementById('the-room').classList.add('active');
     // Stage Heartbeat
-    // window.setInterval(function(){
-    //     stageHand.Manage(soundBlaster.GetStreamPosition());
-    // },5000);
+    window.setInterval(function(){
+        stageHand.Manage(soundBlaster.GetStreamPosition());
+    },5000);
 }
 
 function SetAudioPosition(pPos){
@@ -253,5 +252,5 @@ function SetScale(){
 //////////////////////////////////////////////////////////////////////////////////////
 
 
-//SetScale();
-//Init();
+SetScale();
+Init();

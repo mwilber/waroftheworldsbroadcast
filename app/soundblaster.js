@@ -7,14 +7,16 @@ export class SoundBlaster{
             //|| window.webkitAudioContext // Safari and old versions of Chrome
             || false; 
 
+        window.AudioContext = false;
+
         this.audioElement = null;
         this.streamContext = null;
         this.streamAnalyzer = null;
         this.meter = null;
         this.audioContext = null;
-        // if( AudioContext ){
-        //     this.audioContext = new AudioContext();
-        // }
+        if( AudioContext ){
+            this.audioContext = new AudioContext();
+        }
         this.audioSources = {
             'broadcast': {
                 src: 'assets/audio/381030.mp3',
