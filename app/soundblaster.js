@@ -2,11 +2,6 @@
 export class SoundBlaster{
     constructor(){
 
-        // Polyfill the AudioContext Object
-        window.AudioContext = window.AudioContext // Default
-            //|| window.webkitAudioContext // Safari and old versions of Chrome
-            || false; 
-
         this.audioElement = null;
         this.streamContext = null;
         this.streamAnalyzer = null;

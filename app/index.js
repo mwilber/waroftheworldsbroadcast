@@ -19,6 +19,11 @@ import { StageHand } from './stagehand';
 import { Leaf } from './plugin_leaf';
 import { SocialShare } from './socialshare';
 
+// Polyfill the AudioContext Object
+window.AudioContext = window.AudioContext || false; 
+//disabling audio context for now
+window.AudioContext = false;
+
 
 let socialShare = new SocialShare();
 
