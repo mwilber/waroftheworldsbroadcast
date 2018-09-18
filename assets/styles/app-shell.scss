@@ -20,6 +20,14 @@ html, body, .container{
 	position: relative;
 }
 
+#debugout{
+	position: absolute;
+    top: 5%;
+    left: 5%;
+    color: #f00;
+    font-size: 48px;
+}
+
 body{
 	background-color:#000;
 	color:#fff;

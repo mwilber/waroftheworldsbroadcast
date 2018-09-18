@@ -54,6 +54,7 @@
 	<link rel="stylesheet" href="assets/css/material.min.css">
 	<link rel="stylesheet" href="assets/css/app-shell.css">
 
+
 	<script type="text/javascript">
 		var shareMeta = {
 			title: '<%= htmlWebpackPlugin.options.data.title %>',
@@ -71,21 +72,69 @@
 		};
 
 		initializeCastApi = function() {
-			cast.framework.CastContext.getInstance().setOptions({
+
+			var context = cast.framework.CastContext.getInstance();
+
+			context.setOptions({
 				receiverApplicationId: '54A2143D',
 				autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
 			});
+
+			
+			context.addEventListener(
+				cast.framework.CastContextEventType.SESSION_STATE_CHANGED,
+				function(event) {
+					switch (event.sessionState) {
+					case cast.framework.SessionState.SESSION_STARTED:
+						console.log('[CastContext]', 'connected');
+						break;
+					case cast.framework.SessionState.SESSION_RESUMED:
+						break;
+					case cast.framework.SessionState.SESSION_ENDED:
+						console.log('[CastContext]', 'disconnected');
+						// Update locally as necessary
+						break;
+					}
+			});
 		};
+
+		if( castMode === 'ccast' ){
+			dynamicallyLoadScript('//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js');
+		}else{
+
+		}
 
 		window.addEventListener("load", function(event) {
 			console.log("All resources finished loading!");
+
 			if( castMode === 'ccast' ){
-				dynamicallyLoadScript('//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js');
+
 			}else{
 				dynamicallyLoadScript('//www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1');
 			}
 		});
 
+		function sendMessage(message) {
+			var session = cast.framework.CastContext.getInstance().getCurrentSession();
+			if (session != null) {
+				session.sendMessage('urn:x-cast:com.greenzeta.waroftheworldsbroadcast', message)
+					.then(function(result){
+						console.log('message sent', result);
+					})
+					.catch(function(err){
+						console.error('message error', err);
+					})
+			
+			//, onSuccess.bind(this, 'Message sent: ' + message),
+			//	onError);
+			}
+		}
+
+		function displayText(text) {
+			console.log('[DisplayText]',text);
+			document.getElementById('debugout').innerText = text;
+			window.castReceiverManager.setApplicationState(text);
+		};
 		
 
 		function ToggleSidebar(){
@@ -252,6 +301,7 @@
 				<div class="little-light"></div>
 				<img data-cache="assets/images/radio_lg.png" alt="radio"/>
 			</div>
+			<div id="debugout">Testing...</div>
 		</div>
 	</div>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
