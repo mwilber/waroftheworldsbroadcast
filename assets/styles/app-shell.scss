@@ -25,7 +25,8 @@ html, body, .container{
     top: 5%;
     left: 5%;
     color: #f00;
-    font-size: 48px;
+	font-size: 48px;
+	display: none;
 }
 
 body{
@@ -353,6 +354,15 @@ a:active{
 					height: 20px;
 					margin-top: -8px;
 				}
+			}
+		}
+
+		&.chromecast{
+			.btn-cast{
+				width:25px;
+				height: 25px;
+				margin-left: 17px;
+				margin-top: 2px;
 			}
 		}
 

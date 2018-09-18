@@ -88,6 +88,7 @@
 					switch (event.sessionState) {
 					case cast.framework.SessionState.SESSION_STARTED:
 						console.log('[CastContext]', 'connected');
+						document.querySelector('audio').pause();
 						session = cast.framework.CastContext.getInstance().getCurrentSession();
 						session.addMessageListener('urn:x-cast:com.greenzeta.waroftheworldsbroadcast', ProcessBroadcast);
 						break;
@@ -104,6 +105,8 @@
 
 		// Load the chromecast receiver
 		if( castMode === 'ccast' ){
+
+			document.querySelector('.btn-action').style.display = 'none';
 			dynamicallyLoadScript('//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js');
 		}
 
@@ -117,7 +120,32 @@
 		});
 
 		var ProcessBroadcast = function(namespace, data){
-			console.log('[Incoming Transmission', data);
+			data = JSON.parse(data);
+			console.log('[Incoming Transmission]', data);
+
+			if(typeof data.time !== 'undefined'){
+				// Get the time
+				let minutes = Math.floor(data.time/60);
+				let seconds = Math.floor(data.time%60);
+				// Add leading zero to seconds
+				if(seconds < 10){
+					seconds = '0'+seconds;
+				}
+				document.querySelector('.clock .time').innerHTML = minutes+":"+seconds;
+
+				// Light up the ACT display
+				document.querySelector('.act-1').classList.remove('active');
+				document.querySelector('.act-2').classList.remove('active');
+				document.querySelector('.act-3').classList.remove('active');
+				if(data.time > 0 && data.time < 1256){
+					document.querySelector('.act-1').classList.add('active');
+				}else if(data.time > 1256 && data.time < 2470){
+					document.querySelector('.act-2').classList.add('active');
+				}else{
+					document.querySelector('.act-3').classList.add('active');
+				}
+
+			}
 		}
 
 		function sendMessage(message) {
@@ -255,11 +283,6 @@
 					<li><a class="share gp btn-vintage" href="#"><span><img src="assets/images/google-plus-g-brands.svg" alt="google plus"></span></a></li>
 				</ul>
 			</div>
-			<div class="section chromecast">
-				<div class="btn-vintage">
-					<google-cast-launcher></google-cast-launcher>
-				</div>
-			</div>
 			<div class="section player-ctrls">
 				<ul>
 					<li><a class="btn-vintage player-ctrl skipbackward"><span class="material-icons">skip_previous</span></a></li>
@@ -279,6 +302,19 @@
 					<li class="btn-vintage act act-3"><span>III</span></li>
 				</ul>
 			</div>
+			<div class="section chromecast">
+					<ul>
+						<li>
+							<div class="btn-vintage">
+								<div class="btn-cast">
+									<google-cast-launcher></google-cast-launcher>
+								</div>
+							</div>
+						</li>
+						<li>Chromecast</li>
+					</ul>
+					
+				</div>
 			<div class="section credit">
 				<p>War of the Worlds Broadcast was created by software developer Matthew Wilber. 
 				<br/>	
