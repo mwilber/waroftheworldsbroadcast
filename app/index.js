@@ -327,14 +327,18 @@ document.querySelector('.volume').addEventListener('click', function(){
 });
 
 document.querySelector('.playpause').addEventListener('click', function(){
-    if( document.querySelector('.playpause .material-icons').innerHTML === 'pause' ){
-        soundBlaster.PauseStream();
-        document.querySelector('.playpause .material-icons').innerHTML = 'play_arrow';
+    if(session){
+        sendMessage('.playpause');
     }else{
-        soundBlaster.PlayStream();
-        document.querySelector('.playpause .material-icons').innerHTML = 'pause';
-        document.getElementById('intro').classList.remove('manplay');
-        document.querySelector('.tuner').classList.remove('active');
+        if( document.querySelector('.playpause .material-icons').innerHTML === 'pause' ){
+            soundBlaster.PauseStream();
+            document.querySelector('.playpause .material-icons').innerHTML = 'play_arrow';
+        }else{
+            soundBlaster.PlayStream();
+            document.querySelector('.playpause .material-icons').innerHTML = 'pause';
+            document.getElementById('intro').classList.remove('manplay');
+            document.querySelector('.tuner').classList.remove('active');
+        }
     }
 });
 

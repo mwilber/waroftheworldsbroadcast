@@ -64,6 +64,7 @@
 		};
 
 		var castMode = getQueryVariable('mode') || '';
+		var session = null;;
 
 		window['__onGCastApiAvailable'] = function(isAvailable) {
 			if (isAvailable) {
@@ -87,35 +88,34 @@
 					switch (event.sessionState) {
 					case cast.framework.SessionState.SESSION_STARTED:
 						console.log('[CastContext]', 'connected');
+						session = cast.framework.CastContext.getInstance().getCurrentSession();
 						break;
 					case cast.framework.SessionState.SESSION_RESUMED:
 						break;
 					case cast.framework.SessionState.SESSION_ENDED:
 						console.log('[CastContext]', 'disconnected');
+						session = null;
 						// Update locally as necessary
 						break;
 					}
 			});
 		};
 
+		// Load the chromecast receiver
 		if( castMode === 'ccast' ){
 			dynamicallyLoadScript('//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js');
-		}else{
-
 		}
 
 		window.addEventListener("load", function(event) {
 			console.log("All resources finished loading!");
 
-			if( castMode === 'ccast' ){
-
-			}else{
+			// Load the chromecast sender
+			if( castMode !== 'ccast' ){
 				dynamicallyLoadScript('//www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1');
 			}
 		});
 
 		function sendMessage(message) {
-			var session = cast.framework.CastContext.getInstance().getCurrentSession();
 			if (session != null) {
 				session.sendMessage('urn:x-cast:com.greenzeta.waroftheworldsbroadcast', message)
 					.then(function(result){
@@ -124,16 +124,15 @@
 					.catch(function(err){
 						console.error('message error', err);
 					})
-			
-			//, onSuccess.bind(this, 'Message sent: ' + message),
-			//	onError);
 			}
 		}
 
 		function displayText(text) {
 			console.log('[DisplayText]',text);
 			document.getElementById('debugout').innerText = text;
-			window.castReceiverManager.setApplicationState(text);
+			//window.castReceiverManager.setApplicationState(text);
+
+			document.querySelector(text).click();
 		};
 		
 
