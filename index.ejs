@@ -89,6 +89,7 @@
 					case cast.framework.SessionState.SESSION_STARTED:
 						console.log('[CastContext]', 'connected');
 						session = cast.framework.CastContext.getInstance().getCurrentSession();
+						session.addMessageListener('urn:x-cast:com.greenzeta.waroftheworldsbroadcast', ProcessBroadcast);
 						break;
 					case cast.framework.SessionState.SESSION_RESUMED:
 						break;
@@ -114,6 +115,10 @@
 				dynamicallyLoadScript('//www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1');
 			}
 		});
+
+		var ProcessBroadcast = function(namespace, data){
+			console.log('[Incoming Transmission', data);
+		}
 
 		function sendMessage(message) {
 			if (session != null) {
