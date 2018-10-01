@@ -46,7 +46,10 @@ let preloader = new Preloader([
     'assets/images/wall_tile.png',
     'assets/images/comet.png',
     'assets/images/tripod_walk.png',
-    'assets/images/tripod_beam.png'
+    'assets/images/tripod_beam.png',
+    'assets/images/zeta-o-lantern.png',
+    'assets/images/wood_surface.jpg',
+    'assets/images/starfield.png'
 ]);
 
 let soundBlaster = new SoundBlaster();
@@ -242,7 +245,7 @@ function SetScale(){
 	}
 	
     var rxfrm = 'display:none;';
-    var pxfrm = '';
+    var pxfrm = 'display:none;';
 	if(rscale > 0.2){
 		rxfrm = 'display:block; ';
 		rxfrm += 'bottom:'+rbottom+'%; ';
@@ -250,12 +253,13 @@ function SetScale(){
 		rxfrm += '-moz-transform:scale('+rscale+'); ';
         rxfrm += '-webkit-transform:scale('+rscale+'); ';
         
+        pxfrm = ' ';
         pxfrm += 'transform:scale('+rscale+'); ';
 		pxfrm += '-moz-transform:scale('+rscale+'); ';
 		pxfrm += '-webkit-transform:scale('+rscale+'); ';
 	}
     document.querySelector('#radio').style.cssText = rxfrm;
-    document.querySelector('#pumpkin').style.cssText = pxfrm;
+    //document.querySelector('#pumpkin').style.cssText = pxfrm;
 
 	
 	var stageCSS = 
