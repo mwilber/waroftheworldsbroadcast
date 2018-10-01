@@ -93,11 +93,16 @@ let handleSoundTimer = function(event){
         document.querySelector('.act-'+(actIdx.length)).classList.add('active');
     }
 
+    // background-color: #f3e26c;
+    // background-color: #ffd400;
+    // background-color: #ffeb59;
+    // background-color: #ca8331;
+
     var candleColors = [
-        "#543b1e",
-        "#ffd400",
+        '#f3e26c',
+        '#ffd400',
         '#ffeb59',
-        '#ca8331'
+        '#b59d29'
     ];
     var candleColorChance = Math.random()*4;
     var candleColorSelect = 0;
