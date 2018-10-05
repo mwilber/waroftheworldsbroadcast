@@ -5,7 +5,7 @@ require ('./promise');
 // requireAll(require.context('./modules/', true, /\.js$/));
 
 // Load application styles
-import 'styles/app-shell.scss'; // TODO: Remove this before production
+//import 'styles/app-shell.scss'; // TODO: Remove this before production
 import 'styles/main.scss';
 
 //import { } from '@fortawesome/fontawesome-pro/js/fontawesome.min'
@@ -104,19 +104,9 @@ let handleSoundTimer = function(event){
         '#ffeb59',
         '#b59d29'
     ];
-    var candleColorChance = Math.random()*4;
-    var candleColorSelect = 0;
-    if(candleColorChance > 3){
-        candleColorSelect = 0;
-    }else if(candleColorChance > 2){
-        candleColorSelect = 2;
-    }else if(candleColorChance > 1){
-        candleColorSelect = 3;
-    }else{
-        candleColorSelect = 1;
-    }
+    var candleColorChance = Math.floor(Math.random()*4);
 
-    document.querySelector('#pumpkin .candle').style.backgroundColor = candleColors[candleColorSelect];
+    document.querySelector('#pumpkin .candle').style.backgroundColor = candleColors[candleColorChance];
     //document.querySelector('#pumpkin .candle').style.backgroundColor = "#543b1e";
 
 };

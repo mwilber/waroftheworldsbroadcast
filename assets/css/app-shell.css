@@ -37,7 +37,7 @@ a:active {
   width: 100%;
   height: 100%;
   z-index: 1; }
-  #intro.manplay .tuner {
+  #intro.manplay {
     z-index: 1000; }
   #intro .panel {
     position: absolute;
