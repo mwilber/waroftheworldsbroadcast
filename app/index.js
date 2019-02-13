@@ -58,7 +58,9 @@ let soundBlaster = new SoundBlaster();
 let handleSoundLoaded = function(event){
     console.log('load handler called'); 
     audReady = true;
-    StartAudio();
+    //StartAudio();
+    document.getElementById('intro').classList.add('manplay');
+            document.querySelector('.tuner').classList.add('active');
 };
 
 let handleSoundTimer = function(event){
