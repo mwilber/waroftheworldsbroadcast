@@ -7,7 +7,7 @@ The current site was built in 2012 with the goal of working in all browsers. Thi
 
 For updates, follow [@greenzeta](https://twitter.com/greenzeta) on twitter.
 
-![alt text](http://www.waroftheworldsbroadcast.com/images/share.png "Logo Title Text 1")
+![War of the Worlds Broadcast](http://www.waroftheworldsbroadcast.com/assets/images/share.png "War of the Worlds Broadcast")
 
 ## Goals
 * Refactor JavaScript to ES6 syntax
