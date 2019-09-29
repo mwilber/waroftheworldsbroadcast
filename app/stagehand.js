@@ -83,7 +83,7 @@ export class StageHand {
             let rndSeed = Math.random();
             // Limit number of actors to script maxct
             if( this.stage.querySelectorAll(classRef).length < qPtr.maxct ){
-                console.log('[StageHand]', 'random seed', rndSeed);
+                //console.log('[StageHand]', 'random seed', rndSeed);
                 if(rndSeed < qPtr.randomize){
                     if( qPtr.plugin ){
                         console.log('calling plugin', qPtr.plugin);

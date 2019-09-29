@@ -56,11 +56,9 @@ let soundBlaster = new SoundBlaster();
 
 
 let handleSoundLoaded = function(event){
-    console.log('load handler called'); 
+    //console.log('load handler called'); 
     audReady = true;
-    //StartAudio();
-    document.getElementById('intro').classList.add('manplay');
-            document.querySelector('.tuner').classList.add('active');
+    StartAudio();
 };
 
 let handleSoundTimer = function(event){
@@ -114,7 +112,7 @@ let handleSoundTimer = function(event){
 };
 
 let handleSoundEnded = function(event){
-    console.log('ended handler called');
+    //console.log('ended handler called');
     // Loop the broadcast
     SetAudioPosition(0);
     soundBlaster.PlayStream();
@@ -123,7 +121,7 @@ let handleSoundEnded = function(event){
 };
 
 let handleSoundPlay = function(event){
-    console.log('play handler called');
+    //console.log('play handler called');
     audPlaying = true;
 };
 
@@ -148,7 +146,9 @@ function Init(){
             // Set up the StageHand
             stageHand = new StageHand(data.script, plugins);
             // Load the Audio file
-            soundBlaster.LoadStream('broadcast', handleSoundLoaded, handleSoundTimer, handleSoundPlay, handleSoundEnded );
+            //soundBlaster.LoadStream('broadcast', handleSoundLoaded, handleSoundTimer, handleSoundPlay, handleSoundEnded );
+            document.getElementById('intro').classList.add('manplay');
+            document.querySelector('.tuner').classList.add('active');
             // Load image files
             preloader.PreloadAssets().then(()=>{
                 // TODO: add some sort of check for number of images loaded successfully
@@ -218,8 +218,6 @@ function SetAudioPosition(pPos){
     soundBlaster.SetStreamPosition(pPos);
     stageHand.ResetQueue();
 }
-
-
 
 function SetScale(){
 	var tscale = 40;
@@ -298,7 +296,8 @@ if ('serviceWorker' in navigator) {
 
 document.getElementById('manplay').addEventListener('click', function(){
     //soundBlaster.PlayStream();
-    StartAudio();
+    //StartAudio();
+    soundBlaster.LoadStream('broadcast', handleSoundLoaded, handleSoundTimer, handleSoundPlay, handleSoundEnded );
 });
 
 document.querySelector('.description .read-more').addEventListener('click',function(){
