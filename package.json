@@ -7,9 +7,8 @@
   "homepage": "https://github.com/mwilber/webpack-boilerplate.git",
   "scripts": {
     "dev": "cross-env NODE_ENV=dev webpack-dev-server --host 0.0.0.0 --port 8699 --progress --open --config webpack.config.dev.js",
-    "build": "webpack -p --progress --config webpack.config.build.js && npm run sass-build && npm run copy-assets && npm run sw-generate",
+    "build": "webpack -p --progress --config webpack.config.build.js && npm run sass-build && npm run sw-generate",
     "sass-build": "node-sass --source-map true assets/styles/app-shell.scss -o assets/css",
-    "copy-assets": "mkdir -p dist/assets/images && cp -r assets/images/* dist/assets/images && mkdir -p dist/assets/audio && cp -r assets/audio/* dist/assets/audio && mkdir -p dist/assets/css && cp -r assets/css/* dist/assets/css && mkdir -p dist/assets/data && cp -r assets/data/* dist/assets/data && mkdir -p dist/assets/icons && cp -r assets/icons/* dist/assets/icons && cp -r manifest.json dist/manifest.json",
     "sw-init": "workbox wizard",
     "sw-generate": "workbox injectManifest",
     "sw-test": "npm run build && workbox injectManifest && http-server dist -c-1"
@@ -26,6 +25,7 @@
     "@babel/preset-env": "^7.0.0",
     "babel-loader": "^8.0.2",
     "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^5.0.4",
     "cross-env": "^5.2.0",
     "css-loader": "^1.0.0",
     "ejs-loader": "^0.3.1",
