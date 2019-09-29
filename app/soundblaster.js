@@ -12,9 +12,7 @@ export class SoundBlaster{
         this.streamAnalyzer = null;
         this.meter = null;
         this.audioContext = null;
-        if( AudioContext ){
-            this.audioContext = new AudioContext();
-        }
+        
         this.audioSources = {
             'broadcast': {
                 src: 'assets/audio/381030.mp3',
@@ -146,7 +144,10 @@ export class SoundBlaster{
   
     fetchSample(alias) {
       console.log('[SoundBlaster]','fetching audio', alias);
-      return fetch(this.audioSources[alias].src)
+        if( AudioContext ){
+            this.audioContext = new AudioContext();
+        }
+        return fetch(this.audioSources[alias].src)
           .then(response => response.arrayBuffer())
           .then(buffer => {
               return new Promise((resolve, reject) => {
